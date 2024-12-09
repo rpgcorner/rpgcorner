@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (purchasedStock(); as purchasedStockRef) {
+      <div>
+        <h2 data-cy="purchasedStockDetailsHeading"><span jhiTranslate="rpgCornerApp.purchasedStock.detail.title">Purchased Stock</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ purchasedStockRef.id }}</span>
+          </dd>
+          <dt>
+            <span [ngbTooltip]="'rpgCornerApp.purchasedStock.help.supplie' | translate" jhiTranslate="rpgCornerApp.purchasedStock.supplie"
+              >Supplie</span
+            >
+          </dt>
+          <dd>
+            <span>{{ purchasedStockRef.supplie }}</span>
+          </dd>
+          <dt>
+            <span
+              [ngbTooltip]="'rpgCornerApp.purchasedStock.help.unitPrice' | translate"
+              jhiTranslate="rpgCornerApp.purchasedStock.unitPrice"
+              >Unit Price</span
+            >
+          </dt>
+          <dd>
+            <span>{{ purchasedStockRef.unitPrice }}</span>
+          </dd>
+          <dt><span jhiTranslate="rpgCornerApp.purchasedStock.purchasedWare">Purchased Ware</span></dt>
+          <dd>
+            @if (purchasedStock()!.purchasedWare) {
+              <div>
+                <a [routerLink]="['/ware', purchasedStock()!.purchasedWare?.id, 'view']">{{ purchasedStockRef.purchasedWare?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="rpgCornerApp.purchasedStock.purchase">Purchase</span></dt>
+          <dd>
+            @if (purchasedStock()!.purchase) {
+              <div>
+                <a [routerLink]="['/purchase', purchasedStock()!.purchase?.id, 'view']">{{ purchasedStockRef.purchase?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Vissza</span>
+        </button>
+
+        <button type="button" [routerLink]="['/purchased-stock', purchasedStockRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Szerkesztés</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

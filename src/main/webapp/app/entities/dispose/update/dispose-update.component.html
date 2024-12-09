@@ -1,0 +1,101 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-dispose-heading" data-cy="DisposeCreateUpdateHeading" jhiTranslate="rpgCornerApp.dispose.home.createOrEditLabel">
+        Hozzon létre, vagy módosítson Disposet
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="rpgCornerApp.dispose.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_disposeDate"
+            [ngbTooltip]="'rpgCornerApp.dispose.help.disposeDate' | translate"
+            jhiTranslate="rpgCornerApp.dispose.disposeDate"
+            >Dispose Date</label
+          >
+          <div class="input-group">
+            <input
+              id="field_disposeDate"
+              data-cy="disposeDate"
+              type="text"
+              class="form-control"
+              name="disposeDate"
+              ngbDatepicker
+              #disposeDateDp="ngbDatepicker"
+              formControlName="disposeDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="disposeDateDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_note"
+            [ngbTooltip]="'rpgCornerApp.dispose.help.note' | translate"
+            jhiTranslate="rpgCornerApp.dispose.note"
+            >Note</label
+          >
+          <input type="text" class="form-control" name="note" id="field_note" data-cy="note" formControlName="note" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_disposedByUser" jhiTranslate="rpgCornerApp.dispose.disposedByUser">Disposed By User</label>
+          <select
+            class="form-control"
+            id="field_disposedByUser"
+            data-cy="disposedByUser"
+            name="disposedByUser"
+            formControlName="disposedByUser"
+            [compareWith]="compareUser"
+          >
+            @if (!editForm.get('disposedByUser')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (userOption of usersSharedCollection; track $index) {
+              <option [ngValue]="userOption">{{ userOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (
+          editForm.get(['disposedByUser'])!.invalid &&
+          (editForm.get(['disposedByUser'])!.dirty || editForm.get(['disposedByUser'])!.touched)
+        ) {
+          <div>
+            @if (editForm.get(['disposedByUser'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ez a mező kötelező.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Mégsem</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Mentés</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

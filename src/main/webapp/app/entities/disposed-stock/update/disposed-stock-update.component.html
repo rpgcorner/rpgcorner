@@ -1,0 +1,96 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-disposed-stock-heading"
+        data-cy="DisposedStockCreateUpdateHeading"
+        jhiTranslate="rpgCornerApp.disposedStock.home.createOrEditLabel"
+      >
+        Hozzon létre, vagy módosítson Disposed Stockt
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="rpgCornerApp.disposedStock.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_supplie"
+            [ngbTooltip]="'rpgCornerApp.disposedStock.help.supplie' | translate"
+            jhiTranslate="rpgCornerApp.disposedStock.supplie"
+            >Supplie</label
+          >
+          <input type="number" class="form-control" name="supplie" id="field_supplie" data-cy="supplie" formControlName="supplie" />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_unitPrice"
+            [ngbTooltip]="'rpgCornerApp.disposedStock.help.unitPrice' | translate"
+            jhiTranslate="rpgCornerApp.disposedStock.unitPrice"
+            >Unit Price</label
+          >
+          <input type="number" class="form-control" name="unitPrice" id="field_unitPrice" data-cy="unitPrice" formControlName="unitPrice" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_disposedWare" jhiTranslate="rpgCornerApp.disposedStock.disposedWare">Disposed Ware</label>
+          <select
+            class="form-control"
+            id="field_disposedWare"
+            data-cy="disposedWare"
+            name="disposedWare"
+            formControlName="disposedWare"
+            [compareWith]="compareWare"
+          >
+            <option [ngValue]="null"></option>
+            @for (wareOption of disposedWaresCollection; track $index) {
+              <option [ngValue]="wareOption">{{ wareOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dispose" jhiTranslate="rpgCornerApp.disposedStock.dispose">Dispose</label>
+          <select
+            class="form-control"
+            id="field_dispose"
+            data-cy="dispose"
+            name="dispose"
+            formControlName="dispose"
+            [compareWith]="compareDispose"
+          >
+            <option [ngValue]="null"></option>
+            @for (disposeOption of disposesSharedCollection; track $index) {
+              <option [ngValue]="disposeOption">{{ disposeOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Mégsem</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Mentés</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

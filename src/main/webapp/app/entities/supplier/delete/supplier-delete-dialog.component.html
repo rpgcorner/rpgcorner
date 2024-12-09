@@ -1,0 +1,24 @@
+@if (supplier) {
+  <form name="deleteForm" (ngSubmit)="confirmDelete(supplier.id!)">
+    <div class="modal-header">
+      <h4 class="modal-title" data-cy="supplierDeleteDialogHeading" jhiTranslate="entity.delete.title">Erősítse meg a törlési szándékát</h4>
+    </div>
+
+    <div class="modal-body">
+      <jhi-alert-error></jhi-alert-error>
+      <p id="jhi-delete-supplier-heading" jhiTranslate="rpgCornerApp.supplier.delete.question" [translateValues]="{ id: supplier.id }">
+        Biztos benne, hogy törölni szeretné az Suppliert {{ supplier.id }} azonosítóval?
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Mégsem</span>
+      </button>
+
+      <button id="jhi-confirm-delete-supplier" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+        <fa-icon icon="times"></fa-icon>&nbsp;<span jhiTranslate="entity.action.delete">Törlés</span>
+      </button>
+    </div>
+  </form>
+}

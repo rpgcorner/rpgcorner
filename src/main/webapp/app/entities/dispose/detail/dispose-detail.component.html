@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (dispose(); as disposeRef) {
+      <div>
+        <h2 data-cy="disposeDetailsHeading"><span jhiTranslate="rpgCornerApp.dispose.detail.title">Dispose</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ disposeRef.id }}</span>
+          </dd>
+          <dt>
+            <span [ngbTooltip]="'rpgCornerApp.dispose.help.disposeDate' | translate" jhiTranslate="rpgCornerApp.dispose.disposeDate"
+              >Dispose Date</span
+            >
+          </dt>
+          <dd>
+            <span>{{ disposeRef.disposeDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span [ngbTooltip]="'rpgCornerApp.dispose.help.note' | translate" jhiTranslate="rpgCornerApp.dispose.note">Note</span></dt>
+          <dd>
+            <span>{{ disposeRef.note }}</span>
+          </dd>
+          <dt><span jhiTranslate="rpgCornerApp.dispose.disposedByUser">Disposed By User</span></dt>
+          <dd>
+            <span>{{ disposeRef.disposedByUser?.id }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Vissza</span>
+        </button>
+
+        <button type="button" [routerLink]="['/dispose', disposeRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Szerkesztés</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

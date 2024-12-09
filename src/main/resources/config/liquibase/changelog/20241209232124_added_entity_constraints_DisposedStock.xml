@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity DisposedStock.
+    -->
+    <changeSet id="20241209232124-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="disposed_ware_id"
+                                 baseTableName="disposed_stock"
+                                 constraintName="fk_disposed_stock__disposed_ware_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ware"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="dispose_id"
+                                 baseTableName="disposed_stock"
+                                 constraintName="fk_disposed_stock__dispose_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="dispose"
+                                 />
+    </changeSet>
+</databaseChangeLog>

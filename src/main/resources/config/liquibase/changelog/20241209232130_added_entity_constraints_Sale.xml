@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Sale.
+    -->
+    <changeSet id="20241209232130-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="sold_by_user_id"
+                                 baseTableName="sale"
+                                 constraintName="fk_sale__sold_by_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="sold_for_customer_id"
+                                 baseTableName="sale"
+                                 constraintName="fk_sale__sold_for_customer_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="customer"
+                                 />
+    </changeSet>
+</databaseChangeLog>

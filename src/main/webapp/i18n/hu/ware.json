@@ -1,0 +1,42 @@
+{
+  "rpgCornerApp": {
+    "ware": {
+      "home": {
+        "title": "Wares",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Egy új Ware létrehozása",
+        "createOrEditLabel": "Hozzon létre, vagy módosítson Waret",
+        "notFound": "No Wares found"
+      },
+      "created": "Egy új Ware lett létrehozva {{ param }} azonosítóval",
+      "updated": "A Ware módosítva lett {{ param }} azonosítóval",
+      "deleted": "A Ware törölve lett {{ param }} azonosítóval",
+      "delete": {
+        "question": "Biztos benne, hogy törölni szeretné az Waret {{ id }} azonosítóval?"
+      },
+      "detail": {
+        "title": "Ware"
+      },
+      "id": "ID",
+      "active": "Active",
+      "created": "Created",
+      "name": "Name",
+      "description": "Description",
+      "productCode": "Product Code",
+      "mainCategory": "Main Category",
+      "subCategory": "Sub Category",
+      "inventory": "Inventory",
+      "disposedStock": "Disposed Stock",
+      "purchasedStock": "Purchased Stock",
+      "returnedStock": "Returned Stock",
+      "soldStock": "Sold Stock",
+      "help": {
+        "active": "Az elem aktív státuszát jelzi.",
+        "created": "Az árucikk bejegyzésének dátuma.",
+        "name": "Az árucikk megnevezése.",
+        "description": "Az árucikk leírása.",
+        "productCode": "Gyártási azonosító kód"
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "rpgCornerApp": {
+    "soldStock": {
+      "home": {
+        "title": "SoldStocks",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Egy új Sold Stock létrehozása",
+        "createOrEditLabel": "Hozzon létre, vagy módosítson Sold Stockt",
+        "notFound": "No Sold Stocks found"
+      },
+      "created": "Egy új Sold Stock lett létrehozva {{ param }} azonosítóval",
+      "updated": "A Sold Stock módosítva lett {{ param }} azonosítóval",
+      "deleted": "A Sold Stock törölve lett {{ param }} azonosítóval",
+      "delete": {
+        "question": "Biztos benne, hogy törölni szeretné az Sold Stockt {{ id }} azonosítóval?"
+      },
+      "detail": {
+        "title": "Sold Stock"
+      },
+      "id": "ID",
+      "supplie": "Supplie",
+      "unitPrice": "Unit Price",
+      "returnedSupplie": "Returned Supplie",
+      "soldWare": "Sold Ware",
+      "sale": "Sale",
+      "help": {
+        "supplie": "Az eladott áru mennyisége.",
+        "unitPrice": "Eladási egységár.\nEltérhet a beszerzési egységártól.",
+        "returnedSupplie": "A visszahozott árumennyiség.\nAlapértelmezetten 0. Maximum a supplie értéke."
+      }
+    }
+  }
+}

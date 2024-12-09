@@ -1,0 +1,42 @@
+{
+  "annotations": {
+    "changelogDate": "20241209232123"
+  },
+  "applications": "*",
+  "documentation": "A Dispose entitás.\\n<p>\\nA selejtezés entitás.\\n\\n@author Kárpáti Gábor",
+  "fields": [
+    {
+      "documentation": "A selejtezés dátuma.",
+      "fieldName": "disposeDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "documentation": "Megjegyzés.",
+      "fieldName": "note",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Dispose",
+  "relationships": [
+    {
+      "documentation": "A selejtezett árukészlet.",
+      "otherEntityName": "disposedStock",
+      "otherEntityRelationshipName": "dispose",
+      "relationshipName": "disposedStock",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "documentation": "A selejtezést végző felhasználó.",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "dispose",
+      "relationshipName": "disposedByUser",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required",
+      "relationshipWithBuiltInEntity": true
+    }
+  ],
+  "searchEngine": "no"
+}

@@ -1,0 +1,74 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (ware(); as wareRef) {
+      <div>
+        <h2 data-cy="wareDetailsHeading"><span jhiTranslate="rpgCornerApp.ware.detail.title">Ware</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ wareRef.id }}</span>
+          </dd>
+          <dt><span [ngbTooltip]="'rpgCornerApp.ware.help.active' | translate" jhiTranslate="rpgCornerApp.ware.active">Active</span></dt>
+          <dd>
+            <span>{{ wareRef.active }}</span>
+          </dd>
+          <dt><span [ngbTooltip]="'rpgCornerApp.ware.help.created' | translate" jhiTranslate="rpgCornerApp.ware.created">Created</span></dt>
+          <dd>
+            <span>{{ wareRef.created | formatMediumDate }}</span>
+          </dd>
+          <dt><span [ngbTooltip]="'rpgCornerApp.ware.help.name' | translate" jhiTranslate="rpgCornerApp.ware.name">Name</span></dt>
+          <dd>
+            <span>{{ wareRef.name }}</span>
+          </dd>
+          <dt>
+            <span [ngbTooltip]="'rpgCornerApp.ware.help.description' | translate" jhiTranslate="rpgCornerApp.ware.description"
+              >Description</span
+            >
+          </dt>
+          <dd>
+            <span>{{ wareRef.description }}</span>
+          </dd>
+          <dt>
+            <span [ngbTooltip]="'rpgCornerApp.ware.help.productCode' | translate" jhiTranslate="rpgCornerApp.ware.productCode"
+              >Product Code</span
+            >
+          </dt>
+          <dd>
+            <span>{{ wareRef.productCode }}</span>
+          </dd>
+          <dt><span jhiTranslate="rpgCornerApp.ware.mainCategory">Main Category</span></dt>
+          <dd>
+            @if (ware()!.mainCategory) {
+              <div>
+                <a [routerLink]="['/category', ware()!.mainCategory?.id, 'view']">{{ wareRef.mainCategory?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="rpgCornerApp.ware.subCategory">Sub Category</span></dt>
+          <dd>
+            @if (ware()!.subCategory) {
+              <div>
+                <a [routerLink]="['/category', ware()!.subCategory?.id, 'view']">{{ wareRef.subCategory?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Vissza</span>
+        </button>
+
+        <button type="button" [routerLink]="['/ware', wareRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Szerkesztés</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,24 @@
+@if (dispose) {
+  <form name="deleteForm" (ngSubmit)="confirmDelete(dispose.id!)">
+    <div class="modal-header">
+      <h4 class="modal-title" data-cy="disposeDeleteDialogHeading" jhiTranslate="entity.delete.title">Erősítse meg a törlési szándékát</h4>
+    </div>
+
+    <div class="modal-body">
+      <jhi-alert-error></jhi-alert-error>
+      <p id="jhi-delete-dispose-heading" jhiTranslate="rpgCornerApp.dispose.delete.question" [translateValues]="{ id: dispose.id }">
+        Biztos benne, hogy törölni szeretné az Disposet {{ dispose.id }} azonosítóval?
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Mégsem</span>
+      </button>
+
+      <button id="jhi-confirm-delete-dispose" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+        <fa-icon icon="times"></fa-icon>&nbsp;<span jhiTranslate="entity.action.delete">Törlés</span>
+      </button>
+    </div>
+  </form>
+}

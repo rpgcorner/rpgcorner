@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (soldStock(); as soldStockRef) {
+      <div>
+        <h2 data-cy="soldStockDetailsHeading"><span jhiTranslate="rpgCornerApp.soldStock.detail.title">Sold Stock</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ soldStockRef.id }}</span>
+          </dd>
+          <dt>
+            <span [ngbTooltip]="'rpgCornerApp.soldStock.help.supplie' | translate" jhiTranslate="rpgCornerApp.soldStock.supplie"
+              >Supplie</span
+            >
+          </dt>
+          <dd>
+            <span>{{ soldStockRef.supplie }}</span>
+          </dd>
+          <dt>
+            <span [ngbTooltip]="'rpgCornerApp.soldStock.help.unitPrice' | translate" jhiTranslate="rpgCornerApp.soldStock.unitPrice"
+              >Unit Price</span
+            >
+          </dt>
+          <dd>
+            <span>{{ soldStockRef.unitPrice }}</span>
+          </dd>
+          <dt>
+            <span
+              [ngbTooltip]="'rpgCornerApp.soldStock.help.returnedSupplie' | translate"
+              jhiTranslate="rpgCornerApp.soldStock.returnedSupplie"
+              >Returned Supplie</span
+            >
+          </dt>
+          <dd>
+            <span>{{ soldStockRef.returnedSupplie }}</span>
+          </dd>
+          <dt><span jhiTranslate="rpgCornerApp.soldStock.soldWare">Sold Ware</span></dt>
+          <dd>
+            @if (soldStock()!.soldWare) {
+              <div>
+                <a [routerLink]="['/ware', soldStock()!.soldWare?.id, 'view']">{{ soldStockRef.soldWare?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="rpgCornerApp.soldStock.sale">Sale</span></dt>
+          <dd>
+            @if (soldStock()!.sale) {
+              <div>
+                <a [routerLink]="['/sale', soldStock()!.sale?.id, 'view']">{{ soldStockRef.sale?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Vissza</span>
+        </button>
+
+        <button type="button" [routerLink]="['/sold-stock', soldStockRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Szerkesztés</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

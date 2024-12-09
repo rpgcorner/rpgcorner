@@ -1,0 +1,27 @@
+{
+  "annotations": {
+    "changelogDate": "20241209232125"
+  },
+  "applications": "*",
+  "documentation": "Az Inventory entitás.\\n<p>\\nA raktárkészletet nyilvántartó entitás.\\n\\n@author Kárpáti Gábor",
+  "fields": [
+    {
+      "documentation": "A raktáron lévő áru mennyisége.",
+      "fieldName": "supplie",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "Inventory",
+  "relationships": [
+    {
+      "documentation": "A raktáron lévő árucikk.",
+      "otherEntityName": "ware",
+      "otherEntityRelationshipName": "inventory",
+      "relationshipName": "ware",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no"
+}

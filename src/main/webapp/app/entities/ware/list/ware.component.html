@@ -1,0 +1,144 @@
+<div>
+  <h2 id="page-heading" data-cy="WareHeading">
+    <span jhiTranslate="rpgCornerApp.ware.home.title">Wares</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="rpgCornerApp.ware.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-ware"
+        [routerLink]="['/ware/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="rpgCornerApp.ware.home.createLabel">Egy új Ware létrehozása</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (wares?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="rpgCornerApp.ware.home.notFound">No Wares found</span>
+    </div>
+  }
+
+  @if (wares && wares.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="active">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.ware.active">Active</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="created">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.ware.created">Created</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.ware.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.ware.description">Description</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="productCode">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.ware.productCode">Product Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="mainCategory.id">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.ware.mainCategory">Main Category</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="subCategory.id">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.ware.subCategory">Sub Category</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (ware of wares; track trackId(ware)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/ware', ware.id, 'view']">{{ ware.id }}</a>
+              </td>
+              <td>{{ ware.active }}</td>
+              <td>{{ ware.created | formatMediumDate }}</td>
+              <td>{{ ware.name }}</td>
+              <td>{{ ware.description }}</td>
+              <td>{{ ware.productCode }}</td>
+              <td>
+                @if (ware.mainCategory) {
+                  <div>
+                    <a [routerLink]="['/category', ware.mainCategory.id, 'view']">{{ ware.mainCategory.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (ware.subCategory) {
+                  <div>
+                    <a [routerLink]="['/category', ware.subCategory.id, 'view']">{{ ware.subCategory.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/ware', ware.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Nézet</span>
+                  </a>
+
+                  <a [routerLink]="['/ware', ware.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Szerkesztés</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(ware)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Törlés</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

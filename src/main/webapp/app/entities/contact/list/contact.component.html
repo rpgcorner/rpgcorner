@@ -1,0 +1,163 @@
+<div>
+  <h2 id="page-heading" data-cy="ContactHeading">
+    <span jhiTranslate="rpgCornerApp.contact.home.title">Contacts</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="rpgCornerApp.contact.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-contact"
+        [routerLink]="['/contact/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="rpgCornerApp.contact.home.createLabel">Egy új Contact létrehozása</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (contacts?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="rpgCornerApp.contact.home.notFound">No Contacts found</span>
+    </div>
+  }
+
+  @if (contacts && contacts.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="companyName">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.contact.companyName">Company Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="taxNumber">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.contact.taxNumber">Tax Number</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="contactName">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.contact.contactName">Contact Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="address">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.contact.address">Address</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="email">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.contact.email">Email</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fax">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.contact.fax">Fax</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="mobile">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.contact.mobile">Mobile</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="phone">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.contact.phone">Phone</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="note">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.contact.note">Note</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="supplier.id">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.contact.supplier">Supplier</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (contact of contacts; track trackId(contact)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/contact', contact.id, 'view']">{{ contact.id }}</a>
+              </td>
+              <td>{{ contact.companyName }}</td>
+              <td>{{ contact.taxNumber }}</td>
+              <td>{{ contact.contactName }}</td>
+              <td>{{ contact.address }}</td>
+              <td>{{ contact.email }}</td>
+              <td>{{ contact.fax }}</td>
+              <td>{{ contact.mobile }}</td>
+              <td>{{ contact.phone }}</td>
+              <td>{{ contact.note }}</td>
+              <td>
+                @if (contact.supplier) {
+                  <div>
+                    <a [routerLink]="['/supplier', contact.supplier.id, 'view']">{{ contact.supplier.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/contact', contact.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Nézet</span>
+                  </a>
+
+                  <a [routerLink]="['/contact', contact.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Szerkesztés</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(contact)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Törlés</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

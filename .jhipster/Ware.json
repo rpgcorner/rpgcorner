@@ -1,0 +1,61 @@
+{
+  "annotations": {
+    "changelogDate": "20241209232133"
+  },
+  "applications": "*",
+  "documentation": "A Ware entitás.\\n<p>\\nAz árucikkek entitása.\\n\\n@author Kárpáti Gábor",
+  "fields": [
+    {
+      "documentation": "Az elem aktív státuszát jelzi.",
+      "fieldName": "active",
+      "fieldType": "Boolean"
+    },
+    {
+      "documentation": "Az árucikk bejegyzésének dátuma.",
+      "fieldName": "created",
+      "fieldType": "LocalDate"
+    },
+    {
+      "documentation": "Az árucikk megnevezése.",
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "documentation": "Az árucikk leírása.",
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "documentation": "Gyártási azonosító kód",
+      "fieldName": "productCode",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Ware",
+  "relationships": [
+    {
+      "documentation": "Az árucikk fő kategóriája.",
+      "otherEntityName": "category",
+      "relationshipName": "mainCategory",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "documentation": "Az árucikk alkategóriája.",
+      "otherEntityName": "category",
+      "relationshipName": "subCategory",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "documentation": "Az árucikk raktárkészlete.",
+      "otherEntityName": "inventory",
+      "otherEntityRelationshipName": "ware",
+      "relationshipName": "inventory",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

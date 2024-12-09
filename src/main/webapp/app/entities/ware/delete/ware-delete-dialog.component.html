@@ -1,0 +1,24 @@
+@if (ware) {
+  <form name="deleteForm" (ngSubmit)="confirmDelete(ware.id!)">
+    <div class="modal-header">
+      <h4 class="modal-title" data-cy="wareDeleteDialogHeading" jhiTranslate="entity.delete.title">Erősítse meg a törlési szándékát</h4>
+    </div>
+
+    <div class="modal-body">
+      <jhi-alert-error></jhi-alert-error>
+      <p id="jhi-delete-ware-heading" jhiTranslate="rpgCornerApp.ware.delete.question" [translateValues]="{ id: ware.id }">
+        Biztos benne, hogy törölni szeretné az Waret {{ ware.id }} azonosítóval?
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Mégsem</span>
+      </button>
+
+      <button id="jhi-confirm-delete-ware" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+        <fa-icon icon="times"></fa-icon>&nbsp;<span jhiTranslate="entity.action.delete">Törlés</span>
+      </button>
+    </div>
+  </form>
+}

@@ -1,0 +1,38 @@
+{
+  "annotations": {
+    "changelogDate": "20241209232124"
+  },
+  "applications": "*",
+  "documentation": "A DisposedStock entitás.\\n<p>\\nA selejtezett áru adatait kezelő entitás.\\n\\n@author Kárpáti Gábor",
+  "fields": [
+    {
+      "documentation": "A selejtezett áru mennyisége.",
+      "fieldName": "supplie",
+      "fieldType": "Integer"
+    },
+    {
+      "documentation": "Selejtezési egységár.\\nEltérhet a beszerzési egységártól.",
+      "fieldName": "unitPrice",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "DisposedStock",
+  "relationships": [
+    {
+      "documentation": "A selejtezett árucikk",
+      "otherEntityName": "ware",
+      "relationshipName": "disposedWare",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "documentation": "A selejtezés, amely során az áruikszélet selejtezésre került.",
+      "otherEntityName": "dispose",
+      "otherEntityRelationshipName": "disposedStock",
+      "relationshipName": "dispose",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

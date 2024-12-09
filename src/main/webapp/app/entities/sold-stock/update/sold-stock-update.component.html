@@ -1,0 +1,103 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-sold-stock-heading" data-cy="SoldStockCreateUpdateHeading" jhiTranslate="rpgCornerApp.soldStock.home.createOrEditLabel">
+        Hozzon létre, vagy módosítson Sold Stockt
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="rpgCornerApp.soldStock.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_supplie"
+            [ngbTooltip]="'rpgCornerApp.soldStock.help.supplie' | translate"
+            jhiTranslate="rpgCornerApp.soldStock.supplie"
+            >Supplie</label
+          >
+          <input type="number" class="form-control" name="supplie" id="field_supplie" data-cy="supplie" formControlName="supplie" />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_unitPrice"
+            [ngbTooltip]="'rpgCornerApp.soldStock.help.unitPrice' | translate"
+            jhiTranslate="rpgCornerApp.soldStock.unitPrice"
+            >Unit Price</label
+          >
+          <input type="number" class="form-control" name="unitPrice" id="field_unitPrice" data-cy="unitPrice" formControlName="unitPrice" />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_returnedSupplie"
+            [ngbTooltip]="'rpgCornerApp.soldStock.help.returnedSupplie' | translate"
+            jhiTranslate="rpgCornerApp.soldStock.returnedSupplie"
+            >Returned Supplie</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="returnedSupplie"
+            id="field_returnedSupplie"
+            data-cy="returnedSupplie"
+            formControlName="returnedSupplie"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_soldWare" jhiTranslate="rpgCornerApp.soldStock.soldWare">Sold Ware</label>
+          <select
+            class="form-control"
+            id="field_soldWare"
+            data-cy="soldWare"
+            name="soldWare"
+            formControlName="soldWare"
+            [compareWith]="compareWare"
+          >
+            <option [ngValue]="null"></option>
+            @for (wareOption of soldWaresCollection; track $index) {
+              <option [ngValue]="wareOption">{{ wareOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_sale" jhiTranslate="rpgCornerApp.soldStock.sale">Sale</label>
+          <select class="form-control" id="field_sale" data-cy="sale" name="sale" formControlName="sale" [compareWith]="compareSale">
+            <option [ngValue]="null"></option>
+            @for (saleOption of salesSharedCollection; track $index) {
+              <option [ngValue]="saleOption">{{ saleOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Mégsem</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Mentés</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

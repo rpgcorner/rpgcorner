@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (returnedStock(); as returnedStockRef) {
+      <div>
+        <h2 data-cy="returnedStockDetailsHeading"><span jhiTranslate="rpgCornerApp.returnedStock.detail.title">Returned Stock</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ returnedStockRef.id }}</span>
+          </dd>
+          <dt>
+            <span [ngbTooltip]="'rpgCornerApp.returnedStock.help.supplie' | translate" jhiTranslate="rpgCornerApp.returnedStock.supplie"
+              >Supplie</span
+            >
+          </dt>
+          <dd>
+            <span>{{ returnedStockRef.supplie }}</span>
+          </dd>
+          <dt>
+            <span [ngbTooltip]="'rpgCornerApp.returnedStock.help.unitPrice' | translate" jhiTranslate="rpgCornerApp.returnedStock.unitPrice"
+              >Unit Price</span
+            >
+          </dt>
+          <dd>
+            <span>{{ returnedStockRef.unitPrice }}</span>
+          </dd>
+          <dt><span jhiTranslate="rpgCornerApp.returnedStock.returnedWare">Returned Ware</span></dt>
+          <dd>
+            @if (returnedStock()!.returnedWare) {
+              <div>
+                <a [routerLink]="['/ware', returnedStock()!.returnedWare?.id, 'view']">{{ returnedStockRef.returnedWare?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="rpgCornerApp.returnedStock.productReturn">Product Return</span></dt>
+          <dd>
+            @if (returnedStock()!.productReturn) {
+              <div>
+                <a [routerLink]="['/product-return', returnedStock()!.productReturn?.id, 'view']">{{
+                  returnedStockRef.productReturn?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Vissza</span>
+        </button>
+
+        <button type="button" [routerLink]="['/returned-stock', returnedStockRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Szerkesztés</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,30 @@
+@if (purchasedStock) {
+  <form name="deleteForm" (ngSubmit)="confirmDelete(purchasedStock.id!)">
+    <div class="modal-header">
+      <h4 class="modal-title" data-cy="purchasedStockDeleteDialogHeading" jhiTranslate="entity.delete.title">
+        Erősítse meg a törlési szándékát
+      </h4>
+    </div>
+
+    <div class="modal-body">
+      <jhi-alert-error></jhi-alert-error>
+      <p
+        id="jhi-delete-purchasedStock-heading"
+        jhiTranslate="rpgCornerApp.purchasedStock.delete.question"
+        [translateValues]="{ id: purchasedStock.id }"
+      >
+        Biztos benne, hogy törölni szeretné az Purchased Stockt {{ purchasedStock.id }} azonosítóval?
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Mégsem</span>
+      </button>
+
+      <button id="jhi-confirm-delete-purchasedStock" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+        <fa-icon icon="times"></fa-icon>&nbsp;<span jhiTranslate="entity.action.delete">Törlés</span>
+      </button>
+    </div>
+  </form>
+}

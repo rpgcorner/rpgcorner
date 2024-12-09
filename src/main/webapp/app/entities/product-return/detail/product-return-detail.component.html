@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (productReturn(); as productReturnRef) {
+      <div>
+        <h2 data-cy="productReturnDetailsHeading"><span jhiTranslate="rpgCornerApp.productReturn.detail.title">Product Return</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ productReturnRef.id }}</span>
+          </dd>
+          <dt>
+            <span
+              [ngbTooltip]="'rpgCornerApp.productReturn.help.returnDate' | translate"
+              jhiTranslate="rpgCornerApp.productReturn.returnDate"
+              >Return Date</span
+            >
+          </dt>
+          <dd>
+            <span>{{ productReturnRef.returnDate | formatMediumDate }}</span>
+          </dd>
+          <dt>
+            <span [ngbTooltip]="'rpgCornerApp.productReturn.help.note' | translate" jhiTranslate="rpgCornerApp.productReturn.note"
+              >Note</span
+            >
+          </dt>
+          <dd>
+            <span>{{ productReturnRef.note }}</span>
+          </dd>
+          <dt><span jhiTranslate="rpgCornerApp.productReturn.sale">Sale</span></dt>
+          <dd>
+            @if (productReturn()!.sale) {
+              <div>
+                <a [routerLink]="['/sale', productReturn()!.sale?.id, 'view']">{{ productReturnRef.sale?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="rpgCornerApp.productReturn.returnedByUser">Returned By User</span></dt>
+          <dd>
+            <span>{{ productReturnRef.returnedByUser?.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="rpgCornerApp.productReturn.returnedByCustomer">Returned By Customer</span></dt>
+          <dd>
+            @if (productReturn()!.returnedByCustomer) {
+              <div>
+                <a [routerLink]="['/customer', productReturn()!.returnedByCustomer?.id, 'view']">{{
+                  productReturnRef.returnedByCustomer?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Vissza</span>
+        </button>
+
+        <button type="button" [routerLink]="['/product-return', productReturnRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Szerkesztés</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

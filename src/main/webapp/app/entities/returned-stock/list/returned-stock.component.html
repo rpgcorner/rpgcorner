@@ -1,0 +1,120 @@
+<div>
+  <h2 id="page-heading" data-cy="ReturnedStockHeading">
+    <span jhiTranslate="rpgCornerApp.returnedStock.home.title">ReturnedStocks</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="rpgCornerApp.returnedStock.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-returned-stock"
+        [routerLink]="['/returned-stock/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="rpgCornerApp.returnedStock.home.createLabel">Egy új Returned Stock létrehozása</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (returnedStocks?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="rpgCornerApp.returnedStock.home.notFound">No Returned Stocks found</span>
+    </div>
+  }
+
+  @if (returnedStocks && returnedStocks.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="supplie">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.returnedStock.supplie">Supplie</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="unitPrice">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.returnedStock.unitPrice">Unit Price</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="returnedWare.id">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.returnedStock.returnedWare">Returned Ware</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="productReturn.id">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.returnedStock.productReturn">Product Return</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (returnedStock of returnedStocks; track trackId(returnedStock)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/returned-stock', returnedStock.id, 'view']">{{ returnedStock.id }}</a>
+              </td>
+              <td>{{ returnedStock.supplie }}</td>
+              <td>{{ returnedStock.unitPrice }}</td>
+              <td>
+                @if (returnedStock.returnedWare) {
+                  <div>
+                    <a [routerLink]="['/ware', returnedStock.returnedWare.id, 'view']">{{ returnedStock.returnedWare.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (returnedStock.productReturn) {
+                  <div>
+                    <a [routerLink]="['/product-return', returnedStock.productReturn.id, 'view']">{{ returnedStock.productReturn.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/returned-stock', returnedStock.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Nézet</span>
+                  </a>
+
+                  <a [routerLink]="['/returned-stock', returnedStock.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Szerkesztés</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(returnedStock)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Törlés</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

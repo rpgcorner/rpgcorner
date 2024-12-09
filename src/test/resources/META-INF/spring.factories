@@ -1,0 +1,2 @@
+org.springframework.test.context.ContextCustomizerFactory = com.rpgcornerteam.\
+    rpgcorner.config.SqlTestContainersSpringContextCustomizerFactory

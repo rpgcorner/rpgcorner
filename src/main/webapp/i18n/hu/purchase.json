@@ -1,0 +1,30 @@
+{
+  "rpgCornerApp": {
+    "purchase": {
+      "home": {
+        "title": "Purchases",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Egy új Purchase létrehozása",
+        "createOrEditLabel": "Hozzon létre, vagy módosítson Purchaset",
+        "notFound": "No Purchases found"
+      },
+      "created": "Egy új Purchase lett létrehozva {{ param }} azonosítóval",
+      "updated": "A Purchase módosítva lett {{ param }} azonosítóval",
+      "deleted": "A Purchase törölve lett {{ param }} azonosítóval",
+      "delete": {
+        "question": "Biztos benne, hogy törölni szeretné az Purchaset {{ id }} azonosítóval?"
+      },
+      "detail": {
+        "title": "Purchase"
+      },
+      "id": "ID",
+      "purchaseDate": "Purchase Date",
+      "purchasedStock": "Purchased Stock",
+      "purchasedByUser": "Purchased By User",
+      "purchasedFromSupplier": "Purchased From Supplier",
+      "help": {
+        "purchaseDate": "A beszerzés időpontja."
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "annotations": {
+    "changelogDate": "20241209232122"
+  },
+  "applications": "*",
+  "documentation": "A Customer entitás.\\n<p>\\nA vevő adatait kezelő entitás.\\n\\n@author Kárpáti Gábor",
+  "fields": [],
+  "name": "Customer",
+  "relationships": [
+    {
+      "documentation": "A vevő kapcsolattartási adatai.",
+      "otherEntityName": "contact",
+      "relationshipName": "contact",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "documentation": "A vevő vásárlásai.",
+      "otherEntityName": "sale",
+      "otherEntityRelationshipName": "soldForCustomer",
+      "relationshipName": "sale",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "documentation": "A vevőhöz kapcsolódó áruvisszavételek.",
+      "otherEntityName": "productReturn",
+      "otherEntityRelationshipName": "returnedByCustomer",
+      "relationshipName": "productReturn",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

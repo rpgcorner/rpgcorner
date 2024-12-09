@@ -1,0 +1,56 @@
+{
+  "annotations": {
+    "changelogDate": "20241209232126"
+  },
+  "applications": "*",
+  "documentation": "A ProductReturn entitás.\\n<p>\\nAz áruvisszavételeket kezelő entitás.\\n\\n@author Kárpáti Gábor",
+  "fields": [
+    {
+      "documentation": "A visszavétel dátuma",
+      "fieldName": "returnDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "documentation": "Megjegyzés.",
+      "fieldName": "note",
+      "fieldType": "String"
+    }
+  ],
+  "name": "ProductReturn",
+  "relationships": [
+    {
+      "documentation": "A visszavett árukészlet.",
+      "otherEntityName": "returnedStock",
+      "relationshipName": "returnedStock",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "documentation": "Az eladás, amelyhez a áruvisszavétel tartozik.",
+      "otherEntityName": "sale",
+      "otherEntityRelationshipName": "productReturn",
+      "relationshipName": "sale",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "documentation": "A felhasználó aki az árut visszavette.",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "productReturn",
+      "relationshipName": "returnedByUser",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipWithBuiltInEntity": true
+    },
+    {
+      "documentation": "A vevő aki az árut visszahozta.",
+      "otherEntityName": "customer",
+      "otherEntityRelationshipName": "productReturn",
+      "relationshipName": "returnedByCustomer",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

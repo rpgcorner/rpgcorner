@@ -1,0 +1,33 @@
+{
+  "rpgCornerApp": {
+    "productReturn": {
+      "home": {
+        "title": "ProductReturns",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Egy új Product Return létrehozása",
+        "createOrEditLabel": "Hozzon létre, vagy módosítson Product Returnt",
+        "notFound": "No Product Returns found"
+      },
+      "created": "Egy új Product Return lett létrehozva {{ param }} azonosítóval",
+      "updated": "A Product Return módosítva lett {{ param }} azonosítóval",
+      "deleted": "A Product Return törölve lett {{ param }} azonosítóval",
+      "delete": {
+        "question": "Biztos benne, hogy törölni szeretné az Product Returnt {{ id }} azonosítóval?"
+      },
+      "detail": {
+        "title": "Product Return"
+      },
+      "id": "ID",
+      "returnDate": "Return Date",
+      "note": "Note",
+      "returnedStock": "Returned Stock",
+      "sale": "Sale",
+      "returnedByUser": "Returned By User",
+      "returnedByCustomer": "Returned By Customer",
+      "help": {
+        "returnDate": "A visszavétel dátuma",
+        "note": "Megjegyzés."
+      }
+    }
+  }
+}

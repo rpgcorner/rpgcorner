@@ -1,0 +1,43 @@
+{
+  "annotations": {
+    "changelogDate": "20241209232131"
+  },
+  "applications": "*",
+  "documentation": "A SoldStock entitás.\\n<p>\\nAz eladott áru adatait kezelő entitás.\\n\\n@author Kárpáti Gábor",
+  "fields": [
+    {
+      "documentation": "Az eladott áru mennyisége.",
+      "fieldName": "supplie",
+      "fieldType": "Integer"
+    },
+    {
+      "documentation": "Eladási egységár.\\nEltérhet a beszerzési egységártól.",
+      "fieldName": "unitPrice",
+      "fieldType": "Integer"
+    },
+    {
+      "documentation": "A visszahozott árumennyiség.\\nAlapértelmezetten 0. Maximum a supplie értéke.",
+      "fieldName": "returnedSupplie",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "SoldStock",
+  "relationships": [
+    {
+      "documentation": "Az eladott árucikk.",
+      "otherEntityName": "ware",
+      "relationshipName": "soldWare",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "documentation": "Az eladás, amely során az árukészlet eladásra került.",
+      "otherEntityName": "sale",
+      "otherEntityRelationshipName": "soldStock",
+      "relationshipName": "sale",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

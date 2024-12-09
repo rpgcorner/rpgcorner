@@ -1,0 +1,28 @@
+{
+  "rpgCornerApp": {
+    "inventory": {
+      "home": {
+        "title": "Inventories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Egy új Inventory létrehozása",
+        "createOrEditLabel": "Hozzon létre, vagy módosítson Inventoryt",
+        "notFound": "No Inventories found"
+      },
+      "created": "Egy új Inventory lett létrehozva {{ param }} azonosítóval",
+      "updated": "A Inventory módosítva lett {{ param }} azonosítóval",
+      "deleted": "A Inventory törölve lett {{ param }} azonosítóval",
+      "delete": {
+        "question": "Biztos benne, hogy törölni szeretné az Inventoryt {{ id }} azonosítóval?"
+      },
+      "detail": {
+        "title": "Inventory"
+      },
+      "id": "ID",
+      "supplie": "Supplie",
+      "ware": "Ware",
+      "help": {
+        "supplie": "A raktáron lévő áru mennyisége."
+      }
+    }
+  }
+}

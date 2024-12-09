@@ -1,0 +1,494 @@
+/**
+ * A Contact entitás.
+ * <p>
+ * A kapcsolattartási információk entitása.
+ *
+ * @author Kárpáti Gábor
+ */
+entity Contact {
+  /**
+   * A cég neve.
+   */
+  companyName String
+
+  /**
+   * Adószám
+   */
+  taxNumber String
+
+  /**
+   * A kapcsolat neve.
+   */
+  contactName String
+
+  /**
+   * Cím.
+   */
+  address String
+
+  /**
+   * E-mail cím.
+   */
+  email String
+
+  /**
+   * Fax szám.
+   */
+  fax String
+
+  /**
+   * Mobil szám.
+   */
+  mobile String
+
+  /**
+   * Vezetékes telefonszám.
+   */
+  phone String
+
+  /**
+   * Megjegyzés
+   */
+  note String
+}
+
+/**
+ * A Supplier entitás.
+ * <p>
+ * A beszállító adatait kezelő entitás.
+ *
+ * @author Kárpáti Gábor
+ */
+entity Supplier
+
+  /**
+   * A Customer entitás.
+   * <p>
+   * A vevő adatait kezelő entitás.
+   *
+   * @author Kárpáti Gábor
+   */
+entity Customer
+
+  /**
+   * Az Inventory entitás.
+   * <p>
+   * A raktárkészletet nyilvántartó entitás.
+   *
+   * @author Kárpáti Gábor
+   */
+entity Inventory {
+  // ware
+
+  /**
+   * A raktáron lévő áru mennyisége.
+   */
+  supplie Integer
+}
+
+/**
+ * A Ware entitás.
+ * <p>
+ * Az árucikkek entitása.
+ *
+ * @author Kárpáti Gábor
+ */
+entity Ware {
+  // mainCategory
+  // subCategory
+  // inventory
+
+  /**
+   * Az elem aktív státuszát jelzi.
+   */
+  active Boolean
+
+  /**
+   * Az árucikk bejegyzésének dátuma.
+   */
+  created LocalDate
+
+  /**
+   * Az árucikk megnevezése.
+   */
+  name String
+
+  /**
+   * Az árucikk leírása.
+   */
+  description String
+
+  /**
+   * Gyártási azonosító kód
+   */
+  productCode String
+}
+
+/**
+ * A Category entitás.
+ * <p>
+ * Az árucikkek kategóriáját kezelő entitása.
+ *
+ * @author Kárpáti Gábor
+ */
+entity Category {
+  // mainCategory
+  // subCategory
+
+  /**
+   * Az elem aktív státuszát jelzi.
+   */
+  active Boolean
+
+  /**
+   * A kategória típusa.
+   */
+  categoryType CategoryTypeEnum
+
+  /**
+   * A kategória leírása.
+   */
+  description String
+}
+
+/**
+ * A CategoryTypeEnum enum.
+ * <p>
+ * Enum a fő kategóriák (main category) és az alkategóriák (sub category) kezeléséhez.
+ *
+ * @author Kárpáti Gábor
+ */
+enum CategoryTypeEnum {
+  /**
+   * Fő kategória
+   */
+  MAIN_CATEGORY("Main category"),
+
+  /**
+   * Alkategória
+   */
+  SUB_CATEGORY("Sub category")
+}
+
+/**
+ * A Purchase entitás.
+ * <p>
+ * A beszerzés entitás.
+ *
+ * @author Kárpáti Gábor
+ */
+entity Purchase {
+  // user
+  // supplier
+  // purchasedStock
+
+  /**
+   * A beszerzés időpontja.
+   */
+  purchaseDate LocalDate
+}
+
+/**
+ * A PurchasedStock entitás.
+ * <p>
+ * A beszerzett áru adatait kezelő entitás.
+ *
+ * @author Kárpáti Gábor
+ */
+entity PurchasedStock {
+  // purchase
+  // purchasedWare
+
+  /**
+   * A beszerzett áru mennyisége.
+   */
+  supplie Integer
+
+  /**
+   * Beszerzési egység ár
+   */
+  unitPrice Integer
+}
+
+/**
+ * A Sale entitás.
+ * <p>
+ * Az eladás entitás.
+ *
+ * @author Kárpáti Gábor
+ */
+entity Sale {
+  // user
+  // customer
+  // soldStock
+
+  /**
+   * Az eladás időpontja.
+   */
+  soldDate LocalDate
+}
+
+/**
+ * A SoldStock entitás.
+ * <p>
+ * Az eladott áru adatait kezelő entitás.
+ *
+ * @author Kárpáti Gábor
+ */
+entity SoldStock {
+  // sale
+  // soldWare
+
+  /**
+   * Az eladott áru mennyisége.
+   */
+  supplie Integer
+
+  /**
+   * Eladási egységár.
+   * Eltérhet a beszerzési egységártól.
+   */
+  unitPrice Integer
+
+  /**
+   * A visszahozott árumennyiség.
+   * Alapértelmezetten 0. Maximum a supplie értéke.
+   */
+  returnedSupplie Integer
+}
+
+/**
+ * A ProductReturn entitás.
+ * <p>
+ * Az áruvisszavételeket kezelő entitás.
+ *
+ * @author Kárpáti Gábor
+ */
+entity ProductReturn {
+  // user
+  // customer
+  // sale
+  // returnedStock
+
+  /**
+   * A visszavétel dátuma
+   */
+  returnDate LocalDate
+
+  /**
+   * Megjegyzés.
+   */
+  note String
+}
+
+/**
+ * A ReturnedStock entitás.
+ * <p>
+ * A visszavett árucikk adatait kezelő entitás.
+ *
+ * @author Kárpáti Gábor
+ */
+entity ReturnedStock {
+  // productReturn
+  // returnedWare
+
+  /**
+   * A visszahozott áru mennyisége.
+   */
+  supplie Integer
+
+  /**
+   * A visszavételi egységár.
+   * Eltérhet az eladási egységártól.
+   */
+  unitPrice Integer
+}
+
+/**
+ * A Dispose entitás.
+ * <p>
+ * A selejtezés entitás.
+ *
+ * @author Kárpáti Gábor
+ */
+entity Dispose {
+  // user
+  // disposedStock
+
+  /**
+   * A selejtezés dátuma.
+   */
+  disposeDate LocalDate
+
+  /**
+   * Megjegyzés.
+   */
+  note String
+}
+
+/**
+ * A DisposedStock entitás.
+ * <p>
+ * A selejtezett áru adatait kezelő entitás.
+ *
+ * @author Kárpáti Gábor
+ */
+entity DisposedStock {
+  // dispose
+  // disposedWare
+
+  /**
+   * A selejtezett áru mennyisége.
+   */
+  supplie Integer
+
+  /**
+   * Selejtezési egységár.
+   * Eltérhet a beszerzési egységártól.
+   */
+  unitPrice Integer
+}
+
+/**
+ * One to one relationship.
+ */
+relationship OneToOne {
+  /** A vevő kapcsolattartási adatai. */
+  Customer{contact required}
+  to
+  Contact,
+
+  /** A raktáron lévő árucikk. */
+  Inventory{ware required}
+  to
+  /** Az árucikk raktárkészlete. */
+  Ware{inventory},
+
+  /** A beszerzett árucikk. */
+  PurchasedStock{purchasedWare}
+  to
+  /** Az árucikkhez kapcsolódó beszerzések. */
+  Ware,
+
+  /** Az eladott árucikk. */
+  SoldStock{soldWare}
+  to
+  /** Az árucikkhez kapcsolódó eladások. */
+  Ware,
+
+  /** A visszahozott árucikk */
+  ReturnedStock{returnedWare}
+  to
+  /** Az árucikkhez kapcsolódó visszavételek */
+  Ware,
+
+  /** A selejtezett árucikk */
+  DisposedStock{disposedWare}
+  to
+  /** Az árucikkhez kapcsolódó selejtezések. */
+  Ware
+}
+
+/**
+ * Many to one relationship.
+ */
+relationship ManyToOne {
+  /** Az árucikk fő kategóriája. */
+  Ware{mainCategory required}
+  to
+  Category,
+
+  /** Az árucikk alkategóriája. */
+  Ware{subCategory}
+  to
+  Category,
+
+  /** Az árubeszerző. */
+  Purchase{purchasedByUser required}
+  to
+  /** A felhasználó beszerzései. */
+  User{purchase}  with builtInEntity,
+
+  /** A beszállító. */
+  Purchase{purchasedFromSupplier required}
+  to
+  /** A beszállítóhoz kapcsolódó beszerzések. */
+  Supplier{purchase},
+
+  /** Az eladó. */
+  Sale{soldByUser required}
+  to
+  /** A felhasználó eladásai. */
+  User{sale}  with builtInEntity,
+
+  /** A vevő. */
+  Sale{soldForCustomer required}
+  to
+  /** A vevő vásárlásai. */
+  Customer{sale},
+
+  /** Az eladás, amelyhez a áruvisszavétel tartozik. */
+  ProductReturn{sale}
+  to
+  /** Az eladáshoz kapcsolódó áruvisszavételek. */
+  Sale{productReturn},
+
+  /** A felhasználó aki az árut visszavette. */
+  ProductReturn{returnedByUser}
+  to
+  /** A felhasználó áruvisszavételei. */
+  User{productReturn}  with builtInEntity,
+
+  /** A vevő aki az árut visszahozta. */
+  ProductReturn{returnedByCustomer}
+  to
+  /** A vevőhöz kapcsolódó áruvisszavételek. */
+  Customer{productReturn},
+
+  /** A selejtezést végző felhasználó. */
+  Dispose{disposedByUser required}
+  to
+  /** A felhasználó selejtezései. */
+  User{dispose}  with builtInEntity
+}
+
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+  /** A beszállító kapcsolattartói. */
+  Supplier{contact required}
+  to
+  /** A beszállító amelyhez a kapcsolattartási adatok tartoznak. */
+  Contact{supplier},
+
+  /** Alkategóriák. */
+  Category{subCategory}
+  to
+  /** Fő kategória. */
+  Category{mainCategory},
+
+  /** A bevételezett árukészlet. */
+  Purchase{purchasedStock required}
+  to
+  /** A beszerzés, amelyhez az árukészlet kapcsolódik. */
+  PurchasedStock{purchase},
+
+  /** Az eladott árukészlet. */
+  Sale{soldStock required}
+  to
+  /** Az eladás, amely során az árukészlet eladásra került. */
+  SoldStock{sale},
+
+  /** A visszavett árukészlet. */
+  ProductReturn{returnedStock required}
+  to
+  /** Az áruvisszavétel, amely során az árukészlet vissza lett véve. */
+  ReturnedStock
+
+  /** A selejtezett árukészlet. */
+  Dispose{disposedStock required}
+  to
+  /** A selejtezés, amely során az áruikszélet selejtezésre került. */
+  DisposedStock{dispose}
+}

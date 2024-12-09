@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (purchase(); as purchaseRef) {
+      <div>
+        <h2 data-cy="purchaseDetailsHeading"><span jhiTranslate="rpgCornerApp.purchase.detail.title">Purchase</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ purchaseRef.id }}</span>
+          </dd>
+          <dt>
+            <span [ngbTooltip]="'rpgCornerApp.purchase.help.purchaseDate' | translate" jhiTranslate="rpgCornerApp.purchase.purchaseDate"
+              >Purchase Date</span
+            >
+          </dt>
+          <dd>
+            <span>{{ purchaseRef.purchaseDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="rpgCornerApp.purchase.purchasedByUser">Purchased By User</span></dt>
+          <dd>
+            <span>{{ purchaseRef.purchasedByUser?.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="rpgCornerApp.purchase.purchasedFromSupplier">Purchased From Supplier</span></dt>
+          <dd>
+            @if (purchase()!.purchasedFromSupplier) {
+              <div>
+                <a [routerLink]="['/supplier', purchase()!.purchasedFromSupplier?.id, 'view']">{{
+                  purchaseRef.purchasedFromSupplier?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Vissza</span>
+        </button>
+
+        <button type="button" [routerLink]="['/purchase', purchaseRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Szerkesztés</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,45 @@
+{
+  "rpgCornerApp": {
+    "contact": {
+      "home": {
+        "title": "Contacts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Contact",
+        "createOrEditLabel": "Create or edit a Contact",
+        "notFound": "No Contacts found"
+      },
+      "created": "A new Contact is created with identifier {{ param }}",
+      "updated": "A Contact is updated with identifier {{ param }}",
+      "deleted": "A Contact is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Contact {{ id }}?"
+      },
+      "detail": {
+        "title": "Contact"
+      },
+      "id": "ID",
+      "companyName": "Company Name",
+      "taxNumber": "Tax Number",
+      "contactName": "Contact Name",
+      "address": "Address",
+      "email": "Email",
+      "fax": "Fax",
+      "mobile": "Mobile",
+      "phone": "Phone",
+      "note": "Note",
+      "supplier": "Supplier",
+      "customer": "Customer",
+      "help": {
+        "companyName": "A cég neve.",
+        "taxNumber": "Adószám",
+        "contactName": "A kapcsolat neve.",
+        "address": "Cím.",
+        "email": "E-mail cím.",
+        "fax": "Fax szám.",
+        "mobile": "Mobil szám.",
+        "phone": "Vezetékes telefonszám.",
+        "note": "Megjegyzés"
+      }
+    }
+  }
+}

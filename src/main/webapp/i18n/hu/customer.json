@@ -1,0 +1,26 @@
+{
+  "rpgCornerApp": {
+    "customer": {
+      "home": {
+        "title": "Customers",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Egy új Customer létrehozása",
+        "createOrEditLabel": "Hozzon létre, vagy módosítson Customert",
+        "notFound": "No Customers found"
+      },
+      "created": "Egy új Customer lett létrehozva {{ param }} azonosítóval",
+      "updated": "A Customer módosítva lett {{ param }} azonosítóval",
+      "deleted": "A Customer törölve lett {{ param }} azonosítóval",
+      "delete": {
+        "question": "Biztos benne, hogy törölni szeretné az Customert {{ id }} azonosítóval?"
+      },
+      "detail": {
+        "title": "Customer"
+      },
+      "id": "ID",
+      "contact": "Contact",
+      "sale": "Sale",
+      "productReturn": "Product Return"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "rpgCornerApp": {
+    "returnedStock": {
+      "home": {
+        "title": "ReturnedStocks",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Egy új Returned Stock létrehozása",
+        "createOrEditLabel": "Hozzon létre, vagy módosítson Returned Stockt",
+        "notFound": "No Returned Stocks found"
+      },
+      "created": "Egy új Returned Stock lett létrehozva {{ param }} azonosítóval",
+      "updated": "A Returned Stock módosítva lett {{ param }} azonosítóval",
+      "deleted": "A Returned Stock törölve lett {{ param }} azonosítóval",
+      "delete": {
+        "question": "Biztos benne, hogy törölni szeretné az Returned Stockt {{ id }} azonosítóval?"
+      },
+      "detail": {
+        "title": "Returned Stock"
+      },
+      "id": "ID",
+      "supplie": "Supplie",
+      "unitPrice": "Unit Price",
+      "returnedWare": "Returned Ware",
+      "productReturn": "Product Return",
+      "help": {
+        "supplie": "A visszahozott áru mennyisége.",
+        "unitPrice": "A visszavételi egységár.\nEltérhet az eladási egységártól."
+      }
+    }
+  }
+}

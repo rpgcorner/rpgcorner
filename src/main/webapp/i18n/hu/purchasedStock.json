@@ -1,0 +1,31 @@
+{
+  "rpgCornerApp": {
+    "purchasedStock": {
+      "home": {
+        "title": "PurchasedStocks",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Egy új Purchased Stock létrehozása",
+        "createOrEditLabel": "Hozzon létre, vagy módosítson Purchased Stockt",
+        "notFound": "No Purchased Stocks found"
+      },
+      "created": "Egy új Purchased Stock lett létrehozva {{ param }} azonosítóval",
+      "updated": "A Purchased Stock módosítva lett {{ param }} azonosítóval",
+      "deleted": "A Purchased Stock törölve lett {{ param }} azonosítóval",
+      "delete": {
+        "question": "Biztos benne, hogy törölni szeretné az Purchased Stockt {{ id }} azonosítóval?"
+      },
+      "detail": {
+        "title": "Purchased Stock"
+      },
+      "id": "ID",
+      "supplie": "Supplie",
+      "unitPrice": "Unit Price",
+      "purchasedWare": "Purchased Ware",
+      "purchase": "Purchase",
+      "help": {
+        "supplie": "A beszerzett áru mennyisége.",
+        "unitPrice": "Beszerzési egység ár"
+      }
+    }
+  }
+}

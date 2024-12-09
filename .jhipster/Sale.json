@@ -1,0 +1,54 @@
+{
+  "annotations": {
+    "changelogDate": "20241209232130"
+  },
+  "applications": "*",
+  "documentation": "A Sale entitás.\\n<p>\\nAz eladás entitás.\\n\\n@author Kárpáti Gábor",
+  "fields": [
+    {
+      "documentation": "Az eladás időpontja.",
+      "fieldName": "soldDate",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "name": "Sale",
+  "relationships": [
+    {
+      "documentation": "Az eladott árukészlet.",
+      "otherEntityName": "soldStock",
+      "otherEntityRelationshipName": "sale",
+      "relationshipName": "soldStock",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "documentation": "Az eladó.",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "sale",
+      "relationshipName": "soldByUser",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required",
+      "relationshipWithBuiltInEntity": true
+    },
+    {
+      "documentation": "A vevő.",
+      "otherEntityName": "customer",
+      "otherEntityRelationshipName": "sale",
+      "relationshipName": "soldForCustomer",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "documentation": "Az eladáshoz kapcsolódó áruvisszavételek.",
+      "otherEntityName": "productReturn",
+      "otherEntityRelationshipName": "sale",
+      "relationshipName": "productReturn",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

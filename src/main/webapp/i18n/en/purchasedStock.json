@@ -1,0 +1,31 @@
+{
+  "rpgCornerApp": {
+    "purchasedStock": {
+      "home": {
+        "title": "Purchased Stocks",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Purchased Stock",
+        "createOrEditLabel": "Create or edit a Purchased Stock",
+        "notFound": "No Purchased Stocks found"
+      },
+      "created": "A new Purchased Stock is created with identifier {{ param }}",
+      "updated": "A Purchased Stock is updated with identifier {{ param }}",
+      "deleted": "A Purchased Stock is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Purchased Stock {{ id }}?"
+      },
+      "detail": {
+        "title": "Purchased Stock"
+      },
+      "id": "ID",
+      "supplie": "Supplie",
+      "unitPrice": "Unit Price",
+      "purchasedWare": "Purchased Ware",
+      "purchase": "Purchase",
+      "help": {
+        "supplie": "A beszerzett áru mennyisége.",
+        "unitPrice": "Beszerzési egység ár"
+      }
+    }
+  }
+}

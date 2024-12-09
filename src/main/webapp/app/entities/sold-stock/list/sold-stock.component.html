@@ -1,0 +1,128 @@
+<div>
+  <h2 id="page-heading" data-cy="SoldStockHeading">
+    <span jhiTranslate="rpgCornerApp.soldStock.home.title">SoldStocks</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="rpgCornerApp.soldStock.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-sold-stock"
+        [routerLink]="['/sold-stock/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="rpgCornerApp.soldStock.home.createLabel">Egy új Sold Stock létrehozása</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (soldStocks?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="rpgCornerApp.soldStock.home.notFound">No Sold Stocks found</span>
+    </div>
+  }
+
+  @if (soldStocks && soldStocks.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="supplie">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.soldStock.supplie">Supplie</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="unitPrice">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.soldStock.unitPrice">Unit Price</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="returnedSupplie">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.soldStock.returnedSupplie">Returned Supplie</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="soldWare.id">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.soldStock.soldWare">Sold Ware</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sale.id">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.soldStock.sale">Sale</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (soldStock of soldStocks; track trackId(soldStock)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/sold-stock', soldStock.id, 'view']">{{ soldStock.id }}</a>
+              </td>
+              <td>{{ soldStock.supplie }}</td>
+              <td>{{ soldStock.unitPrice }}</td>
+              <td>{{ soldStock.returnedSupplie }}</td>
+              <td>
+                @if (soldStock.soldWare) {
+                  <div>
+                    <a [routerLink]="['/ware', soldStock.soldWare.id, 'view']">{{ soldStock.soldWare.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (soldStock.sale) {
+                  <div>
+                    <a [routerLink]="['/sale', soldStock.sale.id, 'view']">{{ soldStock.sale.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/sold-stock', soldStock.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Nézet</span>
+                  </a>
+
+                  <a [routerLink]="['/sold-stock', soldStock.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Szerkesztés</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(soldStock)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Törlés</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

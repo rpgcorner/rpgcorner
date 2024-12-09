@@ -1,0 +1,38 @@
+{
+  "annotations": {
+    "changelogDate": "20241209232128"
+  },
+  "applications": "*",
+  "documentation": "A PurchasedStock entitás.\\n<p>\\nA beszerzett áru adatait kezelő entitás.\\n\\n@author Kárpáti Gábor",
+  "fields": [
+    {
+      "documentation": "A beszerzett áru mennyisége.",
+      "fieldName": "supplie",
+      "fieldType": "Integer"
+    },
+    {
+      "documentation": "Beszerzési egység ár",
+      "fieldName": "unitPrice",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "PurchasedStock",
+  "relationships": [
+    {
+      "documentation": "A beszerzett árucikk.",
+      "otherEntityName": "ware",
+      "relationshipName": "purchasedWare",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "documentation": "A beszerzés, amelyhez az árukészlet kapcsolódik.",
+      "otherEntityName": "purchase",
+      "otherEntityRelationshipName": "purchasedStock",
+      "relationshipName": "purchase",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (contact(); as contactRef) {
+      <div>
+        <h2 data-cy="contactDetailsHeading"><span jhiTranslate="rpgCornerApp.contact.detail.title">Contact</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ contactRef.id }}</span>
+          </dd>
+          <dt>
+            <span [ngbTooltip]="'rpgCornerApp.contact.help.companyName' | translate" jhiTranslate="rpgCornerApp.contact.companyName"
+              >Company Name</span
+            >
+          </dt>
+          <dd>
+            <span>{{ contactRef.companyName }}</span>
+          </dd>
+          <dt>
+            <span [ngbTooltip]="'rpgCornerApp.contact.help.taxNumber' | translate" jhiTranslate="rpgCornerApp.contact.taxNumber"
+              >Tax Number</span
+            >
+          </dt>
+          <dd>
+            <span>{{ contactRef.taxNumber }}</span>
+          </dd>
+          <dt>
+            <span [ngbTooltip]="'rpgCornerApp.contact.help.contactName' | translate" jhiTranslate="rpgCornerApp.contact.contactName"
+              >Contact Name</span
+            >
+          </dt>
+          <dd>
+            <span>{{ contactRef.contactName }}</span>
+          </dd>
+          <dt>
+            <span [ngbTooltip]="'rpgCornerApp.contact.help.address' | translate" jhiTranslate="rpgCornerApp.contact.address">Address</span>
+          </dt>
+          <dd>
+            <span>{{ contactRef.address }}</span>
+          </dd>
+          <dt><span [ngbTooltip]="'rpgCornerApp.contact.help.email' | translate" jhiTranslate="rpgCornerApp.contact.email">Email</span></dt>
+          <dd>
+            <span>{{ contactRef.email }}</span>
+          </dd>
+          <dt><span [ngbTooltip]="'rpgCornerApp.contact.help.fax' | translate" jhiTranslate="rpgCornerApp.contact.fax">Fax</span></dt>
+          <dd>
+            <span>{{ contactRef.fax }}</span>
+          </dd>
+          <dt>
+            <span [ngbTooltip]="'rpgCornerApp.contact.help.mobile' | translate" jhiTranslate="rpgCornerApp.contact.mobile">Mobile</span>
+          </dt>
+          <dd>
+            <span>{{ contactRef.mobile }}</span>
+          </dd>
+          <dt><span [ngbTooltip]="'rpgCornerApp.contact.help.phone' | translate" jhiTranslate="rpgCornerApp.contact.phone">Phone</span></dt>
+          <dd>
+            <span>{{ contactRef.phone }}</span>
+          </dd>
+          <dt><span [ngbTooltip]="'rpgCornerApp.contact.help.note' | translate" jhiTranslate="rpgCornerApp.contact.note">Note</span></dt>
+          <dd>
+            <span>{{ contactRef.note }}</span>
+          </dd>
+          <dt><span jhiTranslate="rpgCornerApp.contact.supplier">Supplier</span></dt>
+          <dd>
+            @if (contact()!.supplier) {
+              <div>
+                <a [routerLink]="['/supplier', contact()!.supplier?.id, 'view']">{{ contactRef.supplier?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Vissza</span>
+        </button>
+
+        <button type="button" [routerLink]="['/contact', contactRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Szerkesztés</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

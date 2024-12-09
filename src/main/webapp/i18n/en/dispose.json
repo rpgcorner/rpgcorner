@@ -1,0 +1,31 @@
+{
+  "rpgCornerApp": {
+    "dispose": {
+      "home": {
+        "title": "Disposes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Dispose",
+        "createOrEditLabel": "Create or edit a Dispose",
+        "notFound": "No Disposes found"
+      },
+      "created": "A new Dispose is created with identifier {{ param }}",
+      "updated": "A Dispose is updated with identifier {{ param }}",
+      "deleted": "A Dispose is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Dispose {{ id }}?"
+      },
+      "detail": {
+        "title": "Dispose"
+      },
+      "id": "ID",
+      "disposeDate": "Dispose Date",
+      "note": "Note",
+      "disposedStock": "Disposed Stock",
+      "disposedByUser": "Disposed By User",
+      "help": {
+        "disposeDate": "A selejtezés dátuma.",
+        "note": "Megjegyzés."
+      }
+    }
+  }
+}

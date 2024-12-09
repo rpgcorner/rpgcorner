@@ -1,0 +1,31 @@
+{
+  "rpgCornerApp": {
+    "sale": {
+      "home": {
+        "title": "Sales",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Egy új Sale létrehozása",
+        "createOrEditLabel": "Hozzon létre, vagy módosítson Salet",
+        "notFound": "No Sales found"
+      },
+      "created": "Egy új Sale lett létrehozva {{ param }} azonosítóval",
+      "updated": "A Sale módosítva lett {{ param }} azonosítóval",
+      "deleted": "A Sale törölve lett {{ param }} azonosítóval",
+      "delete": {
+        "question": "Biztos benne, hogy törölni szeretné az Salet {{ id }} azonosítóval?"
+      },
+      "detail": {
+        "title": "Sale"
+      },
+      "id": "ID",
+      "soldDate": "Sold Date",
+      "soldStock": "Sold Stock",
+      "soldByUser": "Sold By User",
+      "soldForCustomer": "Sold For Customer",
+      "productReturn": "Product Return",
+      "help": {
+        "soldDate": "Az eladás időpontja."
+      }
+    }
+  }
+}

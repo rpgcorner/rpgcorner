@@ -1,0 +1,46 @@
+{
+  "annotations": {
+    "changelogDate": "20241209232127"
+  },
+  "applications": "*",
+  "documentation": "A Purchase entitás.\\n<p>\\nA beszerzés entitás.\\n\\n@author Kárpáti Gábor",
+  "fields": [
+    {
+      "documentation": "A beszerzés időpontja.",
+      "fieldName": "purchaseDate",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "name": "Purchase",
+  "relationships": [
+    {
+      "documentation": "A bevételezett árukészlet.",
+      "otherEntityName": "purchasedStock",
+      "otherEntityRelationshipName": "purchase",
+      "relationshipName": "purchasedStock",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "documentation": "Az árubeszerző.",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "purchase",
+      "relationshipName": "purchasedByUser",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required",
+      "relationshipWithBuiltInEntity": true
+    },
+    {
+      "documentation": "A beszállító.",
+      "otherEntityName": "supplier",
+      "otherEntityRelationshipName": "purchase",
+      "relationshipName": "purchasedFromSupplier",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no"
+}

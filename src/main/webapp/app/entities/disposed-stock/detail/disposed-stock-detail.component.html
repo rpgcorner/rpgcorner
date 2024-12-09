@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (disposedStock(); as disposedStockRef) {
+      <div>
+        <h2 data-cy="disposedStockDetailsHeading"><span jhiTranslate="rpgCornerApp.disposedStock.detail.title">Disposed Stock</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ disposedStockRef.id }}</span>
+          </dd>
+          <dt>
+            <span [ngbTooltip]="'rpgCornerApp.disposedStock.help.supplie' | translate" jhiTranslate="rpgCornerApp.disposedStock.supplie"
+              >Supplie</span
+            >
+          </dt>
+          <dd>
+            <span>{{ disposedStockRef.supplie }}</span>
+          </dd>
+          <dt>
+            <span [ngbTooltip]="'rpgCornerApp.disposedStock.help.unitPrice' | translate" jhiTranslate="rpgCornerApp.disposedStock.unitPrice"
+              >Unit Price</span
+            >
+          </dt>
+          <dd>
+            <span>{{ disposedStockRef.unitPrice }}</span>
+          </dd>
+          <dt><span jhiTranslate="rpgCornerApp.disposedStock.disposedWare">Disposed Ware</span></dt>
+          <dd>
+            @if (disposedStock()!.disposedWare) {
+              <div>
+                <a [routerLink]="['/ware', disposedStock()!.disposedWare?.id, 'view']">{{ disposedStockRef.disposedWare?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="rpgCornerApp.disposedStock.dispose">Dispose</span></dt>
+          <dd>
+            @if (disposedStock()!.dispose) {
+              <div>
+                <a [routerLink]="['/dispose', disposedStock()!.dispose?.id, 'view']">{{ disposedStockRef.dispose?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Vissza</span>
+        </button>
+
+        <button type="button" [routerLink]="['/disposed-stock', disposedStockRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Szerkesztés</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

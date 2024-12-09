@@ -1,0 +1,30 @@
+{
+  "annotations": {
+    "changelogDate": "20241209232129"
+  },
+  "applications": "*",
+  "documentation": "A ReturnedStock entitás.\\n<p>\\nA visszavett árucikk adatait kezelő entitás.\\n\\n@author Kárpáti Gábor",
+  "fields": [
+    {
+      "documentation": "A visszahozott áru mennyisége.",
+      "fieldName": "supplie",
+      "fieldType": "Integer"
+    },
+    {
+      "documentation": "A visszavételi egységár.\\nEltérhet az eladási egységártól.",
+      "fieldName": "unitPrice",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "ReturnedStock",
+  "relationships": [
+    {
+      "documentation": "A visszahozott árucikk",
+      "otherEntityName": "ware",
+      "relationshipName": "returnedWare",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

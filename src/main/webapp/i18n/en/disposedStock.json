@@ -1,0 +1,31 @@
+{
+  "rpgCornerApp": {
+    "disposedStock": {
+      "home": {
+        "title": "Disposed Stocks",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Disposed Stock",
+        "createOrEditLabel": "Create or edit a Disposed Stock",
+        "notFound": "No Disposed Stocks found"
+      },
+      "created": "A new Disposed Stock is created with identifier {{ param }}",
+      "updated": "A Disposed Stock is updated with identifier {{ param }}",
+      "deleted": "A Disposed Stock is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Disposed Stock {{ id }}?"
+      },
+      "detail": {
+        "title": "Disposed Stock"
+      },
+      "id": "ID",
+      "supplie": "Supplie",
+      "unitPrice": "Unit Price",
+      "disposedWare": "Disposed Ware",
+      "dispose": "Dispose",
+      "help": {
+        "supplie": "A selejtezett áru mennyisége.",
+        "unitPrice": "Selejtezési egységár.\nEltérhet a beszerzési egységártól."
+      }
+    }
+  }
+}

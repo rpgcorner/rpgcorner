@@ -1,0 +1,166 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-contact-heading" data-cy="ContactCreateUpdateHeading" jhiTranslate="rpgCornerApp.contact.home.createOrEditLabel">
+        Hozzon létre, vagy módosítson Contactt
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="rpgCornerApp.contact.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_companyName"
+            [ngbTooltip]="'rpgCornerApp.contact.help.companyName' | translate"
+            jhiTranslate="rpgCornerApp.contact.companyName"
+            >Company Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="companyName"
+            id="field_companyName"
+            data-cy="companyName"
+            formControlName="companyName"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_taxNumber"
+            [ngbTooltip]="'rpgCornerApp.contact.help.taxNumber' | translate"
+            jhiTranslate="rpgCornerApp.contact.taxNumber"
+            >Tax Number</label
+          >
+          <input type="text" class="form-control" name="taxNumber" id="field_taxNumber" data-cy="taxNumber" formControlName="taxNumber" />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_contactName"
+            [ngbTooltip]="'rpgCornerApp.contact.help.contactName' | translate"
+            jhiTranslate="rpgCornerApp.contact.contactName"
+            >Contact Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="contactName"
+            id="field_contactName"
+            data-cy="contactName"
+            formControlName="contactName"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_address"
+            [ngbTooltip]="'rpgCornerApp.contact.help.address' | translate"
+            jhiTranslate="rpgCornerApp.contact.address"
+            >Address</label
+          >
+          <input type="text" class="form-control" name="address" id="field_address" data-cy="address" formControlName="address" />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_email"
+            [ngbTooltip]="'rpgCornerApp.contact.help.email' | translate"
+            jhiTranslate="rpgCornerApp.contact.email"
+            >Email</label
+          >
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_fax"
+            [ngbTooltip]="'rpgCornerApp.contact.help.fax' | translate"
+            jhiTranslate="rpgCornerApp.contact.fax"
+            >Fax</label
+          >
+          <input type="text" class="form-control" name="fax" id="field_fax" data-cy="fax" formControlName="fax" />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_mobile"
+            [ngbTooltip]="'rpgCornerApp.contact.help.mobile' | translate"
+            jhiTranslate="rpgCornerApp.contact.mobile"
+            >Mobile</label
+          >
+          <input type="text" class="form-control" name="mobile" id="field_mobile" data-cy="mobile" formControlName="mobile" />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_phone"
+            [ngbTooltip]="'rpgCornerApp.contact.help.phone' | translate"
+            jhiTranslate="rpgCornerApp.contact.phone"
+            >Phone</label
+          >
+          <input type="text" class="form-control" name="phone" id="field_phone" data-cy="phone" formControlName="phone" />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_note"
+            [ngbTooltip]="'rpgCornerApp.contact.help.note' | translate"
+            jhiTranslate="rpgCornerApp.contact.note"
+            >Note</label
+          >
+          <input type="text" class="form-control" name="note" id="field_note" data-cy="note" formControlName="note" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_supplier" jhiTranslate="rpgCornerApp.contact.supplier">Supplier</label>
+          <select
+            class="form-control"
+            id="field_supplier"
+            data-cy="supplier"
+            name="supplier"
+            formControlName="supplier"
+            [compareWith]="compareSupplier"
+          >
+            <option [ngValue]="null"></option>
+            @for (supplierOption of suppliersSharedCollection; track $index) {
+              <option [ngValue]="supplierOption">{{ supplierOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Mégsem</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Mentés</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

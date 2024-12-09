@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-inventory-heading" data-cy="InventoryCreateUpdateHeading" jhiTranslate="rpgCornerApp.inventory.home.createOrEditLabel">
+        Hozzon létre, vagy módosítson Inventoryt
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="rpgCornerApp.inventory.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_supplie"
+            [ngbTooltip]="'rpgCornerApp.inventory.help.supplie' | translate"
+            jhiTranslate="rpgCornerApp.inventory.supplie"
+            >Supplie</label
+          >
+          <input type="number" class="form-control" name="supplie" id="field_supplie" data-cy="supplie" formControlName="supplie" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_ware" jhiTranslate="rpgCornerApp.inventory.ware">Ware</label>
+          <select class="form-control" id="field_ware" data-cy="ware" name="ware" formControlName="ware" [compareWith]="compareWare">
+            @if (editForm.get(['ware'])!.value == null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (wareOption of waresCollection; track $index) {
+              <option [ngValue]="wareOption">{{ wareOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['ware'])!.invalid && (editForm.get(['ware'])!.dirty || editForm.get(['ware'])!.touched)) {
+          <div>
+            @if (editForm.get(['ware'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ez a mező kötelező.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Mégsem</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Mentés</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

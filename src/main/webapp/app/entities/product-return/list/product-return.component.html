@@ -1,0 +1,131 @@
+<div>
+  <h2 id="page-heading" data-cy="ProductReturnHeading">
+    <span jhiTranslate="rpgCornerApp.productReturn.home.title">ProductReturns</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="rpgCornerApp.productReturn.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-product-return"
+        [routerLink]="['/product-return/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="rpgCornerApp.productReturn.home.createLabel">Egy új Product Return létrehozása</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (productReturns?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="rpgCornerApp.productReturn.home.notFound">No Product Returns found</span>
+    </div>
+  }
+
+  @if (productReturns && productReturns.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="returnDate">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.productReturn.returnDate">Return Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="note">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.productReturn.note">Note</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sale.id">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.productReturn.sale">Sale</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="returnedByUser.id">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.productReturn.returnedByUser">Returned By User</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="returnedByCustomer.id">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.productReturn.returnedByCustomer">Returned By Customer</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (productReturn of productReturns; track trackId(productReturn)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/product-return', productReturn.id, 'view']">{{ productReturn.id }}</a>
+              </td>
+              <td>{{ productReturn.returnDate | formatMediumDate }}</td>
+              <td>{{ productReturn.note }}</td>
+              <td>
+                @if (productReturn.sale) {
+                  <div>
+                    <a [routerLink]="['/sale', productReturn.sale.id, 'view']">{{ productReturn.sale.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                {{ productReturn.returnedByUser?.id }}
+              </td>
+              <td>
+                @if (productReturn.returnedByCustomer) {
+                  <div>
+                    <a [routerLink]="['/customer', productReturn.returnedByCustomer.id, 'view']">{{
+                      productReturn.returnedByCustomer.id
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/product-return', productReturn.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Nézet</span>
+                  </a>
+
+                  <a [routerLink]="['/product-return', productReturn.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Szerkesztés</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(productReturn)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Törlés</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

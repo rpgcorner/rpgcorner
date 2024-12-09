@@ -1,0 +1,50 @@
+{
+  "annotations": {
+    "changelogDate": "20241209232120"
+  },
+  "applications": "*",
+  "documentation": "A Category entitás.\\n<p>\\nAz árucikkek kategóriáját kezelő entitása.\\n\\n@author Kárpáti Gábor",
+  "fields": [
+    {
+      "documentation": "Az elem aktív státuszát jelzi.",
+      "fieldName": "active",
+      "fieldType": "Boolean"
+    },
+    {
+      "documentation": "A kategória típusa.",
+      "fieldName": "categoryType",
+      "fieldType": "CategoryTypeEnum",
+      "fieldTypeDocumentation": "A CategoryTypeEnum enum.\\n<p>\\nEnum a fő kategóriák (main category) és az alkategóriák (sub category) kezeléséhez.\\n\\n@author Kárpáti Gábor",
+      "fieldValues": "MAIN_CATEGORY (Main category),SUB_CATEGORY (Sub category)",
+      "fieldValuesJavadocs": {
+        "MAIN_CATEGORY": "\r\n   * Fő kategória\r\n",
+        "SUB_CATEGORY": "\r\n   * Alkategória\r\n"
+      }
+    },
+    {
+      "documentation": "A kategória leírása.",
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Category",
+  "relationships": [
+    {
+      "documentation": "Alkategóriák.",
+      "otherEntityName": "category",
+      "otherEntityRelationshipName": "mainCategory",
+      "relationshipName": "subCategory",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "documentation": "Fő kategória.",
+      "otherEntityName": "category",
+      "otherEntityRelationshipName": "subCategory",
+      "relationshipName": "mainCategory",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

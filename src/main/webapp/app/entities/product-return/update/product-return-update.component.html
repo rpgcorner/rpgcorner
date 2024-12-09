@@ -1,0 +1,122 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-product-return-heading"
+        data-cy="ProductReturnCreateUpdateHeading"
+        jhiTranslate="rpgCornerApp.productReturn.home.createOrEditLabel"
+      >
+        Hozzon létre, vagy módosítson Product Returnt
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="rpgCornerApp.productReturn.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_returnDate"
+            [ngbTooltip]="'rpgCornerApp.productReturn.help.returnDate' | translate"
+            jhiTranslate="rpgCornerApp.productReturn.returnDate"
+            >Return Date</label
+          >
+          <div class="input-group">
+            <input
+              id="field_returnDate"
+              data-cy="returnDate"
+              type="text"
+              class="form-control"
+              name="returnDate"
+              ngbDatepicker
+              #returnDateDp="ngbDatepicker"
+              formControlName="returnDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="returnDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_note"
+            [ngbTooltip]="'rpgCornerApp.productReturn.help.note' | translate"
+            jhiTranslate="rpgCornerApp.productReturn.note"
+            >Note</label
+          >
+          <input type="text" class="form-control" name="note" id="field_note" data-cy="note" formControlName="note" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_sale" jhiTranslate="rpgCornerApp.productReturn.sale">Sale</label>
+          <select class="form-control" id="field_sale" data-cy="sale" name="sale" formControlName="sale" [compareWith]="compareSale">
+            <option [ngValue]="null"></option>
+            @for (saleOption of salesSharedCollection; track $index) {
+              <option [ngValue]="saleOption">{{ saleOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_returnedByUser" jhiTranslate="rpgCornerApp.productReturn.returnedByUser"
+            >Returned By User</label
+          >
+          <select
+            class="form-control"
+            id="field_returnedByUser"
+            data-cy="returnedByUser"
+            name="returnedByUser"
+            formControlName="returnedByUser"
+            [compareWith]="compareUser"
+          >
+            <option [ngValue]="null"></option>
+            @for (userOption of usersSharedCollection; track $index) {
+              <option [ngValue]="userOption">{{ userOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_returnedByCustomer" jhiTranslate="rpgCornerApp.productReturn.returnedByCustomer"
+            >Returned By Customer</label
+          >
+          <select
+            class="form-control"
+            id="field_returnedByCustomer"
+            data-cy="returnedByCustomer"
+            name="returnedByCustomer"
+            formControlName="returnedByCustomer"
+            [compareWith]="compareCustomer"
+          >
+            <option [ngValue]="null"></option>
+            @for (customerOption of customersSharedCollection; track $index) {
+              <option [ngValue]="customerOption">{{ customerOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Mégsem</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Mentés</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

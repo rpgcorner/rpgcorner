@@ -1,0 +1,98 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-purchased-stock-heading"
+        data-cy="PurchasedStockCreateUpdateHeading"
+        jhiTranslate="rpgCornerApp.purchasedStock.home.createOrEditLabel"
+      >
+        Hozzon létre, vagy módosítson Purchased Stockt
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="rpgCornerApp.purchasedStock.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_supplie"
+            [ngbTooltip]="'rpgCornerApp.purchasedStock.help.supplie' | translate"
+            jhiTranslate="rpgCornerApp.purchasedStock.supplie"
+            >Supplie</label
+          >
+          <input type="number" class="form-control" name="supplie" id="field_supplie" data-cy="supplie" formControlName="supplie" />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_unitPrice"
+            [ngbTooltip]="'rpgCornerApp.purchasedStock.help.unitPrice' | translate"
+            jhiTranslate="rpgCornerApp.purchasedStock.unitPrice"
+            >Unit Price</label
+          >
+          <input type="number" class="form-control" name="unitPrice" id="field_unitPrice" data-cy="unitPrice" formControlName="unitPrice" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_purchasedWare" jhiTranslate="rpgCornerApp.purchasedStock.purchasedWare"
+            >Purchased Ware</label
+          >
+          <select
+            class="form-control"
+            id="field_purchasedWare"
+            data-cy="purchasedWare"
+            name="purchasedWare"
+            formControlName="purchasedWare"
+            [compareWith]="compareWare"
+          >
+            <option [ngValue]="null"></option>
+            @for (wareOption of purchasedWaresCollection; track $index) {
+              <option [ngValue]="wareOption">{{ wareOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_purchase" jhiTranslate="rpgCornerApp.purchasedStock.purchase">Purchase</label>
+          <select
+            class="form-control"
+            id="field_purchase"
+            data-cy="purchase"
+            name="purchase"
+            formControlName="purchase"
+            [compareWith]="comparePurchase"
+          >
+            <option [ngValue]="null"></option>
+            @for (purchaseOption of purchasesSharedCollection; track $index) {
+              <option [ngValue]="purchaseOption">{{ purchaseOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Mégsem</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Mentés</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

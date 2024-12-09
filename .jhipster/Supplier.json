@@ -1,0 +1,29 @@
+{
+  "annotations": {
+    "changelogDate": "20241209232132"
+  },
+  "applications": "*",
+  "documentation": "A Supplier entitás.\\n<p>\\nA beszállító adatait kezelő entitás.\\n\\n@author Kárpáti Gábor",
+  "fields": [],
+  "name": "Supplier",
+  "relationships": [
+    {
+      "documentation": "A beszállító kapcsolattartói.",
+      "otherEntityName": "contact",
+      "otherEntityRelationshipName": "supplier",
+      "relationshipName": "contact",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "documentation": "A beszállítóhoz kapcsolódó beszerzések.",
+      "otherEntityName": "purchase",
+      "otherEntityRelationshipName": "purchasedFromSupplier",
+      "relationshipName": "purchase",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

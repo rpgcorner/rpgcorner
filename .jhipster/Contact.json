@@ -1,0 +1,66 @@
+{
+  "annotations": {
+    "changelogDate": "20241209232121"
+  },
+  "applications": "*",
+  "documentation": "A Contact entitás.\\n<p>\\nA kapcsolattartási információk entitása.\\n\\n@author Kárpáti Gábor",
+  "fields": [
+    {
+      "documentation": "A cég neve.",
+      "fieldName": "companyName",
+      "fieldType": "String"
+    },
+    {
+      "documentation": "Adószám",
+      "fieldName": "taxNumber",
+      "fieldType": "String"
+    },
+    {
+      "documentation": "A kapcsolat neve.",
+      "fieldName": "contactName",
+      "fieldType": "String"
+    },
+    {
+      "documentation": "Cím.",
+      "fieldName": "address",
+      "fieldType": "String"
+    },
+    {
+      "documentation": "E-mail cím.",
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "documentation": "Fax szám.",
+      "fieldName": "fax",
+      "fieldType": "String"
+    },
+    {
+      "documentation": "Mobil szám.",
+      "fieldName": "mobile",
+      "fieldType": "String"
+    },
+    {
+      "documentation": "Vezetékes telefonszám.",
+      "fieldName": "phone",
+      "fieldType": "String"
+    },
+    {
+      "documentation": "Megjegyzés",
+      "fieldName": "note",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Contact",
+  "relationships": [
+    {
+      "documentation": "A beszállító amelyhez a kapcsolattartási adatok tartoznak.",
+      "otherEntityName": "supplier",
+      "otherEntityRelationshipName": "contact",
+      "relationshipName": "supplier",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

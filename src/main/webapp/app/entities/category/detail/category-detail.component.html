@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (category(); as categoryRef) {
+      <div>
+        <h2 data-cy="categoryDetailsHeading"><span jhiTranslate="rpgCornerApp.category.detail.title">Category</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ categoryRef.id }}</span>
+          </dd>
+          <dt>
+            <span [ngbTooltip]="'rpgCornerApp.category.help.active' | translate" jhiTranslate="rpgCornerApp.category.active">Active</span>
+          </dt>
+          <dd>
+            <span>{{ categoryRef.active }}</span>
+          </dd>
+          <dt>
+            <span [ngbTooltip]="'rpgCornerApp.category.help.categoryType' | translate" jhiTranslate="rpgCornerApp.category.categoryType"
+              >Category Type</span
+            >
+          </dt>
+          <dd>
+            <span [jhiTranslate]="'rpgCornerApp.CategoryTypeEnum.' + (categoryRef.categoryType ?? 'null')">{{
+              { null: '', MAIN_CATEGORY: 'Main category', SUB_CATEGORY: 'Sub category' }[categoryRef.categoryType ?? 'null']
+            }}</span>
+          </dd>
+          <dt>
+            <span [ngbTooltip]="'rpgCornerApp.category.help.description' | translate" jhiTranslate="rpgCornerApp.category.description"
+              >Description</span
+            >
+          </dt>
+          <dd>
+            <span>{{ categoryRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="rpgCornerApp.category.mainCategory">Main Category</span></dt>
+          <dd>
+            @if (category()!.mainCategory) {
+              <div>
+                <a [routerLink]="['/category', category()!.mainCategory?.id, 'view']">{{ categoryRef.mainCategory?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Vissza</span>
+        </button>
+
+        <button type="button" [routerLink]="['/category', categoryRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Szerkesztés</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>
