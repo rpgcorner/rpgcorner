@@ -2,26 +2,26 @@
   "rpgCornerApp": {
     "purchase": {
       "home": {
-        "title": "Purchases",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "Egy új Purchase létrehozása",
-        "createOrEditLabel": "Hozzon létre, vagy módosítson Purchaset",
-        "notFound": "No Purchases found"
+        "title": "Beszerzések",
+        "refreshListLabel": "Lista frissítése",
+        "createLabel": "Egy új beszerzés létrehozása",
+        "createOrEditLabel": "Hozzon létre, vagy módosítson egy beszerzést",
+        "notFound": "Nem találhatóak beszerzések"
       },
-      "created": "Egy új Purchase lett létrehozva {{ param }} azonosítóval",
-      "updated": "A Purchase módosítva lett {{ param }} azonosítóval",
-      "deleted": "A Purchase törölve lett {{ param }} azonosítóval",
+      "created": "Egy új beszerzés lett létrehozva {{ param }} azonosítóval",
+      "updated": "A beszerzés módosítva lett {{ param }} azonosítóval",
+      "deleted": "A beszerzés törölve lett {{ param }} azonosítóval",
       "delete": {
-        "question": "Biztos benne, hogy törölni szeretné az Purchaset {{ id }} azonosítóval?"
+        "question": "Biztos benne, hogy törölni szeretné a beszerzést {{ id }} azonosítóval?"
       },
       "detail": {
-        "title": "Purchase"
+        "title": "Beszerzés"
       },
-      "id": "ID",
-      "purchaseDate": "Purchase Date",
-      "purchasedStock": "Purchased Stock",
-      "purchasedByUser": "Purchased By User",
-      "purchasedFromSupplier": "Purchased From Supplier",
+      "id": "Azonosító",
+      "purchaseDate": "Beszerzés dátuma",
+      "purchasedStock": "Beszerzett készlet",
+      "purchasedByUser": "Beszerzést végző felhasználó",
+      "purchasedFromSupplier": "Beszerzés forrása (beszállító)",
       "help": {
         "purchaseDate": "A beszerzés időpontja."
       }

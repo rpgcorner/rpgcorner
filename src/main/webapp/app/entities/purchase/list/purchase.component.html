@@ -35,13 +35,6 @@
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
           <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
-            <th scope="col" jhiSortBy="id">
-              <div class="d-flex">
-                <span jhiTranslate="global.field.id">ID</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="purchaseDate">
               <div class="d-flex">
                 <span jhiTranslate="rpgCornerApp.purchase.purchaseDate">Purchase Date</span>
@@ -67,9 +60,6 @@
         <tbody>
           @for (purchase of purchases; track trackId(purchase)) {
             <tr data-cy="entityTable">
-              <td>
-                <a [routerLink]="['/purchase', purchase.id, 'view']">{{ purchase.id }}</a>
-              </td>
               <td>{{ purchase.purchaseDate | formatMediumDate }}</td>
               <td>
                 {{ purchase.purchasedByUser?.id }}

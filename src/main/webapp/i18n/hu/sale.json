@@ -2,27 +2,27 @@
   "rpgCornerApp": {
     "sale": {
       "home": {
-        "title": "Sales",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "Egy új Sale létrehozása",
-        "createOrEditLabel": "Hozzon létre, vagy módosítson Salet",
-        "notFound": "No Sales found"
+        "title": "Eladások",
+        "refreshListLabel": "Lista frissítése",
+        "createLabel": "Egy új eladás létrehozása",
+        "createOrEditLabel": "Hozzon létre, vagy módosítson egy eladást",
+        "notFound": "Nem találhatóak eladások"
       },
-      "created": "Egy új Sale lett létrehozva {{ param }} azonosítóval",
-      "updated": "A Sale módosítva lett {{ param }} azonosítóval",
-      "deleted": "A Sale törölve lett {{ param }} azonosítóval",
+      "created": "Egy új eladás lett létrehozva {{ param }} azonosítóval",
+      "updated": "Az eladás módosítva lett {{ param }} azonosítóval",
+      "deleted": "Az eladás törölve lett {{ param }} azonosítóval",
       "delete": {
-        "question": "Biztos benne, hogy törölni szeretné az Salet {{ id }} azonosítóval?"
+        "question": "Biztos benne, hogy törölni szeretné az eladást {{ id }} azonosítóval?"
       },
       "detail": {
-        "title": "Sale"
+        "title": "Eladás"
       },
-      "id": "ID",
-      "soldDate": "Sold Date",
-      "soldStock": "Sold Stock",
-      "soldByUser": "Sold By User",
-      "soldForCustomer": "Sold For Customer",
-      "productReturn": "Product Return",
+      "id": "Azonosító",
+      "soldDate": "Eladás dátuma",
+      "soldStock": "Eladott készlet",
+      "soldByUser": "Eladást végző felhasználó",
+      "soldForCustomer": "Eladás vevője",
+      "productReturn": "Áruvisszavétel",
       "help": {
         "soldDate": "Az eladás időpontja."
       }

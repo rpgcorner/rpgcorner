@@ -6,22 +6,22 @@
       "home": "Kezdőpont",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
-        "main": "Entitások",
-        "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
-        "category": "Category",
-        "contact": "Contact",
-        "customer": "Customer",
-        "dispose": "Dispose",
-        "disposedStock": "Disposed Stock",
-        "inventory": "Inventory",
-        "productReturn": "Product Return",
-        "purchase": "Purchase",
-        "purchasedStock": "Purchased Stock",
-        "returnedStock": "Returned Stock",
-        "sale": "Sale",
-        "soldStock": "Sold Stock",
-        "supplier": "Supplier",
-        "ware": "Ware"
+        "main": "Funkciók",
+        "jhipster-needle-menu-add-entry": "",
+        "category": "Kategória",
+        "contact": "Kapcsolat",
+        "customer": "Vevő",
+        "dispose": "Selejtezés",
+        "disposedStock": "Selejtezett készlet",
+        "inventory": "Raktárkészlet",
+        "productReturn": "Áruvisszavétel",
+        "purchase": "Beszerzés",
+        "purchasedStock": "Beszerzett készlet",
+        "returnedStock": "Visszavett készlet",
+        "sale": "Eladás",
+        "soldStock": "Eladott készlet",
+        "supplier": "Beszállító",
+        "ware": "Áru"
       },
       "account": {
         "main": "Hozzáférés",
@@ -33,6 +33,7 @@
         "register": "Regisztráció"
       },
       "admin": {
+        "role": "Szerepkörök",
         "main": "Adminisztráció",
         "userManagement": "Felhasználókezelés",
         "tracker": "Felhasználó követés",
@@ -62,12 +63,12 @@
       "info": {
         "authenticated": {
           "prefix": "Ha be akar ",
-          "link": "lépni",
+          "link": "Belépés",
           "suffix": ", kipróbálás céljából használható felhasználók:<br/>- Adminisztrátor (azonosító=\"admin\" és a jelszó=\"admin\") <br/>- Felhasználó (azonosító=\"user\" és jelszó=\"user\")."
         },
         "register": {
           "noaccount": "Nincs még hozzáférése?",
-          "link": "Regisztráljon"
+          "link": "Regisztráció"
         }
       },
       "error": {
@@ -156,5 +157,5 @@
       "not.image": "File was expected to be an image but was found to be \"{{ fileType }}\""
     }
   },
-  "footer": "Ez a lábléc."
+  "footer": "RPG Corner"
 }

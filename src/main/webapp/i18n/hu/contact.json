@@ -2,33 +2,33 @@
   "rpgCornerApp": {
     "contact": {
       "home": {
-        "title": "Contacts",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "Egy új Contact létrehozása",
-        "createOrEditLabel": "Hozzon létre, vagy módosítson Contactt",
-        "notFound": "No Contacts found"
+        "title": "Kapcsolatok",
+        "refreshListLabel": "Lista frissítése",
+        "createLabel": "Egy új kapcsolat létrehozása",
+        "createOrEditLabel": "Hozzon létre, vagy módosítson egy kapcsolatot",
+        "notFound": "Nem találhatóak kapcsolatok"
       },
-      "created": "Egy új Contact lett létrehozva {{ param }} azonosítóval",
-      "updated": "A Contact módosítva lett {{ param }} azonosítóval",
-      "deleted": "A Contact törölve lett {{ param }} azonosítóval",
+      "created": "Egy új kapcsolat lett létrehozva {{ param }} azonosítóval",
+      "updated": "A kapcsolat módosítva lett {{ param }} azonosítóval",
+      "deleted": "A kapcsolat törölve lett {{ param }} azonosítóval",
       "delete": {
-        "question": "Biztos benne, hogy törölni szeretné az Contactt {{ id }} azonosítóval?"
+        "question": "Biztos benne, hogy törölni szeretné a kapcsolatot {{ id }} azonosítóval?"
       },
       "detail": {
-        "title": "Contact"
+        "title": "Kapcsolat"
       },
-      "id": "ID",
-      "companyName": "Company Name",
-      "taxNumber": "Tax Number",
-      "contactName": "Contact Name",
-      "address": "Address",
-      "email": "Email",
-      "fax": "Fax",
-      "mobile": "Mobile",
-      "phone": "Phone",
-      "note": "Note",
-      "supplier": "Supplier",
-      "customer": "Customer",
+      "id": "Azonosító",
+      "companyName": "Cég neve",
+      "taxNumber": "Adószám",
+      "contactName": "Kapcsolat neve",
+      "address": "Cím",
+      "email": "E-mail cím",
+      "fax": "Fax szám",
+      "mobile": "Mobil szám",
+      "phone": "Vezetékes telefonszám",
+      "note": "Megjegyzés",
+      "supplier": "Beszállító",
+      "customer": "Vevő",
       "help": {
         "companyName": "A cég neve.",
         "taxNumber": "Adószám",

@@ -2,29 +2,29 @@
   "rpgCornerApp": {
     "purchasedStock": {
       "home": {
-        "title": "PurchasedStocks",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "Egy új Purchased Stock létrehozása",
-        "createOrEditLabel": "Hozzon létre, vagy módosítson Purchased Stockt",
-        "notFound": "No Purchased Stocks found"
+        "title": "Beszerzett Készletek",
+        "refreshListLabel": "Lista frissítése",
+        "createLabel": "Egy új beszerzett készlet létrehozása",
+        "createOrEditLabel": "Hozzon létre, vagy módosítson egy beszerzett készletet",
+        "notFound": "Nem találhatóak beszerzett készletek"
       },
-      "created": "Egy új Purchased Stock lett létrehozva {{ param }} azonosítóval",
-      "updated": "A Purchased Stock módosítva lett {{ param }} azonosítóval",
-      "deleted": "A Purchased Stock törölve lett {{ param }} azonosítóval",
+      "created": "Egy új beszerzett készlet lett létrehozva {{ param }} azonosítóval",
+      "updated": "A beszerzett készlet módosítva lett {{ param }} azonosítóval",
+      "deleted": "A beszerzett készlet törölve lett {{ param }} azonosítóval",
       "delete": {
-        "question": "Biztos benne, hogy törölni szeretné az Purchased Stockt {{ id }} azonosítóval?"
+        "question": "Biztos benne, hogy törölni szeretné a beszerzett készletet {{ id }} azonosítóval?"
       },
       "detail": {
-        "title": "Purchased Stock"
+        "title": "Beszerzett Készlet"
       },
-      "id": "ID",
-      "supplie": "Supplie",
-      "unitPrice": "Unit Price",
-      "purchasedWare": "Purchased Ware",
-      "purchase": "Purchase",
+      "id": "Azonosító",
+      "supplie": "Mennyiség",
+      "unitPrice": "Egységár",
+      "purchasedWare": "Beszerzett Áru",
+      "purchase": "Beszerzés",
       "help": {
         "supplie": "A beszerzett áru mennyisége.",
-        "unitPrice": "Beszerzési egység ár"
+        "unitPrice": "Beszerzési egységár."
       }
     }
   }

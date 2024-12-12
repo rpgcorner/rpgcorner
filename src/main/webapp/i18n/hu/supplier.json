@@ -2,24 +2,24 @@
   "rpgCornerApp": {
     "supplier": {
       "home": {
-        "title": "Suppliers",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "Egy új Supplier létrehozása",
-        "createOrEditLabel": "Hozzon létre, vagy módosítson Suppliert",
-        "notFound": "No Suppliers found"
+        "title": "Beszállítók",
+        "refreshListLabel": "Lista frissítése",
+        "createLabel": "Egy új beszállító létrehozása",
+        "createOrEditLabel": "Hozzon létre, vagy módosítson egy beszállítót",
+        "notFound": "Nem találhatóak beszállítók"
       },
-      "created": "Egy új Supplier lett létrehozva {{ param }} azonosítóval",
-      "updated": "A Supplier módosítva lett {{ param }} azonosítóval",
-      "deleted": "A Supplier törölve lett {{ param }} azonosítóval",
+      "created": "Egy új beszállító lett létrehozva {{ param }} azonosítóval",
+      "updated": "A beszállító módosítva lett {{ param }} azonosítóval",
+      "deleted": "A beszállító törölve lett {{ param }} azonosítóval",
       "delete": {
-        "question": "Biztos benne, hogy törölni szeretné az Suppliert {{ id }} azonosítóval?"
+        "question": "Biztos benne, hogy törölni szeretné a beszállítót {{ id }} azonosítóval?"
       },
       "detail": {
-        "title": "Supplier"
+        "title": "Beszállító"
       },
-      "id": "ID",
-      "contact": "Contact",
-      "purchase": "Purchase"
+      "id": "Azonosító",
+      "contact": "Kapcsolat",
+      "purchase": "Beszerzés"
     }
   }
 }

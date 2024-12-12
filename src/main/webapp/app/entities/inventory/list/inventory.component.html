@@ -35,13 +35,6 @@
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
           <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
-            <th scope="col" jhiSortBy="id">
-              <div class="d-flex">
-                <span jhiTranslate="global.field.id">ID</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="supplie">
               <div class="d-flex">
                 <span jhiTranslate="rpgCornerApp.inventory.supplie">Supplie</span>
@@ -61,9 +54,6 @@
         <tbody>
           @for (inventory of inventories; track trackId(inventory)) {
             <tr data-cy="entityTable">
-              <td>
-                <a [routerLink]="['/inventory', inventory.id, 'view']">{{ inventory.id }}</a>
-              </td>
               <td>{{ inventory.supplie }}</td>
               <td>
                 @if (inventory.ware) {

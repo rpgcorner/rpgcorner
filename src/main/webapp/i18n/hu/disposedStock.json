@@ -2,26 +2,26 @@
   "rpgCornerApp": {
     "disposedStock": {
       "home": {
-        "title": "DisposedStocks",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "Egy új Disposed Stock létrehozása",
-        "createOrEditLabel": "Hozzon létre, vagy módosítson Disposed Stockt",
-        "notFound": "No Disposed Stocks found"
+        "title": "Selejtezett Készletek",
+        "refreshListLabel": "Lista frissítése",
+        "createLabel": "Egy új selejtezett készlet létrehozása",
+        "createOrEditLabel": "Hozzon létre, vagy módosítson egy selejtezett készletet",
+        "notFound": "Nem találhatóak selejtezett készletek"
       },
-      "created": "Egy új Disposed Stock lett létrehozva {{ param }} azonosítóval",
-      "updated": "A Disposed Stock módosítva lett {{ param }} azonosítóval",
-      "deleted": "A Disposed Stock törölve lett {{ param }} azonosítóval",
+      "created": "Egy új selejtezett készlet lett létrehozva {{ param }} azonosítóval",
+      "updated": "A selejtezett készlet módosítva lett {{ param }} azonosítóval",
+      "deleted": "A selejtezett készlet törölve lett {{ param }} azonosítóval",
       "delete": {
-        "question": "Biztos benne, hogy törölni szeretné az Disposed Stockt {{ id }} azonosítóval?"
+        "question": "Biztos benne, hogy törölni szeretné a selejtezett készletet {{ id }} azonosítóval?"
       },
       "detail": {
-        "title": "Disposed Stock"
+        "title": "Selejtezett Készlet"
       },
-      "id": "ID",
-      "supplie": "Supplie",
-      "unitPrice": "Unit Price",
-      "disposedWare": "Disposed Ware",
-      "dispose": "Dispose",
+      "id": "Azonosító",
+      "supplie": "Mennyiség",
+      "unitPrice": "Egységár",
+      "disposedWare": "Selejtezett Áru",
+      "dispose": "Selejtezés",
       "help": {
         "supplie": "A selejtezett áru mennyisége.",
         "unitPrice": "Selejtezési egységár.\nEltérhet a beszerzési egységártól."

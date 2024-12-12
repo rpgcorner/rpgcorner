@@ -2,27 +2,27 @@
   "rpgCornerApp": {
     "category": {
       "home": {
-        "title": "Categories",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "Egy új Category létrehozása",
-        "createOrEditLabel": "Hozzon létre, vagy módosítson Categoryt",
-        "notFound": "No Categories found"
+        "title": "Kategóriák",
+        "refreshListLabel": "Lista frissítése",
+        "createLabel": "Egy új kategória létrehozása",
+        "createOrEditLabel": "Hozzon létre, vagy módosítson egy kategóriát",
+        "notFound": "Nem találhatóak kategóriák"
       },
-      "created": "Egy új Category lett létrehozva {{ param }} azonosítóval",
-      "updated": "A Category módosítva lett {{ param }} azonosítóval",
-      "deleted": "A Category törölve lett {{ param }} azonosítóval",
+      "created": "Egy új kategória lett létrehozva {{ param }} azonosítóval",
+      "updated": "A kategória módosítva lett {{ param }} azonosítóval",
+      "deleted": "A kategória törölve lett {{ param }} azonosítóval",
       "delete": {
-        "question": "Biztos benne, hogy törölni szeretné az Categoryt {{ id }} azonosítóval?"
+        "question": "Biztos benne, hogy törölni szeretné a kategóriát {{ id }} azonosítóval?"
       },
       "detail": {
-        "title": "Category"
+        "title": "Kategória"
       },
-      "id": "ID",
-      "active": "Active",
-      "categoryType": "Category Type",
-      "description": "Description",
-      "subCategory": "Sub Category",
-      "mainCategory": "Main Category",
+      "id": "Azonosító",
+      "active": "Aktív",
+      "categoryType": "Kategória típusa",
+      "description": "Leírás",
+      "subCategory": "Alkategória",
+      "mainCategory": "Főkategória",
       "help": {
         "active": "Az elem aktív státuszát jelzi.",
         "categoryType": "A kategória típusa.",

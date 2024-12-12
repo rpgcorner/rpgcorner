@@ -35,13 +35,6 @@
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
           <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
-            <th scope="col" jhiSortBy="id">
-              <div class="d-flex">
-                <span jhiTranslate="global.field.id">ID</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="active">
               <div class="d-flex">
                 <span jhiTranslate="rpgCornerApp.category.active">Active</span>
@@ -75,9 +68,6 @@
         <tbody>
           @for (category of categories; track trackId(category)) {
             <tr data-cy="entityTable">
-              <td>
-                <a [routerLink]="['/category', category.id, 'view']">{{ category.id }}</a>
-              </td>
               <td>{{ category.active }}</td>
               <td [jhiTranslate]="'rpgCornerApp.CategoryTypeEnum.' + (category.categoryType ?? 'null')">
                 {{ { null: '', MAIN_CATEGORY: 'Main category', SUB_CATEGORY: 'Sub category' }[category.categoryType ?? 'null'] }}

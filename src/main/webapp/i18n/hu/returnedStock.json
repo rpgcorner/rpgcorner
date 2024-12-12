@@ -2,26 +2,26 @@
   "rpgCornerApp": {
     "returnedStock": {
       "home": {
-        "title": "ReturnedStocks",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "Egy új Returned Stock létrehozása",
-        "createOrEditLabel": "Hozzon létre, vagy módosítson Returned Stockt",
-        "notFound": "No Returned Stocks found"
+        "title": "Visszavett Készletek",
+        "refreshListLabel": "Lista frissítése",
+        "createLabel": "Egy új visszavett készlet létrehozása",
+        "createOrEditLabel": "Hozzon létre, vagy módosítson egy visszavett készletet",
+        "notFound": "Nem találhatóak visszavett készletek"
       },
-      "created": "Egy új Returned Stock lett létrehozva {{ param }} azonosítóval",
-      "updated": "A Returned Stock módosítva lett {{ param }} azonosítóval",
-      "deleted": "A Returned Stock törölve lett {{ param }} azonosítóval",
+      "created": "Egy új visszavett készlet lett létrehozva {{ param }} azonosítóval",
+      "updated": "A visszavett készlet módosítva lett {{ param }} azonosítóval",
+      "deleted": "A visszavett készlet törölve lett {{ param }} azonosítóval",
       "delete": {
-        "question": "Biztos benne, hogy törölni szeretné az Returned Stockt {{ id }} azonosítóval?"
+        "question": "Biztos benne, hogy törölni szeretné a visszavett készletet {{ id }} azonosítóval?"
       },
       "detail": {
-        "title": "Returned Stock"
+        "title": "Visszavett Készlet"
       },
-      "id": "ID",
-      "supplie": "Supplie",
-      "unitPrice": "Unit Price",
-      "returnedWare": "Returned Ware",
-      "productReturn": "Product Return",
+      "id": "Azonosító",
+      "supplie": "Mennyiség",
+      "unitPrice": "Egységár",
+      "returnedWare": "Visszavett Áru",
+      "productReturn": "Áruvisszavétel",
       "help": {
         "supplie": "A visszahozott áru mennyisége.",
         "unitPrice": "A visszavételi egységár.\nEltérhet az eladási egységártól."

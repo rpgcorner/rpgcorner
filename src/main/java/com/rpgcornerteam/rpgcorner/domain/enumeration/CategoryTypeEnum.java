@@ -9,17 +9,17 @@ package com.rpgcornerteam.rpgcorner.domain.enumeration;
  */
 public enum CategoryTypeEnum {
     /**
-     * 
+     *
    * Fő kategória
 
      */
-    MAIN_CATEGORY("Main category"),
+    MAIN_CATEGORY("Fő kategória"),
     /**
-     * 
+     *
    * Alkategória
 
      */
-    SUB_CATEGORY("Sub category");
+    SUB_CATEGORY("Alkategória");
 
     private final String value;
 

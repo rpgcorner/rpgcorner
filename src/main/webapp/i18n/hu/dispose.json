@@ -2,26 +2,26 @@
   "rpgCornerApp": {
     "dispose": {
       "home": {
-        "title": "Disposes",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "Egy új Dispose létrehozása",
-        "createOrEditLabel": "Hozzon létre, vagy módosítson Disposet",
-        "notFound": "No Disposes found"
+        "title": "Selejtezések",
+        "refreshListLabel": "Lista frissítése",
+        "createLabel": "Egy új selejtezés létrehozása",
+        "createOrEditLabel": "Hozzon létre, vagy módosítson egy selejtezést",
+        "notFound": "Nem találhatóak selejtezések"
       },
-      "created": "Egy új Dispose lett létrehozva {{ param }} azonosítóval",
-      "updated": "A Dispose módosítva lett {{ param }} azonosítóval",
-      "deleted": "A Dispose törölve lett {{ param }} azonosítóval",
+      "created": "Egy új selejtezés lett létrehozva {{ param }} azonosítóval",
+      "updated": "A selejtezés módosítva lett {{ param }} azonosítóval",
+      "deleted": "A selejtezés törölve lett {{ param }} azonosítóval",
       "delete": {
-        "question": "Biztos benne, hogy törölni szeretné az Disposet {{ id }} azonosítóval?"
+        "question": "Biztos benne, hogy törölni szeretné a selejtezést {{ id }} azonosítóval?"
       },
       "detail": {
-        "title": "Dispose"
+        "title": "Selejtezés"
       },
-      "id": "ID",
-      "disposeDate": "Dispose Date",
-      "note": "Note",
-      "disposedStock": "Disposed Stock",
-      "disposedByUser": "Disposed By User",
+      "id": "Azonosító",
+      "disposeDate": "Selejtezés dátuma",
+      "note": "Megjegyzés",
+      "disposedStock": "Selejtezett készlet",
+      "disposedByUser": "Selejtezést végző felhasználó",
       "help": {
         "disposeDate": "A selejtezés dátuma.",
         "note": "Megjegyzés."

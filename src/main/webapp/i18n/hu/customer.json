@@ -2,25 +2,25 @@
   "rpgCornerApp": {
     "customer": {
       "home": {
-        "title": "Customers",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "Egy új Customer létrehozása",
-        "createOrEditLabel": "Hozzon létre, vagy módosítson Customert",
-        "notFound": "No Customers found"
+        "title": "Vevők",
+        "refreshListLabel": "Lista frissítése",
+        "createLabel": "Egy új vevő létrehozása",
+        "createOrEditLabel": "Hozzon létre, vagy módosítson egy vevőt",
+        "notFound": "Nem találhatóak vevők"
       },
-      "created": "Egy új Customer lett létrehozva {{ param }} azonosítóval",
-      "updated": "A Customer módosítva lett {{ param }} azonosítóval",
-      "deleted": "A Customer törölve lett {{ param }} azonosítóval",
+      "created": "Egy új vevő lett létrehozva {{ param }} azonosítóval",
+      "updated": "A vevő módosítva lett {{ param }} azonosítóval",
+      "deleted": "A vevő törölve lett {{ param }} azonosítóval",
       "delete": {
-        "question": "Biztos benne, hogy törölni szeretné az Customert {{ id }} azonosítóval?"
+        "question": "Biztos benne, hogy törölni szeretné a vevőt {{ id }} azonosítóval?"
       },
       "detail": {
-        "title": "Customer"
+        "title": "Vevő"
       },
-      "id": "ID",
-      "contact": "Contact",
-      "sale": "Sale",
-      "productReturn": "Product Return"
+      "id": "Azonosító",
+      "contact": "Kapcsolat",
+      "sale": "Eladás",
+      "productReturn": "Áruvisszavétel"
     }
   }
 }

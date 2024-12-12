@@ -35,13 +35,6 @@
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
           <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
-            <th scope="col" jhiSortBy="id">
-              <div class="d-flex">
-                <span jhiTranslate="global.field.id">ID</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="contact.id">
               <div class="d-flex">
                 <span jhiTranslate="rpgCornerApp.customer.contact">Contact</span>
@@ -54,9 +47,6 @@
         <tbody>
           @for (customer of customers; track trackId(customer)) {
             <tr data-cy="entityTable">
-              <td>
-                <a [routerLink]="['/customer', customer.id, 'view']">{{ customer.id }}</a>
-              </td>
               <td>
                 @if (customer.contact) {
                   <div>
