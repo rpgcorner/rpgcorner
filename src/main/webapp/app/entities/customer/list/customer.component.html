@@ -35,6 +35,70 @@
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
           <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="companyName">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.contact.companyName">Company Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="taxNumber">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.contact.taxNumber">Tax Number</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="contactName">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.contact.contactName">Contact Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="address">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.contact.address">Address</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="email">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.contact.email">Email</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fax">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.contact.fax">Fax</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="mobile">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.contact.mobile">Mobile</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="phone">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.contact.phone">Phone</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="note">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.contact.note">Note</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+
             <th scope="col" jhiSortBy="contact.id">
               <div class="d-flex">
                 <span jhiTranslate="rpgCornerApp.customer.contact">Contact</span>
@@ -47,6 +111,16 @@
         <tbody>
           @for (customer of customers; track trackId(customer)) {
             <tr data-cy="entityTable">
+              <td>{{ customer.contact?.companyName }}</td>
+              <td>{{ customer.contact?.taxNumber }}</td>
+              <td>{{ customer.contact?.contactName }}</td>
+              <td>{{ customer.contact?.address }}</td>
+              <td>{{ customer.contact?.email }}</td>
+              <td>{{ customer.contact?.fax }}</td>
+              <td>{{ customer.contact?.mobile }}</td>
+              <td>{{ customer.contact?.phone }}</td>
+              <td>{{ customer.contact?.note }}</td>
+
               <td>
                 @if (customer.contact) {
                   <div>

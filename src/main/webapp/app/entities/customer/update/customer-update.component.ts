@@ -1,4 +1,5 @@
-import { Component, OnInit, inject } from '@angular/core';
+/* eslint-disable */
+import { Component, OnInit, inject, ViewChild } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -12,14 +13,16 @@ import { ContactService } from 'app/entities/contact/service/contact.service';
 import { ICustomer } from '../customer.model';
 import { CustomerService } from '../service/customer.service';
 import { CustomerFormGroup, CustomerFormService } from './customer-form.service';
+import { ContactUpdateComponent } from '../../contact/update/contact-update.component';
 
 @Component({
   standalone: true,
   selector: 'jhi-customer-update',
   templateUrl: './customer-update.component.html',
-  imports: [SharedModule, FormsModule, ReactiveFormsModule],
+  imports: [SharedModule, FormsModule, ReactiveFormsModule, ContactUpdateComponent],
 })
 export class CustomerUpdateComponent implements OnInit {
+  @ViewChild(ContactUpdateComponent) contactUpdateComponent!: ContactUpdateComponent;
   isSaving = false;
   customer: ICustomer | null = null;
 
@@ -41,7 +44,10 @@ export class CustomerUpdateComponent implements OnInit {
       if (customer) {
         this.updateForm(customer);
       }
-
+      debugger;
+      if (customer.contact?.id) {
+        this.loadContact(customer.contact.id); // Meghívod a loadContact metódust
+      }
       this.loadRelationshipsOptions();
     });
   }
@@ -51,13 +57,35 @@ export class CustomerUpdateComponent implements OnInit {
   }
 
   save(): void {
+    debugger;
     this.isSaving = true;
-    const customer = this.customerFormService.getCustomer(this.editForm);
-    if (customer.id !== null) {
-      this.subscribeToSaveResponse(this.customerService.update(customer));
-    } else {
-      this.subscribeToSaveResponse(this.customerService.create(customer));
-    }
+
+    // Contact mentése
+    this.contactUpdateComponent.save().subscribe({
+      next: (savedContact: IContact) => {
+        console.log('Saved Contact:', savedContact);
+
+        // Customer mentése a Contact ID-val
+        const customer = this.customerFormService.getCustomer(this.editForm);
+        customer.contact = savedContact; // A Contact ID hozzáadása
+
+        let saveObservable: Observable<HttpResponse<ICustomer>>;
+        if (customer.id !== null) {
+          saveObservable = this.customerService.update(customer);
+        } else {
+          saveObservable = this.customerService.create(customer);
+        }
+
+        saveObservable.pipe(finalize(() => this.onSaveFinalize())).subscribe({
+          next: () => this.onSaveSuccess(),
+          error: () => this.onSaveError(),
+        });
+      },
+      error: () => {
+        console.error('Failed to save Contact');
+        this.isSaving = false;
+      },
+    });
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<ICustomer>>): void {
@@ -92,5 +120,22 @@ export class CustomerUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IContact[]>) => res.body ?? []))
       .pipe(map((contacts: IContact[]) => this.contactService.addContactToCollectionIfMissing<IContact>(contacts, this.customer?.contact)))
       .subscribe((contacts: IContact[]) => (this.contactsCollection = contacts));
+  }
+
+  protected loadContact(contactId: number): void {
+    this.contactService.find(contactId).subscribe({
+      next: (response: HttpResponse<IContact>) => {
+        if (response.body) {
+          this.contactUpdateComponent.updateForm(response.body);
+          this.contactsCollection = [response.body];
+          console.log('Contact loaded:', response.body);
+        } else {
+          console.error('Contact not found');
+        }
+      },
+      error: err => {
+        console.error('Error loading contact:', err);
+      },
+    });
   }
 }

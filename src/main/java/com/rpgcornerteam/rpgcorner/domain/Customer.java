@@ -36,8 +36,7 @@ public class Customer implements Serializable {
      * A vevő kapcsolattartási adatai.
      */
     @Schema(description = "A vevő kapcsolattartási adatai.")
-    @JsonIgnoreProperties(value = { "supplier", "customer" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.EAGER, optional = false)
     @NotNull
     @JoinColumn(unique = true)
     private Contact contact;

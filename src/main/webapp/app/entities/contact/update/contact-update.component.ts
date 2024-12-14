@@ -1,4 +1,5 @@
-import { Component, OnInit, inject } from '@angular/core';
+/* eslint-disable */
+import { Component, OnInit, inject, Input, ViewChild } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -12,6 +13,7 @@ import { SupplierService } from 'app/entities/supplier/service/supplier.service'
 import { IContact } from '../contact.model';
 import { ContactService } from '../service/contact.service';
 import { ContactFormGroup, ContactFormService } from './contact-form.service';
+import { CustomerUpdateComponent } from '../../customer/update/customer-update.component';
 
 @Component({
   standalone: true,
@@ -20,6 +22,7 @@ import { ContactFormGroup, ContactFormService } from './contact-form.service';
   imports: [SharedModule, FormsModule, ReactiveFormsModule],
 })
 export class ContactUpdateComponent implements OnInit {
+  @Input() isVisible: boolean = true; // Alapértelmezett érték: false
   isSaving = false;
   contact: IContact | null = null;
 
@@ -50,16 +53,22 @@ export class ContactUpdateComponent implements OnInit {
     window.history.back();
   }
 
-  save(): void {
+  save(): Observable<IContact> {
     this.isSaving = true;
     const contact = this.contactFormService.getContact(this.editForm);
-    if (contact.id !== null) {
-      this.subscribeToSaveResponse(this.contactService.update(contact));
-    } else {
-      this.subscribeToSaveResponse(this.contactService.create(contact));
-    }
-  }
 
+    let saveObservable: Observable<HttpResponse<IContact>>;
+    if (contact.id !== null) {
+      saveObservable = this.contactService.update(contact);
+    } else {
+      saveObservable = this.contactService.create(contact);
+    }
+
+    return saveObservable.pipe(
+      map((response: HttpResponse<IContact>) => response.body!), // Extract the body (IContact)
+      finalize(() => (this.isSaving = false)),
+    );
+  }
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IContact>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),
@@ -79,7 +88,7 @@ export class ContactUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  protected updateForm(contact: IContact): void {
+  public updateForm(contact: IContact): void {
     this.contact = contact;
     this.contactFormService.resetForm(this.editForm, contact);
 
