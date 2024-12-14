@@ -28,7 +28,7 @@
           </dt>
           <dd>
             <span [jhiTranslate]="'rpgCornerApp.CategoryTypeEnum.' + (categoryRef.categoryType ?? 'null')">{{
-              { null: '', MAIN_CATEGORY: 'Main category', SUB_CATEGORY: 'Sub category' }[categoryRef.categoryType ?? 'null']
+              { null: '', MAIN_CATEGORY: 'Fő kategória', SUB_CATEGORY: 'Sub category' }[categoryRef.categoryType ?? 'null']
             }}</span>
           </dd>
           <dt>
@@ -39,7 +39,7 @@
           <dd>
             <span>{{ categoryRef.description }}</span>
           </dd>
-          <dt><span jhiTranslate="rpgCornerApp.category.mainCategory">Main Category</span></dt>
+          <dt><span jhiTranslate="rpgCornerApp.category.mainCategory">Fő kategória</span></dt>
           <dd>
             @if (category()!.mainCategory) {
               <div>

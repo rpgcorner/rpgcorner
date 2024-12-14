@@ -1,5 +1,5 @@
 export enum CategoryTypeEnum {
-  MAIN_CATEGORY = 'Main category',
+  MAIN_CATEGORY = 'Fő kategória',
 
-  SUB_CATEGORY = 'Sub category',
+  SUB_CATEGORY = 'Alkategória',
 }

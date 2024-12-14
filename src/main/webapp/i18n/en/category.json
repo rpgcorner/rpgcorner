@@ -21,8 +21,8 @@
       "active": "Active",
       "categoryType": "Category Type",
       "description": "Description",
-      "subCategory": "Sub Category",
-      "mainCategory": "Main Category",
+      "subCategory": "Alkategória",
+      "mainCategory": "Fő kategória",
       "help": {
         "active": "Az elem aktív státuszát jelzi.",
         "categoryType": "A kategória típusa.",

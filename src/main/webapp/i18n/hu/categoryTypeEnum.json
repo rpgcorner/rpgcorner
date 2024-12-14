@@ -2,8 +2,8 @@
   "rpgCornerApp": {
     "CategoryTypeEnum": {
       "null": "",
-      "MAIN_CATEGORY": "Main category",
-      "SUB_CATEGORY": "Sub category"
+      "MAIN_CATEGORY": "Fő kategória",
+      "SUB_CATEGORY": "Alkategória"
     }
   }
 }
