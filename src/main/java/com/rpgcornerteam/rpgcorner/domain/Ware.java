@@ -72,15 +72,15 @@ public class Ware implements Serializable {
     @Schema(description = "Az árucikk fő kategóriája.")
     @ManyToOne(optional = false)
     @NotNull
-    @JsonIgnoreProperties(value = { "subCategories", "mainCategory" }, allowSetters = true)
+    //@JsonIgnoreProperties(value = { "subCategories", "mainCategory" }, allowSetters = true)
     private Category mainCategory;
 
     /**
      * Az árucikk alkategóriája.
      */
     @Schema(description = "Az árucikk alkategóriája.")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "subCategories", "mainCategory" }, allowSetters = true)
+    @ManyToOne(fetch = FetchType.EAGER)
+    // @JsonIgnoreProperties(value = { "subCategories", "mainCategory" }, allowSetters = true)
     private Category subCategory;
 
     /**

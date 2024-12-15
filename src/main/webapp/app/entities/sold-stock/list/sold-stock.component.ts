@@ -1,6 +1,7 @@
-import { Component, NgZone, OnInit, inject } from '@angular/core';
+/* eslint-disable */
+import { Component, inject, Input, NgZone, OnInit } from '@angular/core';
 import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
-import { Observable, Subscription, combineLatest, filter, tap } from 'rxjs';
+import { combineLatest, filter, Observable, Subscription, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
@@ -31,7 +32,8 @@ export class SoldStockComponent implements OnInit {
   subscription: Subscription | null = null;
   soldStocks?: ISoldStock[];
   isLoading = false;
-
+  @Input() isVisible = true;
+  @Input() salesId?: number;
   sortState = sortStateSignal({});
 
   public readonly router = inject(Router);
@@ -44,6 +46,9 @@ export class SoldStockComponent implements OnInit {
   trackId = (item: ISoldStock): number => this.soldStockService.getSoldStockIdentifier(item);
 
   ngOnInit(): void {
+    if (this.isVisible === undefined) {
+      this.isVisible = true;
+    }
     this.subscription = combineLatest([this.activatedRoute.queryParamMap, this.activatedRoute.data])
       .pipe(
         tap(([params, data]) => this.fillComponentAttributeFromRoute(params, data)),
@@ -103,7 +108,14 @@ export class SoldStockComponent implements OnInit {
     const queryObject: any = {
       sort: this.sortService.buildSortParam(this.sortState()),
     };
-    return this.soldStockService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
+
+    if (this.salesId) {
+      return this.soldStockService.findBySaleId(this.salesId).pipe(tap(() => (this.isLoading = false)));
+    }
+    if (this.isVisible) {
+      return this.soldStockService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
+    }
+    return new Observable<EntityArrayResponseType>();
   }
 
   protected handleNavigation(sortState: SortState): void {

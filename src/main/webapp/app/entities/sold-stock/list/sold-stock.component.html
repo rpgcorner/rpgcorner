@@ -1,8 +1,9 @@
 <div>
   <h2 id="page-heading" data-cy="SoldStockHeading">
-    <span jhiTranslate="rpgCornerApp.soldStock.home.title">SoldStocks</span>
+    <span jhiTranslate="rpgCornerApp.soldStock.home.title" *ngIf="isVisible">SoldStocks</span>
+    <span jhiTranslate="rpgCornerApp.soldStock.home.aruTitle" *ngIf="!isVisible">SoldStocks</span>
 
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-end" *ngIf="isVisible">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
         <span jhiTranslate="rpgCornerApp.soldStock.home.refreshListLabel">Refresh list</span>
@@ -16,6 +17,18 @@
       >
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="rpgCornerApp.soldStock.home.createLabel">Egy új Sold Stock létrehozása</span>
+      </button>
+    </div>
+    <div class="d-flex justify-content-end" *ngIf="!isVisible">
+      <button
+        [disabled]="!salesId"
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-sold-stock"
+        [routerLink]="['/sold-stock/' + salesId + '/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="rpgCornerApp.soldStock.home.createAruLabel">Egy új Sold Stock létrehozása</span>
       </button>
     </div>
   </h2>
@@ -62,7 +75,7 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="sale.id">
+            <th scope="col" jhiSortBy="sale.id" *ngIf="isVisible">
               <div class="d-flex">
                 <span jhiTranslate="rpgCornerApp.soldStock.sale">Sale</span>
                 <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -71,6 +84,7 @@
             <th scope="col"></th>
           </tr>
         </thead>
+
         <tbody>
           @for (soldStock of soldStocks; track trackId(soldStock)) {
             <tr data-cy="entityTable">
@@ -80,18 +94,18 @@
               <td>
                 @if (soldStock.soldWare) {
                   <div>
-                    <a [routerLink]="['/ware', soldStock.soldWare.id, 'view']">{{ soldStock.soldWare.id }}</a>
+                    <a [routerLink]="['/ware', soldStock.soldWare.id, 'view']">{{ soldStock.soldWare.description }}</a>
                   </div>
                 }
               </td>
-              <td>
+              <td *ngIf="isVisible">
                 @if (soldStock.sale) {
                   <div>
                     <a [routerLink]="['/sale', soldStock.sale.id, 'view']">{{ soldStock.sale.id }}</a>
                   </div>
                 }
               </td>
-              <td class="text-end">
+              <td class="text-end" *ngIf="isVisible">
                 <div class="btn-group">
                   <a [routerLink]="['/sold-stock', soldStock.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
                     <fa-icon icon="eye"></fa-icon>

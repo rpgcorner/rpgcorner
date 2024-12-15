@@ -5,7 +5,7 @@ export interface IDispose {
   id: number;
   disposeDate?: dayjs.Dayjs | null;
   note?: string | null;
-  disposedByUser?: Pick<IUser, 'id'> | null;
+  disposedByUser?: IUser | null;
 }
 
 export type NewDispose = Omit<IDispose, 'id'> & { id: null };

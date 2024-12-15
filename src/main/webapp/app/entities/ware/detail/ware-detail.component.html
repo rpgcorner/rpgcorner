@@ -47,7 +47,7 @@
           <dd>
             @if (ware()!.mainCategory) {
               <div>
-                <a [routerLink]="['/category', ware()!.mainCategory?.id, 'view']">{{ wareRef.mainCategory?.id }}</a>
+                <a [routerLink]="['/category', ware()!.mainCategory?.id, 'view']">{{ wareRef.mainCategory?.description }}</a>
               </div>
             }
           </dd>
@@ -55,7 +55,7 @@
           <dd>
             @if (ware()!.subCategory) {
               <div>
-                <a [routerLink]="['/category', ware()!.subCategory?.id, 'view']">{{ wareRef.subCategory?.id }}</a>
+                <a [routerLink]="['/category', ware()!.subCategory?.id, 'view']">{{ wareRef.subCategory?.description }}</a>
               </div>
             }
           </dd>

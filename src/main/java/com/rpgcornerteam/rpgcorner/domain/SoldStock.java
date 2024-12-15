@@ -57,10 +57,10 @@ public class SoldStock implements Serializable {
      */
     @Schema(description = "Az eladott árucikk.")
     @JsonIgnoreProperties(
-        value = { "mainCategory", "subCategory", "inventory", "disposedStock", "purchasedStock", "returnedStock", "soldStock" },
+        value = { "mainCategory", "subCategory", "inventory", "disposedStock", "purchasedStock", "returnedStock" },
         allowSetters = true
     )
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(unique = true)
     private Ware soldWare;
 
@@ -68,8 +68,8 @@ public class SoldStock implements Serializable {
      * Az eladás, amely során az árukészlet eladásra került.
      */
     @Schema(description = "Az eladás, amely során az árukészlet eladásra került.")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "soldStocks", "soldByUser", "soldForCustomer", "productReturns" }, allowSetters = true)
+    @ManyToOne(fetch = FetchType.EAGER)
+    // @JsonIgnoreProperties(value = { "soldStocks", "soldByUser", "soldForCustomer", "productReturns" }, allowSetters = true)
     private Sale sale;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

@@ -45,7 +45,7 @@
           <dd>
             @if (soldStock()!.soldWare) {
               <div>
-                <a [routerLink]="['/ware', soldStock()!.soldWare?.id, 'view']">{{ soldStockRef.soldWare?.id }}</a>
+                <a [routerLink]="['/ware', soldStock()!.soldWare?.id, 'view']">{{ soldStockRef.soldWare?.description }}</a>
               </div>
             }
           </dd>

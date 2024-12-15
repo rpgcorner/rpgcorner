@@ -2,9 +2,11 @@
   "rpgCornerApp": {
     "soldStock": {
       "home": {
+        "aruTitle": "Áruk",
         "title": "Eladott Készletek",
         "refreshListLabel": "Lista frissítése",
         "createLabel": "Egy új eladott készlet létrehozása",
+        "createAruLabel": "Áru hozzáadása",
         "createOrEditLabel": "Hozzon létre, vagy módosítson egy eladott készletet",
         "notFound": "Nem találhatóak eladott készletek"
       },

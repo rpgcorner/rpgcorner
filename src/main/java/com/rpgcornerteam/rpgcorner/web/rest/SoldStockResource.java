@@ -165,6 +165,12 @@ public class SoldStockResource {
         return ResponseUtil.wrapOrNotFound(soldStock);
     }
 
+    @GetMapping("sale/{saleId}")
+    public List<SoldStock> getSoldStockBySaleId(@PathVariable("saleId") Long saleId) {
+        LOG.debug("REST request to get SoldStock by saleId : {}", saleId);
+        return soldStockRepository.findBySale_Id(saleId);
+    }
+
     /**
      * {@code DELETE  /sold-stocks/:id} : delete the "id" soldStock.
      *

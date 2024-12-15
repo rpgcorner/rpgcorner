@@ -5,7 +5,7 @@ import { ICustomer } from 'app/entities/customer/customer.model';
 export interface ISale {
   id: number;
   soldDate?: dayjs.Dayjs | null;
-  soldByUser?: Pick<IUser, 'id'> | null;
+  soldByUser?: IUser | null; // A teljes IUser típus kell
   soldForCustomer?: ICustomer | null;
 }
 

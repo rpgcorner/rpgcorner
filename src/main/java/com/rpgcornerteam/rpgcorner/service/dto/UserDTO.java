@@ -1,6 +1,9 @@
 package com.rpgcornerteam.rpgcorner.service.dto;
 
 import com.rpgcornerteam.rpgcorner.domain.User;
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -15,6 +18,12 @@ public class UserDTO implements Serializable {
 
     private String login;
 
+    private String firstName;
+
+    private String lastName;
+
+    private String email;
+
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -23,6 +32,8 @@ public class UserDTO implements Serializable {
         this.id = user.getId();
         // Customize it here if you need, or not, firstName/lastName/etc
         this.login = user.getLogin();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
     }
 
     public Long getId() {
@@ -70,5 +81,29 @@ public class UserDTO implements Serializable {
             "id='" + id + '\'' +
             ", login='" + login + '\'' +
             "}";
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

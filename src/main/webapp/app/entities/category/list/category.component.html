@@ -76,7 +76,7 @@
               <td>
                 @if (category.mainCategory) {
                   <div>
-                    <a [routerLink]="['/category', category.mainCategory.id, 'view']">{{ category.mainCategory.id }}</a>
+                    <a [routerLink]="['/category', category.mainCategory.id, 'view']">{{ category.mainCategory.description }}</a>
                   </div>
                 }
               </td>

@@ -52,7 +52,7 @@
               <option [ngValue]="null" selected></option>
             }
             @for (userOption of usersSharedCollection; track $index) {
-              <option [ngValue]="userOption">{{ userOption.id }}</option>
+              <option [ngValue]="userOption">{{ userOption.firstName }}</option>
             }
           </select>
         </div>
@@ -78,7 +78,7 @@
               <option [ngValue]="null" selected></option>
             }
             @for (customerOption of customersSharedCollection; track $index) {
-              <option [ngValue]="customerOption">{{ customerOption.id }}</option>
+              <option [ngValue]="customerOption">{{ customerOption.contact?.companyName }}</option>
             }
           </select>
         </div>
@@ -93,7 +93,7 @@
           </div>
         }
       </div>
-
+      <jhi-sold-stock [isVisible]="false" [salesId]="editForm.get(['id'])!.value"></jhi-sold-stock>
       <div>
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
           <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Mégsem</span>

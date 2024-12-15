@@ -43,7 +43,7 @@
           <dd>
             @if (category()!.mainCategory) {
               <div>
-                <a [routerLink]="['/category', category()!.mainCategory?.id, 'view']">{{ categoryRef.mainCategory?.id }}</a>
+                <a [routerLink]="['/category', category()!.mainCategory?.id, 'view']">{{ categoryRef.mainCategory?.description }}</a>
               </div>
             }
           </dd>

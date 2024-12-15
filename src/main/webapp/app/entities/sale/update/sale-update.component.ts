@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
@@ -14,12 +15,13 @@ import { CustomerService } from 'app/entities/customer/service/customer.service'
 import { SaleService } from '../service/sale.service';
 import { ISale } from '../sale.model';
 import { SaleFormGroup, SaleFormService } from './sale-form.service';
-
+import { SoldStockComponent } from '../../sold-stock/list/sold-stock.component';
+import { Router } from '@angular/router';
 @Component({
   standalone: true,
   selector: 'jhi-sale-update',
   templateUrl: './sale-update.component.html',
-  imports: [SharedModule, FormsModule, ReactiveFormsModule],
+  imports: [SharedModule, FormsModule, ReactiveFormsModule, SoldStockComponent],
 })
 export class SaleUpdateComponent implements OnInit {
   isSaving = false;
@@ -40,7 +42,7 @@ export class SaleUpdateComponent implements OnInit {
   compareUser = (o1: IUser | null, o2: IUser | null): boolean => this.userService.compareUser(o1, o2);
 
   compareCustomer = (o1: ICustomer | null, o2: ICustomer | null): boolean => this.customerService.compareCustomer(o1, o2);
-
+  protected router = inject(Router);
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ sale }) => {
       this.sale = sale;
@@ -68,13 +70,16 @@ export class SaleUpdateComponent implements OnInit {
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<ISale>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
-      next: () => this.onSaveSuccess(),
+      next: res => this.onSaveSuccess(res.body),
       error: () => this.onSaveError(),
     });
   }
 
-  protected onSaveSuccess(): void {
-    this.previousState();
+  protected onSaveSuccess(sale: ISale | null): void {
+    if (sale?.id) {
+      // Navigálás az adott sale ID alapján
+      this.router.navigate(['/sale', sale.id, 'edit']);
+    }
   }
 
   protected onSaveError(): void {

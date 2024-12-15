@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
@@ -27,7 +28,7 @@ export class SoldStockUpdateComponent implements OnInit {
 
   soldWaresCollection: IWare[] = [];
   salesSharedCollection: ISale[] = [];
-
+  saleId: number = 0;
   protected soldStockService = inject(SoldStockService);
   protected soldStockFormService = inject(SoldStockFormService);
   protected wareService = inject(WareService);
@@ -42,6 +43,7 @@ export class SoldStockUpdateComponent implements OnInit {
   compareSale = (o1: ISale | null, o2: ISale | null): boolean => this.saleService.compareSale(o1, o2);
 
   ngOnInit(): void {
+    this.saleId = Number(this.activatedRoute.snapshot.params['salesId']);
     this.activatedRoute.data.subscribe(({ soldStock }) => {
       this.soldStock = soldStock;
       if (soldStock) {
@@ -104,6 +106,19 @@ export class SoldStockUpdateComponent implements OnInit {
       .query()
       .pipe(map((res: HttpResponse<ISale[]>) => res.body ?? []))
       .pipe(map((sales: ISale[]) => this.saleService.addSaleToCollectionIfMissing<ISale>(sales, this.soldStock?.sale)))
-      .subscribe((sales: ISale[]) => (this.salesSharedCollection = sales));
+      .subscribe((sales: ISale[]) => {
+        this.salesSharedCollection = sales;
+        // Keresés a salesSharedCollection-ben
+        const selectedSale = this.salesSharedCollection.find(sale => sale.id === this.saleId);
+        if (!selectedSale) {
+          console.warn(`Sale with id ${this.saleId} not found in the collection.`);
+        } else {
+          console.log('Selected Sale:', selectedSale);
+          // Itt beállíthatsz bármit a selectedSale alapján, ha szükséges
+          this.editForm.patchValue({
+            sale: selectedSale, // 'sale' az űrlapkontroll neve
+          });
+        }
+      });
   }
 }

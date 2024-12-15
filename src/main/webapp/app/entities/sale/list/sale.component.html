@@ -62,7 +62,7 @@
             <tr data-cy="entityTable">
               <td>{{ sale.soldDate | formatMediumDate }}</td>
               <td>
-                {{ sale.soldByUser?.id }}
+                {{ sale.soldByUser?.firstName }}
               </td>
               <td>
                 @if (sale.soldForCustomer) {

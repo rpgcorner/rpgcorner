@@ -8,7 +8,7 @@ export interface IProductReturn {
   returnDate?: dayjs.Dayjs | null;
   note?: string | null;
   sale?: ISale | null;
-  returnedByUser?: Pick<IUser, 'id'> | null;
+  returnedByUser?: IUser | null;
   returnedByCustomer?: ICustomer | null;
 }
 

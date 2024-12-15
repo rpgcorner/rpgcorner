@@ -96,14 +96,14 @@
               <td>
                 @if (ware.mainCategory) {
                   <div>
-                    <a [routerLink]="['/category', ware.mainCategory.id, 'view']">{{ ware.mainCategory.id }}</a>
+                    <a [routerLink]="['/category', ware.mainCategory.id, 'view']">{{ ware.mainCategory.description }}</a>
                   </div>
                 }
               </td>
               <td>
                 @if (ware.subCategory) {
                   <div>
-                    <a [routerLink]="['/category', ware.subCategory.id, 'view']">{{ ware.subCategory.id }}</a>
+                    <a [routerLink]="['/category', ware.subCategory.id, 'view']">{{ ware.subCategory.description }}</a>
                   </div>
                 }
               </td>

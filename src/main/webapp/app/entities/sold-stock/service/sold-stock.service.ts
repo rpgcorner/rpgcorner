@@ -40,6 +40,10 @@ export class SoldStockService {
     return this.http.get<ISoldStock[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
+  findBySaleId(saleId: number): Observable<EntityArrayResponseType> {
+    return this.http.get<ISoldStock[]>(`${this.resourceUrl}/sale/${saleId}`, { observe: 'response' });
+  }
+
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }

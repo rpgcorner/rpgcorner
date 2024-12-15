@@ -30,6 +30,14 @@ const soldStockRoute: Routes = [
     canActivate: [UserRouteAccessService],
   },
   {
+    path: ':salesId/new',
+    loadComponent: () => import('./update/sold-stock-update.component').then(m => m.SoldStockUpdateComponent),
+    resolve: {
+      soldStock: SoldStockResolve,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
     path: ':id/edit',
     loadComponent: () => import('./update/sold-stock-update.component').then(m => m.SoldStockUpdateComponent),
     resolve: {
