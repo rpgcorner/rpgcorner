@@ -63,7 +63,7 @@ public class Sale implements Serializable {
     @Schema(description = "A vevő.")
     @ManyToOne(optional = false)
     @NotNull
-    @JsonIgnoreProperties(value = { "contact", "sales", "productReturns" }, allowSetters = true)
+    //@JsonIgnoreProperties(value = { "contact", "sales", "productReturns" }, allowSetters = true)
     private Customer soldForCustomer;
 
     /**

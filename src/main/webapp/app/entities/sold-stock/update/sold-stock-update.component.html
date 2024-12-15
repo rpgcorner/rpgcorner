@@ -71,16 +71,6 @@
             }
           </select>
         </div>
-
-        <div class="mb-3">
-          <label class="form-label" for="field_sale" jhiTranslate="rpgCornerApp.soldStock.sale">Sale</label>
-          <select class="form-control" id="field_sale" data-cy="sale" name="sale" formControlName="sale" [compareWith]="compareSale">
-            <option [ngValue]="null"></option>
-            @for (saleOption of salesSharedCollection; track $index) {
-              <option [ngValue]="saleOption">{{ saleOption.id }}</option>
-            }
-          </select>
-        </div>
       </div>
       <div>
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">

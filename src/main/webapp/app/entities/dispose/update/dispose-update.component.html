@@ -80,7 +80,7 @@
           </div>
         }
       </div>
-
+      <jhi-disposed-stock [isVisible]="false" [disposeId]="editForm.get(['id'])!.value"></jhi-disposed-stock>
       <div>
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
           <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Mégsem</span>

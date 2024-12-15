@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
@@ -27,7 +28,7 @@ export class DisposedStockUpdateComponent implements OnInit {
 
   disposedWaresCollection: IWare[] = [];
   disposesSharedCollection: IDispose[] = [];
-
+  disposeId: number = 0;
   protected disposedStockService = inject(DisposedStockService);
   protected disposedStockFormService = inject(DisposedStockFormService);
   protected wareService = inject(WareService);
@@ -42,6 +43,7 @@ export class DisposedStockUpdateComponent implements OnInit {
   compareDispose = (o1: IDispose | null, o2: IDispose | null): boolean => this.disposeService.compareDispose(o1, o2);
 
   ngOnInit(): void {
+    this.disposeId = Number(this.activatedRoute.snapshot.params['disposeId']);
     this.activatedRoute.data.subscribe(({ disposedStock }) => {
       this.disposedStock = disposedStock;
       if (disposedStock) {
@@ -112,6 +114,18 @@ export class DisposedStockUpdateComponent implements OnInit {
       .pipe(
         map((disposes: IDispose[]) => this.disposeService.addDisposeToCollectionIfMissing<IDispose>(disposes, this.disposedStock?.dispose)),
       )
-      .subscribe((disposes: IDispose[]) => (this.disposesSharedCollection = disposes));
+      .subscribe((disposes: IDispose[]) => {
+        this.disposesSharedCollection = disposes;
+        const selectedDispose = this.disposesSharedCollection.find(sale => sale.id === this.disposeId);
+        if (!selectedDispose) {
+          console.warn(`Disp with id ${this.disposeId} not found in the collection.`);
+        } else {
+          console.log('Selected Sale:', selectedDispose);
+
+          this.editForm.patchValue({
+            dispose: selectedDispose,
+          });
+        }
+      });
   }
 }

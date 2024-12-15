@@ -53,24 +53,7 @@
           >
             <option [ngValue]="null"></option>
             @for (wareOption of disposedWaresCollection; track $index) {
-              <option [ngValue]="wareOption">{{ wareOption.id }}</option>
-            }
-          </select>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label" for="field_dispose" jhiTranslate="rpgCornerApp.disposedStock.dispose">Dispose</label>
-          <select
-            class="form-control"
-            id="field_dispose"
-            data-cy="dispose"
-            name="dispose"
-            formControlName="dispose"
-            [compareWith]="compareDispose"
-          >
-            <option [ngValue]="null"></option>
-            @for (disposeOption of disposesSharedCollection; track $index) {
-              <option [ngValue]="disposeOption">{{ disposeOption.id }}</option>
+              <option [ngValue]="wareOption">{{ wareOption.description }}</option>
             }
           </select>
         </div>

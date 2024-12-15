@@ -4,6 +4,7 @@
       "home": {
         "title": "Selejtezett Készletek",
         "refreshListLabel": "Lista frissítése",
+        "createSelejt": "Egy új selejtezett készlet hozzáadása",
         "createLabel": "Egy új selejtezett készlet létrehozása",
         "createOrEditLabel": "Hozzon létre, vagy módosítson egy selejtezett készletet",
         "notFound": "Nem találhatóak selejtezett készletek"

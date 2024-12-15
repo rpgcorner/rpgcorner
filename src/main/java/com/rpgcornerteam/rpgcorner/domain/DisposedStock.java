@@ -48,11 +48,11 @@ public class DisposedStock implements Serializable {
      * A selejtezett árucikk
      */
     @Schema(description = "A selejtezett árucikk")
-    @JsonIgnoreProperties(
+    /*  @JsonIgnoreProperties(
         value = { "mainCategory", "subCategory", "inventory", "disposedStock", "purchasedStock", "returnedStock", "soldStock" },
         allowSetters = true
-    )
-    @OneToOne(fetch = FetchType.LAZY)
+    )*/
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(unique = true)
     private Ware disposedWare;
 

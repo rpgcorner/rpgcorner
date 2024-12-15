@@ -2,7 +2,7 @@
   <h2 id="page-heading" data-cy="DisposedStockHeading">
     <span jhiTranslate="rpgCornerApp.disposedStock.home.title">DisposedStocks</span>
 
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-end" *ngIf="isVisible">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
         <span jhiTranslate="rpgCornerApp.disposedStock.home.refreshListLabel">Refresh list</span>
@@ -16,6 +16,19 @@
       >
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="rpgCornerApp.disposedStock.home.createLabel">Egy új Disposed Stock létrehozása</span>
+      </button>
+    </div>
+
+    <div class="d-flex justify-content-end" *ngIf="!isVisible">
+      <button
+        [disabled]="!disposeId"
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-disposed-stock"
+        [routerLink]="['/disposed-stock/' + disposeId + '/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="rpgCornerApp.disposedStock.home.createSelejt">Egy új Disposed Stock létrehozása</span>
       </button>
     </div>
   </h2>
@@ -72,7 +85,7 @@
               <td>
                 @if (disposedStock.disposedWare) {
                   <div>
-                    <a [routerLink]="['/ware', disposedStock.disposedWare.id, 'view']">{{ disposedStock.disposedWare.id }}</a>
+                    <a [routerLink]="['/ware', disposedStock.disposedWare.id, 'view']">{{ disposedStock.disposedWare.description }}</a>
                   </div>
                 }
               </td>
@@ -85,12 +98,22 @@
               </td>
               <td class="text-end">
                 <div class="btn-group">
-                  <a [routerLink]="['/disposed-stock', disposedStock.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                  <a
+                    *ngIf="isVisible"
+                    [routerLink]="['/disposed-stock', disposedStock.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
                     <fa-icon icon="eye"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Nézet</span>
                   </a>
 
-                  <a [routerLink]="['/disposed-stock', disposedStock.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                  <a
+                    *ngIf="isVisible"
+                    [routerLink]="['/disposed-stock', disposedStock.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
                     <fa-icon icon="pencil-alt"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Szerkesztés</span>
                   </a>

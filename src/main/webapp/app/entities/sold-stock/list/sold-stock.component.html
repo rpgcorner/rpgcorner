@@ -105,14 +105,24 @@
                   </div>
                 }
               </td>
-              <td class="text-end" *ngIf="isVisible">
+              <td class="text-end">
                 <div class="btn-group">
-                  <a [routerLink]="['/sold-stock', soldStock.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                  <a
+                    *ngIf="isVisible"
+                    [routerLink]="['/sold-stock', soldStock.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
                     <fa-icon icon="eye"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Nézet</span>
                   </a>
 
-                  <a [routerLink]="['/sold-stock', soldStock.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                  <a
+                    *ngIf="isVisible"
+                    [routerLink]="['/sold-stock', soldStock.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
                     <fa-icon icon="pencil-alt"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Szerkesztés</span>
                   </a>

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -6,6 +7,7 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IDisposedStock, NewDisposedStock } from '../disposed-stock.model';
+import { ISoldStock } from '../../sold-stock/sold-stock.model';
 
 export type PartialUpdateDisposedStock = Partial<IDisposedStock> & Pick<IDisposedStock, 'id'>;
 
@@ -42,6 +44,10 @@ export class DisposedStockService {
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<IDisposedStock[]>(this.resourceUrl, { params: options, observe: 'response' });
+  }
+
+  findByDisposeId(disposeId: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IDisposedStock[]>(`${this.resourceUrl}/dispose/${disposeId}`, { observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {

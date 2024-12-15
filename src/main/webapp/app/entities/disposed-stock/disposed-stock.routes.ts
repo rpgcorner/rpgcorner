@@ -30,6 +30,14 @@ const disposedStockRoute: Routes = [
     canActivate: [UserRouteAccessService],
   },
   {
+    path: ':disposeId/new',
+    loadComponent: () => import('./update/disposed-stock-update.component').then(m => m.DisposedStockUpdateComponent),
+    resolve: {
+      disposedStock: DisposedStockResolve,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
     path: ':id/edit',
     loadComponent: () => import('./update/disposed-stock-update.component').then(m => m.DisposedStockUpdateComponent),
     resolve: {
