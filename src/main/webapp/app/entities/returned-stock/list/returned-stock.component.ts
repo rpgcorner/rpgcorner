@@ -1,4 +1,5 @@
-import { Component, NgZone, OnInit, inject } from '@angular/core';
+/* eslint-disable */
+import { Component, NgZone, OnInit, inject, Input } from '@angular/core';
 import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
 import { Observable, Subscription, combineLatest, filter, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -31,7 +32,8 @@ export class ReturnedStockComponent implements OnInit {
   subscription: Subscription | null = null;
   returnedStocks?: IReturnedStock[];
   isLoading = false;
-
+  @Input() isVisible = true;
+  @Input() productReturnId?: number;
   sortState = sortStateSignal({});
 
   public readonly router = inject(Router);
@@ -97,13 +99,18 @@ export class ReturnedStockComponent implements OnInit {
   protected fillComponentAttributesFromResponseBody(data: IReturnedStock[] | null): IReturnedStock[] {
     return data ?? [];
   }
-
   protected queryBackend(): Observable<EntityArrayResponseType> {
+    if (this.productReturnId) {
+      return this.returnedStockService.findByProductReturnId(this.productReturnId).pipe(tap(() => (this.isLoading = false)));
+    }
     this.isLoading = true;
     const queryObject: any = {
       sort: this.sortService.buildSortParam(this.sortState()),
     };
-    return this.returnedStockService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
+    if (this.isVisible) {
+      return this.returnedStockService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
+    }
+    return new Observable<EntityArrayResponseType>();
   }
 
   protected handleNavigation(sortState: SortState): void {

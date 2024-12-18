@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
-    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+    <form name="editForm" novalidate [formGroup]="editForm">
       <h2 id="jhi-supplier-heading" data-cy="SupplierCreateUpdateHeading" jhiTranslate="rpgCornerApp.supplier.home.createOrEditLabel">
         Hozzon létre, vagy módosítson Suppliert
       </h2>
@@ -16,12 +16,41 @@
         }
       </div>
 
+      <div class="mb-3">
+        <label
+          class="form-label"
+          for="field_companyName"
+          [ngbTooltip]="'rpgCornerApp.contact.help.companyName' | translate"
+          jhiTranslate="rpgCornerApp.contact.companyName"
+          >Company Name</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          name="companyName"
+          id="field_companyName"
+          data-cy="companyName"
+          formControlName="companyName"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label
+          class="form-label"
+          for="field_taxNumber"
+          [ngbTooltip]="'rpgCornerApp.contact.help.taxNumber' | translate"
+          jhiTranslate="rpgCornerApp.contact.taxNumber"
+          >Tax Number</label
+        >
+        <input type="text" class="form-control" name="taxNumber" id="field_taxNumber" data-cy="taxNumber" formControlName="taxNumber" />
+      </div>
       <div>
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
           <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Mégsem</span>
         </button>
 
         <button
+          (click)="save()"
           type="submit"
           id="save-entity"
           data-cy="entityCreateSaveButton"

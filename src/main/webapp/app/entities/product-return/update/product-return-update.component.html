@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
-    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+    <form name="editForm" novalidate [formGroup]="editForm">
       <h2
         id="jhi-product-return-heading"
         data-cy="ProductReturnCreateUpdateHeading"
@@ -101,13 +101,14 @@
           </select>
         </div>
       </div>
+      <jhi-returned-stock [isVisible]="false" [productReturnId]="editForm.get(['id'])!.value"></jhi-returned-stock>
 
       <div>
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
           <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Mégsem</span>
         </button>
-
         <button
+          (click)="save()"
           type="submit"
           id="save-entity"
           data-cy="entityCreateSaveButton"

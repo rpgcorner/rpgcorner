@@ -59,23 +59,6 @@
             }
           </select>
         </div>
-
-        <div class="mb-3">
-          <label class="form-label" for="field_purchase" jhiTranslate="rpgCornerApp.purchasedStock.purchase">Purchase</label>
-          <select
-            class="form-control"
-            id="field_purchase"
-            data-cy="purchase"
-            name="purchase"
-            formControlName="purchase"
-            [compareWith]="comparePurchase"
-          >
-            <option [ngValue]="null"></option>
-            @for (purchaseOption of purchasesSharedCollection; track $index) {
-              <option [ngValue]="purchaseOption">{{ purchaseOption.id }}</option>
-            }
-          </select>
-        </div>
       </div>
 
       <div>

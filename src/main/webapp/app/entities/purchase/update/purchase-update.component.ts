@@ -1,6 +1,7 @@
-import { Component, OnInit, inject } from '@angular/core';
+/* eslint-disable */
+import { Component, OnInit, inject, Input } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 
@@ -14,12 +15,15 @@ import { SupplierService } from 'app/entities/supplier/service/supplier.service'
 import { PurchaseService } from '../service/purchase.service';
 import { IPurchase } from '../purchase.model';
 import { PurchaseFormGroup, PurchaseFormService } from './purchase-form.service';
+import { DisposedStockComponent } from '../../disposed-stock/list/disposed-stock.component';
+import { PurchasedStockComponent } from '../../purchased-stock/list/purchased-stock.component';
+import { IDispose } from '../../dispose/dispose.model';
 
 @Component({
   standalone: true,
   selector: 'jhi-purchase-update',
   templateUrl: './purchase-update.component.html',
-  imports: [SharedModule, FormsModule, ReactiveFormsModule],
+  imports: [SharedModule, FormsModule, ReactiveFormsModule, DisposedStockComponent, PurchasedStockComponent],
 })
 export class PurchaseUpdateComponent implements OnInit {
   isSaving = false;
@@ -33,7 +37,7 @@ export class PurchaseUpdateComponent implements OnInit {
   protected userService = inject(UserService);
   protected supplierService = inject(SupplierService);
   protected activatedRoute = inject(ActivatedRoute);
-
+  protected router = inject(Router);
   // eslint-disable-next-line @typescript-eslint/member-ordering
   editForm: PurchaseFormGroup = this.purchaseFormService.createPurchaseFormGroup();
 
@@ -68,13 +72,16 @@ export class PurchaseUpdateComponent implements OnInit {
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IPurchase>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
-      next: () => this.onSaveSuccess(),
+      next: res => this.onSaveSuccess(res.body),
       error: () => this.onSaveError(),
     });
   }
 
-  protected onSaveSuccess(): void {
-    this.previousState();
+  protected onSaveSuccess(dispose: IPurchase | null): void {
+    if (dispose?.id) {
+      // Navigálás az adott sale ID alapján
+      this.router.navigate(['/purchase', dispose.id, 'edit']);
+    }
   }
 
   protected onSaveError(): void {

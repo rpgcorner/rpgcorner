@@ -68,7 +68,7 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="dispose.id">
+            <th scope="col" jhiSortBy="dispose.id" *ngIf="isVisible">
               <div class="d-flex">
                 <span jhiTranslate="rpgCornerApp.disposedStock.dispose">Dispose</span>
                 <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -89,7 +89,7 @@
                   </div>
                 }
               </td>
-              <td>
+              <td *ngIf="isVisible">
                 @if (disposedStock.dispose) {
                   <div>
                     <a [routerLink]="['/dispose', disposedStock.dispose.id, 'view']">{{ disposedStock.dispose.id }}</a>

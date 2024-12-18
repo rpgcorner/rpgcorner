@@ -2,7 +2,7 @@
   <h2 id="page-heading" data-cy="PurchasedStockHeading">
     <span jhiTranslate="rpgCornerApp.purchasedStock.home.title">PurchasedStocks</span>
 
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-end" *ngIf="isVisible">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
         <span jhiTranslate="rpgCornerApp.purchasedStock.home.refreshListLabel">Refresh list</span>
@@ -13,6 +13,18 @@
         data-cy="entityCreateButton"
         class="btn btn-primary jh-create-entity create-purchased-stock"
         [routerLink]="['/purchased-stock/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="rpgCornerApp.purchasedStock.home.createLabel">Egy új Purchased Stock létrehozása</span>
+      </button>
+    </div>
+    <div class="d-flex justify-content-end" *ngIf="!isVisible">
+      <button
+        [disabled]="!purchaseId"
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-purchased-stock"
+        [routerLink]="['/purchased-stock/' + purchaseId + '/new']"
       >
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="rpgCornerApp.purchasedStock.home.createLabel">Egy új Purchased Stock létrehozása</span>
@@ -86,6 +98,7 @@
               <td class="text-end">
                 <div class="btn-group">
                   <a
+                    *ngIf="isVisible"
                     [routerLink]="['/purchased-stock', purchasedStock.id, 'view']"
                     class="btn btn-info btn-sm"
                     data-cy="entityDetailsButton"
@@ -95,6 +108,7 @@
                   </a>
 
                   <a
+                    *ngIf="isVisible"
                     [routerLink]="['/purchased-stock', purchasedStock.id, 'edit']"
                     class="btn btn-primary btn-sm"
                     data-cy="entityEditButton"

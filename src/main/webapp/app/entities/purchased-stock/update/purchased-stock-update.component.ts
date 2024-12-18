@@ -1,4 +1,5 @@
-import { Component, OnInit, inject } from '@angular/core';
+/* eslint-disable */
+import { Component, inject, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -14,6 +15,7 @@ import { PurchaseService } from 'app/entities/purchase/service/purchase.service'
 import { PurchasedStockService } from '../service/purchased-stock.service';
 import { IPurchasedStock } from '../purchased-stock.model';
 import { PurchasedStockFormGroup, PurchasedStockFormService } from './purchased-stock-form.service';
+import { IDispose } from '../../dispose/dispose.model';
 
 @Component({
   standalone: true,
@@ -33,7 +35,7 @@ export class PurchasedStockUpdateComponent implements OnInit {
   protected wareService = inject(WareService);
   protected purchaseService = inject(PurchaseService);
   protected activatedRoute = inject(ActivatedRoute);
-
+  purchasedId: number = 0;
   // eslint-disable-next-line @typescript-eslint/member-ordering
   editForm: PurchasedStockFormGroup = this.purchasedStockFormService.createPurchasedStockFormGroup();
 
@@ -42,6 +44,7 @@ export class PurchasedStockUpdateComponent implements OnInit {
   comparePurchase = (o1: IPurchase | null, o2: IPurchase | null): boolean => this.purchaseService.comparePurchase(o1, o2);
 
   ngOnInit(): void {
+    this.purchasedId = Number(this.activatedRoute.snapshot.params['purchasedId']);
     this.activatedRoute.data.subscribe(({ purchasedStock }) => {
       this.purchasedStock = purchasedStock;
       if (purchasedStock) {
@@ -114,6 +117,18 @@ export class PurchasedStockUpdateComponent implements OnInit {
           this.purchaseService.addPurchaseToCollectionIfMissing<IPurchase>(purchases, this.purchasedStock?.purchase),
         ),
       )
-      .subscribe((purchases: IPurchase[]) => (this.purchasesSharedCollection = purchases));
+      .subscribe((disposes: IDispose[]) => {
+        this.purchasesSharedCollection = disposes;
+        const selectedDispose = this.purchasesSharedCollection.find(sale => sale.id === this.purchasedId);
+        if (!selectedDispose) {
+          console.warn(`Disp with id ${this.purchasedId} not found in the collection.`);
+        } else {
+          console.log('Selected Sale:', selectedDispose);
+
+          this.editForm.patchValue({
+            purchase: selectedDispose,
+          });
+        }
+      });
   }
 }

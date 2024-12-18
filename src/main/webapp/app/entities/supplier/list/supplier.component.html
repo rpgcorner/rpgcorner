@@ -35,17 +35,32 @@
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
           <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
-            <th scope="col"></th>
+            <th scope="col" jhiSortBy="companyName">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.contact.companyName">Company Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="taxNumber">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.contact.taxNumber">Tax Number</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
           </tr>
         </thead>
         <tbody>
           @for (supplier of suppliers; track trackId(supplier)) {
             <tr data-cy="entityTable">
+              <td>{{ supplier.companyName }}</td>
+              <td>{{ supplier.taxNumber }}</td>
               <td class="text-end">
                 <div class="btn-group">
-                  <a [routerLink]="['/supplier', supplier.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
-                    <fa-icon icon="eye"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Nézet</span>
+                  <a [routerLink]="['/supplier', supplier.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Szerkesztés</span>
                   </a>
 
                   <button type="submit" (click)="delete(supplier)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">

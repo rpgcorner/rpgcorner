@@ -29,6 +29,14 @@ const supplierRoute: Routes = [
     },
     canActivate: [UserRouteAccessService],
   },
+  {
+    path: ':id/edit',
+    loadComponent: () => import('./update/supplier-update.component').then(m => m.SupplierUpdateComponent),
+    resolve: {
+      supplier: SupplierResolve,
+    },
+    canActivate: [UserRouteAccessService],
+  },
 ];
 
 export default supplierRoute;

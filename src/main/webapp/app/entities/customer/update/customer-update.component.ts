@@ -44,7 +44,6 @@ export class CustomerUpdateComponent implements OnInit {
       if (customer) {
         this.updateForm(customer);
       }
-      debugger;
       if (customer.contact?.id) {
         this.loadContact(customer.contact.id); // Meghívod a loadContact metódust
       }
@@ -57,7 +56,6 @@ export class CustomerUpdateComponent implements OnInit {
   }
 
   save(): void {
-    debugger;
     this.isSaving = true;
 
     // Contact mentése

@@ -120,12 +120,6 @@ public class ContactResource {
         Optional<Contact> result = contactRepository
             .findById(contact.getId())
             .map(existingContact -> {
-                if (contact.getCompanyName() != null) {
-                    existingContact.setCompanyName(contact.getCompanyName());
-                }
-                if (contact.getTaxNumber() != null) {
-                    existingContact.setTaxNumber(contact.getTaxNumber());
-                }
                 if (contact.getContactName() != null) {
                     existingContact.setContactName(contact.getContactName());
                 }

@@ -1,5 +1,6 @@
 package com.rpgcornerteam.rpgcorner.web.rest;
 
+import com.rpgcornerteam.rpgcorner.domain.PurchasedStock;
 import com.rpgcornerteam.rpgcorner.domain.ReturnedStock;
 import com.rpgcornerteam.rpgcorner.repository.ReturnedStockRepository;
 import com.rpgcornerteam.rpgcorner.web.rest.errors.BadRequestAlertException;
@@ -175,5 +176,11 @@ public class ReturnedStockResource {
         return ResponseEntity.noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("product/{productReturnId}")
+    public List<ReturnedStock> getPurchasedStockBySaleId(@PathVariable("productReturnId") Long productReturnId) {
+        LOG.debug("REST request to get PurchasedStock by productReturnId : {}", productReturnId);
+        return returnedStockRepository.findByProductReturn_Id(productReturnId);
     }
 }

@@ -1,6 +1,8 @@
 package com.rpgcornerteam.rpgcorner.repository;
 
+import com.rpgcornerteam.rpgcorner.domain.DisposedStock;
 import com.rpgcornerteam.rpgcorner.domain.PurchasedStock;
+import java.util.List;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +11,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface PurchasedStockRepository extends JpaRepository<PurchasedStock, Long> {}
+public interface PurchasedStockRepository extends JpaRepository<PurchasedStock, Long> {
+    List<PurchasedStock> findByPurchase_Id(Long purchaseId);
+}

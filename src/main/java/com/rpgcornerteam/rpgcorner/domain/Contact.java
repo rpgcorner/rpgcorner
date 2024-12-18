@@ -30,20 +30,6 @@ public class Contact implements Serializable {
     private Long id;
 
     /**
-     * A cég neve.
-     */
-    @Schema(description = "A cég neve.")
-    @Column(name = "company_name")
-    private String companyName;
-
-    /**
-     * Adószám
-     */
-    @Schema(description = "Adószám")
-    @Column(name = "tax_number")
-    private String taxNumber;
-
-    /**
      * A kapcsolat neve.
      */
     @Schema(description = "A kapcsolat neve.")
@@ -117,32 +103,6 @@ public class Contact implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getCompanyName() {
-        return this.companyName;
-    }
-
-    public Contact companyName(String companyName) {
-        this.setCompanyName(companyName);
-        return this;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public String getTaxNumber() {
-        return this.taxNumber;
-    }
-
-    public Contact taxNumber(String taxNumber) {
-        this.setTaxNumber(taxNumber);
-        return this;
-    }
-
-    public void setTaxNumber(String taxNumber) {
-        this.taxNumber = taxNumber;
     }
 
     public String getContactName() {
@@ -292,8 +252,6 @@ public class Contact implements Serializable {
     public String toString() {
         return "Contact{" +
             "id=" + getId() +
-            ", companyName='" + getCompanyName() + "'" +
-            ", taxNumber='" + getTaxNumber() + "'" +
             ", contactName='" + getContactName() + "'" +
             ", address='" + getAddress() + "'" +
             ", email='" + getEmail() + "'" +

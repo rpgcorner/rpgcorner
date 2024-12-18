@@ -57,23 +57,6 @@
             }
           </select>
         </div>
-
-        <div class="mb-3">
-          <label class="form-label" for="field_productReturn" jhiTranslate="rpgCornerApp.returnedStock.productReturn">Product Return</label>
-          <select
-            class="form-control"
-            id="field_productReturn"
-            data-cy="productReturn"
-            name="productReturn"
-            formControlName="productReturn"
-            [compareWith]="compareProductReturn"
-          >
-            <option [ngValue]="null"></option>
-            @for (productReturnOption of productReturnsSharedCollection; track $index) {
-              <option [ngValue]="productReturnOption">{{ productReturnOption.id }}</option>
-            }
-          </select>
-        </div>
       </div>
 
       <div>

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
@@ -14,6 +15,7 @@ import { ProductReturnService } from 'app/entities/product-return/service/produc
 import { ReturnedStockService } from '../service/returned-stock.service';
 import { IReturnedStock } from '../returned-stock.model';
 import { ReturnedStockFormGroup, ReturnedStockFormService } from './returned-stock-form.service';
+import { IDispose } from '../../dispose/dispose.model';
 
 @Component({
   standalone: true,
@@ -33,7 +35,7 @@ export class ReturnedStockUpdateComponent implements OnInit {
   protected wareService = inject(WareService);
   protected productReturnService = inject(ProductReturnService);
   protected activatedRoute = inject(ActivatedRoute);
-
+  productReturnId: number = 0;
   // eslint-disable-next-line @typescript-eslint/member-ordering
   editForm: ReturnedStockFormGroup = this.returnedStockFormService.createReturnedStockFormGroup();
 
@@ -43,6 +45,7 @@ export class ReturnedStockUpdateComponent implements OnInit {
     this.productReturnService.compareProductReturn(o1, o2);
 
   ngOnInit(): void {
+    this.productReturnId = Number(this.activatedRoute.snapshot.params['productReturnId']);
     this.activatedRoute.data.subscribe(({ returnedStock }) => {
       this.returnedStock = returnedStock;
       if (returnedStock) {
@@ -118,6 +121,18 @@ export class ReturnedStockUpdateComponent implements OnInit {
           ),
         ),
       )
-      .subscribe((productReturns: IProductReturn[]) => (this.productReturnsSharedCollection = productReturns));
+      .subscribe((disposes: IDispose[]) => {
+        this.productReturnsSharedCollection = disposes;
+        const selectedProductReturn = this.productReturnsSharedCollection.find(sale => sale.id === this.productReturnId);
+        if (!selectedProductReturn) {
+          console.warn(`Disp with id ${this.productReturnId} not found in the collection.`);
+        } else {
+          console.log('Selected Sale:', selectedProductReturn);
+
+          this.editForm.patchValue({
+            productReturn: selectedProductReturn,
+          });
+        }
+      });
   }
 }

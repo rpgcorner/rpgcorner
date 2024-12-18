@@ -58,7 +58,7 @@
               <td>
                 @if (inventory.ware) {
                   <div>
-                    <a [routerLink]="['/ware', inventory.ware.id, 'view']">{{ inventory.ware.id }}</a>
+                    <a [routerLink]="['/ware', inventory.ware.id, 'view']">{{ inventory.ware.description }}</a>
                   </div>
                 }
               </td>

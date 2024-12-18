@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
-    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+    <form name="editForm" novalidate [formGroup]="editForm">
       <h2 id="jhi-sale-heading" data-cy="SaleCreateUpdateHeading" jhiTranslate="rpgCornerApp.sale.home.createOrEditLabel">
         Hozzon létre, vagy módosítson Salet
       </h2>
@@ -102,6 +102,7 @@
         <button
           type="submit"
           id="save-entity"
+          (click)="save()"
           data-cy="entityCreateSaveButton"
           [disabled]="editForm.invalid || isSaving"
           class="btn btn-primary"

@@ -1,6 +1,7 @@
+/* eslint-disable */
 import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
@@ -18,6 +19,7 @@ import { SupplierFormGroup, SupplierFormService } from './supplier-form.service'
   imports: [SharedModule, FormsModule, ReactiveFormsModule],
 })
 export class SupplierUpdateComponent implements OnInit {
+  private readonly router = inject(Router);
   isSaving = false;
   supplier: ISupplier | null = null;
 
@@ -44,18 +46,25 @@ export class SupplierUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const supplier = this.supplierFormService.getSupplier(this.editForm);
-    this.subscribeToSaveResponse(this.supplierService.create(supplier));
+    if (supplier.id !== null) {
+      this.subscribeToSaveResponse(this.supplierService.update(supplier));
+    } else {
+      this.subscribeToSaveResponse(this.supplierService.create(supplier));
+    }
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<ISupplier>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
-      next: () => this.onSaveSuccess(),
+      next: res => this.onSaveSuccess(res.body),
       error: () => this.onSaveError(),
     });
   }
 
-  protected onSaveSuccess(): void {
-    this.previousState();
+  protected onSaveSuccess(supplier: ISupplier | null): void {
+    if (supplier?.id) {
+      // Navigálás az adott sale ID alapján
+      this.router.navigate(['/supplier', supplier.id, 'edit']);
+    }
   }
 
   protected onSaveError(): void {

@@ -2,7 +2,7 @@
   <h2 id="page-heading" data-cy="ReturnedStockHeading">
     <span jhiTranslate="rpgCornerApp.returnedStock.home.title">ReturnedStocks</span>
 
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-end" *ngIf="isVisible">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
         <span jhiTranslate="rpgCornerApp.returnedStock.home.refreshListLabel">Refresh list</span>
@@ -13,6 +13,18 @@
         data-cy="entityCreateButton"
         class="btn btn-primary jh-create-entity create-returned-stock"
         [routerLink]="['/returned-stock/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="rpgCornerApp.returnedStock.home.createLabel">Egy új Returned Stock létrehozása</span>
+      </button>
+    </div>
+    <div class="d-flex justify-content-end" *ngIf="!isVisible">
+      <button
+        [disabled]="!productReturnId"
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-returned-stock"
+        [routerLink]="['/returned-stock/' + productReturnId + '/new']"
       >
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="rpgCornerApp.returnedStock.home.createLabel">Egy új Returned Stock létrehozása</span>
@@ -85,12 +97,22 @@
               </td>
               <td class="text-end">
                 <div class="btn-group">
-                  <a [routerLink]="['/returned-stock', returnedStock.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                  <a
+                    *ngIf="isVisible"
+                    [routerLink]="['/returned-stock', returnedStock.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
                     <fa-icon icon="eye"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Nézet</span>
                   </a>
 
-                  <a [routerLink]="['/returned-stock', returnedStock.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                  <a
+                    *ngIf="isVisible"
+                    [routerLink]="['/returned-stock', returnedStock.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
                     <fa-icon icon="pencil-alt"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Szerkesztés</span>
                   </a>

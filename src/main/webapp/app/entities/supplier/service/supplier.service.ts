@@ -17,6 +17,12 @@ export class SupplierService {
 
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/suppliers');
 
+  update(updateSupplier: NewSupplier): Observable<EntityResponseType> {
+    return this.http.patch<ISupplier>(`${this.resourceUrl}/${updateSupplier.id}`, updateSupplier, {
+      observe: 'response',
+    });
+  }
+
   create(supplier: NewSupplier): Observable<EntityResponseType> {
     return this.http.post<ISupplier>(this.resourceUrl, supplier, { observe: 'response' });
   }

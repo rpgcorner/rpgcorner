@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
@@ -23,6 +24,14 @@ const purchasedStockRoute: Routes = [
   },
   {
     path: 'new',
+    loadComponent: () => import('./update/purchased-stock-update.component').then(m => m.PurchasedStockUpdateComponent),
+    resolve: {
+      purchasedStock: PurchasedStockResolve,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: ':purchasedId/new',
     loadComponent: () => import('./update/purchased-stock-update.component').then(m => m.PurchasedStockUpdateComponent),
     resolve: {
       purchasedStock: PurchasedStockResolve,

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -6,6 +7,7 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IPurchasedStock, NewPurchasedStock } from '../purchased-stock.model';
+import { IDisposedStock } from '../../disposed-stock/disposed-stock.model';
 
 export type PartialUpdatePurchasedStock = Partial<IPurchasedStock> & Pick<IPurchasedStock, 'id'>;
 
@@ -33,6 +35,9 @@ export class PurchasedStockService {
     return this.http.patch<IPurchasedStock>(`${this.resourceUrl}/${this.getPurchasedStockIdentifier(purchasedStock)}`, purchasedStock, {
       observe: 'response',
     });
+  }
+  findByPurchaseId(purchaseId: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IDisposedStock[]>(`${this.resourceUrl}/purchased/${purchaseId}`, { observe: 'response' });
   }
 
   find(id: number): Observable<EntityResponseType> {

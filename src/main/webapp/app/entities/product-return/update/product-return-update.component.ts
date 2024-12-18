@@ -1,6 +1,7 @@
+/* eslint-disable */
 import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 
@@ -16,12 +17,14 @@ import { CustomerService } from 'app/entities/customer/service/customer.service'
 import { ProductReturnService } from '../service/product-return.service';
 import { IProductReturn } from '../product-return.model';
 import { ProductReturnFormGroup, ProductReturnFormService } from './product-return-form.service';
+import { IPurchase } from '../../purchase/purchase.model';
+import { ReturnedStockComponent } from '../../returned-stock/list/returned-stock.component';
 
 @Component({
   standalone: true,
   selector: 'jhi-product-return-update',
   templateUrl: './product-return-update.component.html',
-  imports: [SharedModule, FormsModule, ReactiveFormsModule],
+  imports: [SharedModule, FormsModule, ReactiveFormsModule, ReturnedStockComponent],
 })
 export class ProductReturnUpdateComponent implements OnInit {
   isSaving = false;
@@ -37,7 +40,7 @@ export class ProductReturnUpdateComponent implements OnInit {
   protected userService = inject(UserService);
   protected customerService = inject(CustomerService);
   protected activatedRoute = inject(ActivatedRoute);
-
+  protected router = inject(Router);
   // eslint-disable-next-line @typescript-eslint/member-ordering
   editForm: ProductReturnFormGroup = this.productReturnFormService.createProductReturnFormGroup();
 
@@ -74,13 +77,16 @@ export class ProductReturnUpdateComponent implements OnInit {
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IProductReturn>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
-      next: () => this.onSaveSuccess(),
+      next: res => this.onSaveSuccess(res.body),
       error: () => this.onSaveError(),
     });
   }
 
-  protected onSaveSuccess(): void {
-    this.previousState();
+  protected onSaveSuccess(productReturn: IProductReturn | null): void {
+    if (productReturn?.id) {
+      // Navigálás az adott sale ID alapján
+      this.router.navigate(['/product-return/', productReturn.id, 'edit']);
+    }
   }
 
   protected onSaveError(): void {

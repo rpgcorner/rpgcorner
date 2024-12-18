@@ -1,5 +1,6 @@
 package com.rpgcornerteam.rpgcorner.web.rest;
 
+import com.rpgcornerteam.rpgcorner.domain.Contact;
 import com.rpgcornerteam.rpgcorner.domain.Supplier;
 import com.rpgcornerteam.rpgcorner.repository.SupplierRepository;
 import com.rpgcornerteam.rpgcorner.web.rest.errors.BadRequestAlertException;
@@ -7,6 +8,7 @@ import jakarta.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,6 +57,43 @@ public class SupplierResource {
         return ResponseEntity.created(new URI("/api/suppliers/" + supplier.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, supplier.getId().toString()))
             .body(supplier);
+    }
+
+    @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
+    public ResponseEntity<Supplier> partialUpdateContact(
+        @PathVariable(value = "id", required = false) final Long id,
+        @RequestBody Supplier supplier
+    ) throws URISyntaxException {
+        LOG.debug("REST request to partial update Contact supplier : {}, {}", id, supplier);
+        if (supplier.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        if (!Objects.equals(id, supplier.getId())) {
+            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
+        }
+
+        if (!supplierRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+
+        Optional<Supplier> result = supplierRepository
+            .findById(supplier.getId())
+            .map(existingContact -> {
+                if (supplier.getCompanyName() != null) {
+                    existingContact.setCompanyName(supplier.getCompanyName());
+                }
+                if (supplier.getTaxNumber() != null) {
+                    existingContact.setTaxNumber(supplier.getTaxNumber());
+                }
+
+                return existingContact;
+            })
+            .map(supplierRepository::save);
+
+        return ResponseUtil.wrapOrNotFound(
+            result,
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, supplier.getId().toString())
+        );
     }
 
     /**

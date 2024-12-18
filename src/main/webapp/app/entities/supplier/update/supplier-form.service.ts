@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -14,10 +15,12 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type SupplierFormGroupInput = ISupplier | PartialWithRequiredKeyOf<NewSupplier>;
 
-type SupplierFormDefaults = Pick<NewSupplier, 'id'>;
+type SupplierFormDefaults = Pick<NewSupplier, 'id' | 'companyName' | 'taxNumber'>;
 
 type SupplierFormGroupContent = {
   id: FormControl<ISupplier['id'] | NewSupplier['id']>;
+  companyName: FormControl<ISupplier['companyName'] | NewSupplier['companyName']>;
+  taxNumber: FormControl<ISupplier['taxNumber'] | NewSupplier['taxNumber']>;
 };
 
 export type SupplierFormGroup = FormGroup<SupplierFormGroupContent>;
@@ -32,6 +35,20 @@ export class SupplierFormService {
     return new FormGroup<SupplierFormGroupContent>({
       id: new FormControl(
         { value: supplierRawValue.id, disabled: true },
+        {
+          nonNullable: true,
+          validators: [Validators.required],
+        },
+      ),
+      companyName: new FormControl(
+        { value: supplierRawValue.companyName, disabled: false },
+        {
+          nonNullable: true,
+          validators: [Validators.required],
+        },
+      ),
+      taxNumber: new FormControl(
+        { value: supplierRawValue.taxNumber, disabled: false },
         {
           nonNullable: true,
           validators: [Validators.required],
@@ -57,6 +74,8 @@ export class SupplierFormService {
   private getFormDefaults(): SupplierFormDefaults {
     return {
       id: null,
+      companyName: '',
+      taxNumber: '',
     };
   }
 }

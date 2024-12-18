@@ -34,6 +34,36 @@ public class Supplier implements Serializable {
     private Long id;
 
     /**
+     * A cég neve.
+     */
+    @Schema(description = "A cég neve.")
+    @Column(name = "company_name")
+    private String companyName;
+
+    /**
+     * Adószám
+     */
+    @Schema(description = "Adószám")
+    @Column(name = "tax_number")
+    private String taxNumber;
+
+    public String getCompanyName() {
+        return this.companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getTaxNumber() {
+        return taxNumber;
+    }
+
+    public void setTaxNumber(String taxNumber) {
+        this.taxNumber = taxNumber;
+    }
+
+    /**
      * A beszállító kapcsolattartói.
      */
     @Schema(description = "A beszállító kapcsolattartói.")

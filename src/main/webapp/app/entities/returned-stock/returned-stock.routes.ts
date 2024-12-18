@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
@@ -23,6 +24,14 @@ const returnedStockRoute: Routes = [
   },
   {
     path: 'new',
+    loadComponent: () => import('./update/returned-stock-update.component').then(m => m.ReturnedStockUpdateComponent),
+    resolve: {
+      returnedStock: ReturnedStockResolve,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: ':productReturnId/new',
     loadComponent: () => import('./update/returned-stock-update.component').then(m => m.ReturnedStockUpdateComponent),
     resolve: {
       returnedStock: ReturnedStockResolve,

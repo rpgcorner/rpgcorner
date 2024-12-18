@@ -1,4 +1,5 @@
-import { Component, NgZone, OnInit, inject } from '@angular/core';
+/* eslint-disable */
+import { Component, NgZone, OnInit, inject, Input } from '@angular/core';
 import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
 import { Observable, Subscription, combineLatest, filter, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -28,6 +29,8 @@ import { PurchasedStockDeleteDialogComponent } from '../delete/purchased-stock-d
   ],
 })
 export class PurchasedStockComponent implements OnInit {
+  @Input() isVisible = true;
+  @Input() purchaseId?: number;
   subscription: Subscription | null = null;
   purchasedStocks?: IPurchasedStock[];
   isLoading = false;
@@ -99,11 +102,17 @@ export class PurchasedStockComponent implements OnInit {
   }
 
   protected queryBackend(): Observable<EntityArrayResponseType> {
+    if (this.purchaseId) {
+      return this.purchasedStockService.findByPurchaseId(this.purchaseId).pipe(tap(() => (this.isLoading = false)));
+    }
     this.isLoading = true;
     const queryObject: any = {
       sort: this.sortService.buildSortParam(this.sortState()),
     };
-    return this.purchasedStockService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
+    if (this.isVisible) {
+      return this.purchasedStockService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
+    }
+    return new Observable<EntityArrayResponseType>();
   }
 
   protected handleNavigation(sortState: SortState): void {
