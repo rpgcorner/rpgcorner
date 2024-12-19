@@ -11,12 +11,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ISupplier } from '../supplier.model';
 import { SupplierService } from '../service/supplier.service';
 import { SupplierFormGroup, SupplierFormService } from './supplier-form.service';
+import { ContactComponent } from '../../contact/list/contact.component';
+import { ContactUpdateComponent } from '../../contact/update/contact-update.component';
 
 @Component({
   standalone: true,
   selector: 'jhi-supplier-update',
   templateUrl: './supplier-update.component.html',
-  imports: [SharedModule, FormsModule, ReactiveFormsModule],
+  imports: [SharedModule, FormsModule, ReactiveFormsModule, ContactComponent, ContactUpdateComponent],
 })
 export class SupplierUpdateComponent implements OnInit {
   private readonly router = inject(Router);

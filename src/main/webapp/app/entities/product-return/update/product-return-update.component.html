@@ -96,7 +96,7 @@
           >
             <option [ngValue]="null"></option>
             @for (customerOption of customersSharedCollection; track $index) {
-              <option [ngValue]="customerOption">{{ customerOption.contact?.companyName }}</option>
+              <option [ngValue]="customerOption">{{ customerOption.contact?.contactName }}</option>
             }
           </select>
         </div>

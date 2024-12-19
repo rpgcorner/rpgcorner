@@ -72,7 +72,7 @@
               <td>
                 @if (sale.soldForCustomer) {
                   <div>
-                    <a [routerLink]="['/customer', sale.soldForCustomer.id, 'edit']">{{ sale.soldForCustomer.contact?.companyName }}</a>
+                    <a [routerLink]="['/customer', sale.soldForCustomer.id, 'edit']">{{ sale.soldForCustomer.contact?.contactName }}</a>
                   </div>
                 }
               </td>

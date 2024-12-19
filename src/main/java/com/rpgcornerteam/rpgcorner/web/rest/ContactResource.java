@@ -1,6 +1,7 @@
 package com.rpgcornerteam.rpgcorner.web.rest;
 
 import com.rpgcornerteam.rpgcorner.domain.Contact;
+import com.rpgcornerteam.rpgcorner.domain.ReturnedStock;
 import com.rpgcornerteam.rpgcorner.repository.ContactRepository;
 import com.rpgcornerteam.rpgcorner.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -196,5 +197,11 @@ public class ContactResource {
         return ResponseEntity.noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("supplier/{supplierId}")
+    public List<Contact> getPurchasedStockBySaleId(@PathVariable("supplierId") Long supplierId) {
+        LOG.debug("REST request to get PurchasedStock by productReturnId : {}", supplierId);
+        return contactRepository.findBySupplier_Id(supplierId);
     }
 }

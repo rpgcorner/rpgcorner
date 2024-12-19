@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -6,6 +7,7 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IContact, NewContact } from '../contact.model';
+import { IDisposedStock } from '../../disposed-stock/disposed-stock.model';
 
 export type PartialUpdateContact = Partial<IContact> & Pick<IContact, 'id'>;
 
@@ -29,6 +31,10 @@ export class ContactService {
 
   partialUpdate(contact: PartialUpdateContact): Observable<EntityResponseType> {
     return this.http.patch<IContact>(`${this.resourceUrl}/${this.getContactIdentifier(contact)}`, contact, { observe: 'response' });
+  }
+
+  findBySupplierId(supplierId: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IDisposedStock[]>(`${this.resourceUrl}/supplier/${supplierId}`, { observe: 'response' });
   }
 
   find(id: number): Observable<EntityResponseType> {

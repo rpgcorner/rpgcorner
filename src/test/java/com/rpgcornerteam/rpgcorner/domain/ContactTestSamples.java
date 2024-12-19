@@ -12,8 +12,6 @@ public class ContactTestSamples {
     public static Contact getContactSample1() {
         return new Contact()
             .id(1L)
-            .companyName("companyName1")
-            .taxNumber("taxNumber1")
             .contactName("contactName1")
             .address("address1")
             .email("email1")
@@ -26,8 +24,6 @@ public class ContactTestSamples {
     public static Contact getContactSample2() {
         return new Contact()
             .id(2L)
-            .companyName("companyName2")
-            .taxNumber("taxNumber2")
             .contactName("contactName2")
             .address("address2")
             .email("email2")

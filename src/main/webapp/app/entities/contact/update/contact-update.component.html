@@ -103,25 +103,7 @@
           >
           <input type="text" class="form-control" name="note" id="field_note" data-cy="note" formControlName="note" />
         </div>
-
-        <div class="mb-3" *ngIf="isVisible">
-          <label class="form-label" for="field_supplier" jhiTranslate="rpgCornerApp.contact.supplier">Supplier</label>
-          <select
-            class="form-control"
-            id="field_supplier"
-            data-cy="supplier"
-            name="supplier"
-            formControlName="supplier"
-            [compareWith]="compareSupplier"
-          >
-            <option [ngValue]="null"></option>
-            @for (supplierOption of suppliersSharedCollection; track $index) {
-              <option [ngValue]="supplierOption">{{ supplierOption.id }}</option>
-            }
-          </select>
-        </div>
       </div>
-
       <div *ngIf="isVisible">
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
           <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Mégsem</span>

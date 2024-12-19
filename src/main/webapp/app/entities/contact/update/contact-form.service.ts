@@ -18,8 +18,6 @@ type ContactFormDefaults = Pick<NewContact, 'id'>;
 
 type ContactFormGroupContent = {
   id: FormControl<IContact['id'] | NewContact['id']>;
-  companyName: FormControl<IContact['companyName']>;
-  taxNumber: FormControl<IContact['taxNumber']>;
   contactName: FormControl<IContact['contactName']>;
   address: FormControl<IContact['address']>;
   email: FormControl<IContact['email']>;
@@ -47,8 +45,6 @@ export class ContactFormService {
           validators: [Validators.required],
         },
       ),
-      companyName: new FormControl(contactRawValue.companyName),
-      taxNumber: new FormControl(contactRawValue.taxNumber),
       contactName: new FormControl(contactRawValue.contactName),
       address: new FormControl(contactRawValue.address),
       email: new FormControl(contactRawValue.email),

@@ -1,6 +1,8 @@
 package com.rpgcornerteam.rpgcorner.repository;
 
 import com.rpgcornerteam.rpgcorner.domain.Contact;
+import com.rpgcornerteam.rpgcorner.domain.ReturnedStock;
+import java.util.List;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +11,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface ContactRepository extends JpaRepository<Contact, Long> {}
+public interface ContactRepository extends JpaRepository<Contact, Long> {
+    List<Contact> findBySupplier_Id(Long supplierId);
+}

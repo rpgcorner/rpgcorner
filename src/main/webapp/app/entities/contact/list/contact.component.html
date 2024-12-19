@@ -1,5 +1,5 @@
 <div>
-  <h2 id="page-heading" data-cy="ContactHeading">
+  <h2 id="page-heading" data-cy="ContactHeading" *ngIf="isVisible">
     <span jhiTranslate="rpgCornerApp.contact.home.title">Contacts</span>
 
     <div class="d-flex justify-content-end">
@@ -13,6 +13,23 @@
         data-cy="entityCreateButton"
         class="btn btn-primary jh-create-entity create-contact"
         [routerLink]="['/contact/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="rpgCornerApp.contact.home.createLabel">Egy új Contact létrehozása</span>
+      </button>
+    </div>
+  </h2>
+
+  <h2 id="page-heading" data-cy="ContactHeading" *ngIf="!isVisible">
+    <span jhiTranslate="rpgCornerApp.contact.home.title">Contacts</span>
+
+    <div class="d-flex justify-content-end">
+      <button
+        [disabled]="!supplierId"
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-contact"
+        [routerLink]="['/contact/' + supplierId + '/new']"
       >
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="rpgCornerApp.contact.home.createLabel">Egy új Contact létrehozása</span>
@@ -35,20 +52,6 @@
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
           <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
-            <th scope="col" jhiSortBy="companyName">
-              <div class="d-flex">
-                <span jhiTranslate="rpgCornerApp.contact.companyName">Company Name</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="taxNumber">
-              <div class="d-flex">
-                <span jhiTranslate="rpgCornerApp.contact.taxNumber">Tax Number</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="contactName">
               <div class="d-flex">
                 <span jhiTranslate="rpgCornerApp.contact.contactName">Contact Name</span>
@@ -110,8 +113,6 @@
         <tbody>
           @for (contact of contacts; track trackId(contact)) {
             <tr data-cy="entityTable">
-              <td>{{ contact.companyName }}</td>
-              <td>{{ contact.taxNumber }}</td>
               <td>{{ contact.contactName }}</td>
               <td>{{ contact.address }}</td>
               <td>{{ contact.email }}</td>
@@ -128,7 +129,12 @@
               </td>
               <td class="text-end">
                 <div class="btn-group">
-                  <a [routerLink]="['/contact', contact.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                  <a
+                    *ngIf="isVisible"
+                    [routerLink]="['/contact', contact.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
                     <fa-icon icon="eye"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Nézet</span>
                   </a>

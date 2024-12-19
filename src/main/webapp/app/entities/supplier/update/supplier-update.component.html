@@ -44,6 +44,7 @@
         >
         <input type="text" class="form-control" name="taxNumber" id="field_taxNumber" data-cy="taxNumber" formControlName="taxNumber" />
       </div>
+      <jhi-contact [isVisible]="false" [supplierId]="editForm.get(['id'])!.value"></jhi-contact>
       <div>
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
           <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Mégsem</span>

@@ -2,8 +2,6 @@ import { ISupplier } from 'app/entities/supplier/supplier.model';
 
 export interface IContact {
   id: number;
-  companyName?: string | null;
-  taxNumber?: string | null;
   contactName?: string | null;
   address?: string | null;
   email?: string | null;

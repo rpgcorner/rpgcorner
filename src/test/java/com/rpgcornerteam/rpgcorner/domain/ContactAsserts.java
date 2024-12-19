@@ -47,8 +47,6 @@ public class ContactAsserts {
     public static void assertContactUpdatableFieldsEquals(Contact expected, Contact actual) {
         assertThat(expected)
             .as("Verify Contact relevant properties")
-            .satisfies(e -> assertThat(e.getCompanyName()).as("check companyName").isEqualTo(actual.getCompanyName()))
-            .satisfies(e -> assertThat(e.getTaxNumber()).as("check taxNumber").isEqualTo(actual.getTaxNumber()))
             .satisfies(e -> assertThat(e.getContactName()).as("check contactName").isEqualTo(actual.getContactName()))
             .satisfies(e -> assertThat(e.getAddress()).as("check address").isEqualTo(actual.getAddress()))
             .satisfies(e -> assertThat(e.getEmail()).as("check email").isEqualTo(actual.getEmail()))

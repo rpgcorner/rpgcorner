@@ -35,20 +35,6 @@
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
           <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
-            <th scope="col" jhiSortBy="companyName">
-              <div class="d-flex">
-                <span jhiTranslate="rpgCornerApp.contact.companyName">Company Name</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="taxNumber">
-              <div class="d-flex">
-                <span jhiTranslate="rpgCornerApp.contact.taxNumber">Tax Number</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col" jhiSortBy="contactName">
               <div class="d-flex">
                 <span jhiTranslate="rpgCornerApp.contact.contactName">Contact Name</span>
@@ -111,8 +97,6 @@
         <tbody>
           @for (customer of customers; track trackId(customer)) {
             <tr data-cy="entityTable">
-              <td>{{ customer.contact?.companyName }}</td>
-              <td>{{ customer.contact?.taxNumber }}</td>
               <td>{{ customer.contact?.contactName }}</td>
               <td>{{ customer.contact?.address }}</td>
               <td>{{ customer.contact?.email }}</td>

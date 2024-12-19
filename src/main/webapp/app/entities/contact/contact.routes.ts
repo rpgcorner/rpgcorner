@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
@@ -23,6 +24,14 @@ const contactRoute: Routes = [
   },
   {
     path: 'new',
+    loadComponent: () => import('./update/contact-update.component').then(m => m.ContactUpdateComponent),
+    resolve: {
+      contact: ContactResolve,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: ':supplierId/new',
     loadComponent: () => import('./update/contact-update.component').then(m => m.ContactUpdateComponent),
     resolve: {
       contact: ContactResolve,

@@ -89,8 +89,6 @@ class ContactResourceIT {
      */
     public static Contact createEntity() {
         return new Contact()
-            .companyName(DEFAULT_COMPANY_NAME)
-            .taxNumber(DEFAULT_TAX_NUMBER)
             .contactName(DEFAULT_CONTACT_NAME)
             .address(DEFAULT_ADDRESS)
             .email(DEFAULT_EMAIL)
@@ -183,8 +181,6 @@ class ContactResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(contact.getId().intValue())))
-            .andExpect(jsonPath("$.[*].companyName").value(hasItem(DEFAULT_COMPANY_NAME)))
-            .andExpect(jsonPath("$.[*].taxNumber").value(hasItem(DEFAULT_TAX_NUMBER)))
             .andExpect(jsonPath("$.[*].contactName").value(hasItem(DEFAULT_CONTACT_NAME)))
             .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS)))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
@@ -237,8 +233,6 @@ class ContactResourceIT {
         // Disconnect from session so that the updates on updatedContact are not directly saved in db
         em.detach(updatedContact);
         updatedContact
-            .companyName(UPDATED_COMPANY_NAME)
-            .taxNumber(UPDATED_TAX_NUMBER)
             .contactName(UPDATED_CONTACT_NAME)
             .address(UPDATED_ADDRESS)
             .email(UPDATED_EMAIL)

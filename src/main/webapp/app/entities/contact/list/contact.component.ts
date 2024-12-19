@@ -1,4 +1,5 @@
-import { Component, NgZone, OnInit, inject } from '@angular/core';
+/* eslint-disable */
+import { Component, NgZone, OnInit, inject, Input } from '@angular/core';
 import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
 import { Observable, Subscription, combineLatest, filter, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -31,7 +32,8 @@ export class ContactComponent implements OnInit {
   subscription: Subscription | null = null;
   contacts?: IContact[];
   isLoading = false;
-
+  @Input() isVisible: boolean = true;
+  @Input() supplierId?: number;
   sortState = sortStateSignal({});
 
   public readonly router = inject(Router);
@@ -99,11 +101,17 @@ export class ContactComponent implements OnInit {
   }
 
   protected queryBackend(): Observable<EntityArrayResponseType> {
+    if (this.supplierId) {
+      return this.contactService.findBySupplierId(this.supplierId).pipe(tap(() => (this.isLoading = false)));
+    }
     this.isLoading = true;
     const queryObject: any = {
       sort: this.sortService.buildSortParam(this.sortState()),
     };
-    return this.contactService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
+    if (this.isVisible) {
+      return this.contactService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
+    }
+    return new Observable<EntityArrayResponseType>();
   }
 
   protected handleNavigation(sortState: SortState): void {

@@ -6,7 +6,6 @@ export const sampleWithRequiredData: IContact = {
 
 export const sampleWithPartialData: IContact = {
   id: 23286,
-  companyName: 'in toward',
   contactName: 'állj',
   address: 'mint',
   mobile: 'alá pedig nos',

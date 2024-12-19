@@ -9,6 +9,7 @@ import { ISupplier } from '../supplier.model';
 import { SupplierFormService } from './supplier-form.service';
 
 import { SupplierUpdateComponent } from './supplier-update.component';
+import { ContactService } from '../../contact/service/contact.service';
 
 describe('Supplier Management Update Component', () => {
   let comp: SupplierUpdateComponent;
@@ -16,6 +17,7 @@ describe('Supplier Management Update Component', () => {
   let activatedRoute: ActivatedRoute;
   let supplierFormService: SupplierFormService;
   let supplierService: SupplierService;
+  let contactService: ContactService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -38,7 +40,7 @@ describe('Supplier Management Update Component', () => {
     activatedRoute = TestBed.inject(ActivatedRoute);
     supplierFormService = TestBed.inject(SupplierFormService);
     supplierService = TestBed.inject(SupplierService);
-
+    contactService = TestBed.inject(ContactService);
     comp = fixture.componentInstance;
   });
 
@@ -50,6 +52,8 @@ describe('Supplier Management Update Component', () => {
       comp.ngOnInit();
 
       expect(comp.supplier).toEqual(supplier);
+      jest.spyOn(contactService, 'query').mockReturnValue(of(new HttpResponse({ body: contactCollection })));
+      jest.spyOn(contactService, 'addContactToCollectionIfMissing').mockReturnValue(expectedCollection);
     });
   });
 
