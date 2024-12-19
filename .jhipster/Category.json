@@ -11,7 +11,7 @@
       "fieldType": "Boolean"
     },
     {
-      "documentation": "A kategória típusa.",
+      "documentation": "Az árukategória típusa.",
       "fieldName": "categoryType",
       "fieldType": "CategoryTypeEnum",
       "fieldTypeDocumentation": "A CategoryTypeEnum enum.\\n<p>\\nEnum a fő kategóriák (main category) és az alkategóriák (sub category) kezeléséhez.\\n\\n@author Kárpáti Gábor",
