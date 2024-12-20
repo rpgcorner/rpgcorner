@@ -4,6 +4,7 @@
       "home": {
         "title": "Authorities",
         "refreshListLabel": "Refresh list",
+        "search": "Keresés",
         "createLabel": "Egy új Authority létrehozása",
         "createOrEditLabel": "Hozzon létre, vagy módosítson Authorityt",
         "notFound": "No Authorities found"

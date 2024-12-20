@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
@@ -9,6 +10,7 @@ import { DATE_FORMAT } from 'app/config/input.constants';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IWare, NewWare } from '../ware.model';
+import { ICategory } from '../../category/category.model';
 
 export type PartialUpdateWare = Partial<IWare> & Pick<IWare, 'id'>;
 
@@ -120,5 +122,13 @@ export class WareService {
     return res.clone({
       body: res.body ? res.body.map(item => this.convertDateFromServer(item)) : null,
     });
+  }
+
+  searchByParam(name?: string, active?: boolean): Observable<EntityArrayResponseType> {
+    const options = {
+      ...(name && { name }),
+      ...(active !== undefined && { active: active.toString() }),
+    };
+    return this.http.get<IWare[]>(`${this.resourceUrl}/search`, { params: options, observe: 'response' });
   }
 }

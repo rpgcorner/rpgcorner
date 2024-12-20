@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Component, NgZone, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
 import { Observable, Subscription, combineLatest, filter, tap } from 'rxjs';
@@ -28,6 +29,8 @@ import { WareDeleteDialogComponent } from '../delete/ware-delete-dialog.componen
   ],
 })
 export class WareComponent implements OnInit {
+  searchTerm: string = '';
+  isActive = false;
   subscription: Subscription | null = null;
   wares?: IWare[];
   isLoading = false;
@@ -116,6 +119,18 @@ export class WareComponent implements OnInit {
         relativeTo: this.activatedRoute,
         queryParams: queryParamsObj,
       });
+    });
+  }
+  search(searchParam: any) {
+    this.isLoading = true;
+    this.wareService.searchByParam(searchParam, this.isActive).subscribe({
+      next: response => {
+        this.wares = response.body || [];
+        this.isLoading = false;
+      },
+      error: () => {
+        this.isLoading = false;
+      },
     });
   }
 }

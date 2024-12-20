@@ -166,4 +166,13 @@ public class CustomerResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    @GetMapping("/search")
+    public List<Customer> searchPurchases(@RequestParam(required = false) String searchParam) {
+        LOG.debug("REST request to search Purchases by date range: searchParam={}", searchParam);
+        if (searchParam != null && !searchParam.isEmpty()) {
+            return customerRepository.findByContactNameOrAddressContainingIgnoreCase(searchParam);
+        }
+        return customerRepository.findAll();
+    }
 }

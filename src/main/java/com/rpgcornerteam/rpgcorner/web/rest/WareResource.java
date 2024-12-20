@@ -1,5 +1,6 @@
 package com.rpgcornerteam.rpgcorner.web.rest;
 
+import com.rpgcornerteam.rpgcorner.domain.Supplier;
 import com.rpgcornerteam.rpgcorner.domain.Ware;
 import com.rpgcornerteam.rpgcorner.repository.WareRepository;
 import com.rpgcornerteam.rpgcorner.web.rest.errors.BadRequestAlertException;
@@ -216,5 +217,19 @@ public class WareResource {
         return ResponseEntity.noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/search")
+    public List<Ware> getAllWare(@RequestParam(required = false) String name, @RequestParam(required = false) Boolean active) {
+        LOG.debug("REST request to search Categories by name and active status");
+        if (name != null && !name.isEmpty() && active != null) {
+            return wareRepository.findByNameContainingIgnoreCaseAndActive(name, active);
+        } else if (name != null && !name.isEmpty()) {
+            return wareRepository.findByNameContainingIgnoreCase(name);
+        } else if (active != null) {
+            return wareRepository.findByActive(active);
+        } else {
+            return wareRepository.findAll();
+        }
     }
 }

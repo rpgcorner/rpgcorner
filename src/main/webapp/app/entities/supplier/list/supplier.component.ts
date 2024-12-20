@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { Component, NgZone, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
 import { Observable, Subscription, combineLatest, filter, tap } from 'rxjs';
@@ -6,7 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import SharedModule from 'app/shared/shared.module';
 import { SortByDirective, SortDirective, SortService, type SortState, sortStateSignal } from 'app/shared/sort';
 import { DurationPipe, FormatMediumDatePipe, FormatMediumDatetimePipe } from 'app/shared/date';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DEFAULT_SORT_DATA, ITEM_DELETED_EVENT, SORT } from 'app/config/navigation.constants';
 import { ISupplier } from '../supplier.model';
 import { EntityArrayResponseType, SupplierService } from '../service/supplier.service';
@@ -25,9 +27,11 @@ import { SupplierDeleteDialogComponent } from '../delete/supplier-delete-dialog.
     DurationPipe,
     FormatMediumDatetimePipe,
     FormatMediumDatePipe,
+    ReactiveFormsModule,
   ],
 })
 export class SupplierComponent implements OnInit {
+  searchTerm: string = '';
   subscription: Subscription | null = null;
   suppliers?: ISupplier[];
   isLoading = false;
@@ -116,6 +120,19 @@ export class SupplierComponent implements OnInit {
         relativeTo: this.activatedRoute,
         queryParams: queryParamsObj,
       });
+    });
+  }
+
+  search(searchParam: any) {
+    this.isLoading = true;
+    this.supplierService.searchByParam(searchParam).subscribe({
+      next: response => {
+        this.suppliers = response.body || [];
+        this.isLoading = false;
+      },
+      error: () => {
+        this.isLoading = false;
+      },
     });
   }
 }

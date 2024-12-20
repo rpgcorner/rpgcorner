@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Component, NgZone, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
 import { Observable, Subscription, combineLatest, filter, tap } from 'rxjs';
@@ -28,6 +29,7 @@ import { PurchaseDeleteDialogComponent } from '../delete/purchase-delete-dialog.
   ],
 })
 export class PurchaseComponent implements OnInit {
+  searchTerm: string = '';
   subscription: Subscription | null = null;
   purchases?: IPurchase[];
   isLoading = false;
@@ -42,6 +44,8 @@ export class PurchaseComponent implements OnInit {
   protected ngZone = inject(NgZone);
 
   trackId = (item: IPurchase): number => this.purchaseService.getPurchaseIdentifier(item);
+  startDate: any;
+  endDate: any;
 
   ngOnInit(): void {
     this.subscription = combineLatest([this.activatedRoute.queryParamMap, this.activatedRoute.data])
@@ -116,6 +120,20 @@ export class PurchaseComponent implements OnInit {
         relativeTo: this.activatedRoute,
         queryParams: queryParamsObj,
       });
+    });
+  }
+
+  search(searchParam: any) {
+    this.isLoading = true;
+    debugger;
+    this.purchaseService.searchByParam(searchParam, this.startDate, this.endDate).subscribe({
+      next: response => {
+        this.purchases = response.body || [];
+        this.isLoading = false;
+      },
+      error: () => {
+        this.isLoading = false;
+      },
     });
   }
 }

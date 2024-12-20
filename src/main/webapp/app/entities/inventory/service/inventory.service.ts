@@ -71,4 +71,11 @@ export class InventoryService {
     }
     return inventoryCollection;
   }
+
+  searchByParam(name?: string): Observable<EntityArrayResponseType> {
+    const options: any = {};
+    if (name) options['searchParam'] = name;
+
+    return this.http.get<IInventory[]>(`${this.resourceUrl}/search`, { params: options, observe: 'response' });
+  }
 }

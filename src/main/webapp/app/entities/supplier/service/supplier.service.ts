@@ -67,4 +67,8 @@ export class SupplierService {
     }
     return supplierCollection;
   }
+  searchByParam(searchParam: string): Observable<EntityArrayResponseType> {
+    const options = { searchParam };
+    return this.http.get<ISupplier[]>(`${this.resourceUrl}/search`, { params: options, observe: 'response' });
+  }
 }

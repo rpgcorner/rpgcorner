@@ -175,4 +175,12 @@ public class InventoryResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    @GetMapping("/search")
+    public List<Inventory> searchPurchases(@RequestParam(required = false) String searchParam) {
+        if (searchParam != null && !searchParam.isEmpty()) {
+            return inventoryRepository.findByWare_DescriptionContainingIgnoreCase(searchParam);
+        }
+        return inventoryRepository.findAll();
+    }
 }

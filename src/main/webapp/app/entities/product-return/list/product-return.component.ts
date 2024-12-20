@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { Component, NgZone, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
 import { Observable, Subscription, combineLatest, filter, tap } from 'rxjs';
@@ -116,6 +118,21 @@ export class ProductReturnComponent implements OnInit {
         relativeTo: this.activatedRoute,
         queryParams: queryParamsObj,
       });
+    });
+  }
+  startDate: any;
+  endDate: any;
+  searchTerm: any;
+  search(searchParam: any) {
+    this.isLoading = true;
+    this.productReturnService.searchByParam(searchParam, this.startDate, this.endDate).subscribe({
+      next: response => {
+        this.productReturns = response.body || [];
+        this.isLoading = false;
+      },
+      error: () => {
+        this.isLoading = false;
+      },
     });
   }
 }

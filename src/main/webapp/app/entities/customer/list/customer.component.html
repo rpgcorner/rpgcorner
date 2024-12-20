@@ -2,10 +2,14 @@
   <h2 id="page-heading" data-cy="CustomerHeading">
     <span jhiTranslate="rpgCornerApp.customer.home.title">Customers</span>
 
-    <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+    <div class="d-flex justify-content-start">
+      <div class="input-group me-3" style="max-width: 200px">
+        <input type="text" class="form-control" placeholder="Szabad szöveg" aria-label="Keresés" [(ngModel)]="searchTerm" />
+      </div>
+
+      <button class="btn btn-info me-2" (click)="search(searchTerm)" [disabled]="isLoading">
         <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
-        <span jhiTranslate="rpgCornerApp.customer.home.refreshListLabel">Refresh list</span>
+        <span jhiTranslate="rpgCornerApp.adminAuthority.home.search">Keresés</span>
       </button>
 
       <button

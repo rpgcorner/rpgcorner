@@ -1,6 +1,7 @@
 package com.rpgcornerteam.rpgcorner.web.rest;
 
 import com.rpgcornerteam.rpgcorner.domain.Category;
+import com.rpgcornerteam.rpgcorner.domain.Supplier;
 import com.rpgcornerteam.rpgcorner.repository.CategoryRepository;
 import com.rpgcornerteam.rpgcorner.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -178,5 +179,19 @@ public class CategoryResource {
         return ResponseEntity.noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/search")
+    public List<Category> searchCategories(@RequestParam(required = false) String name, @RequestParam(required = false) Boolean active) {
+        LOG.debug("REST request to search Categories by name and active status");
+        if (name != null && !name.isEmpty() && active != null) {
+            return categoryRepository.findByDescriptionContainingIgnoreCaseAndActive(name, active);
+        } else if (name != null && !name.isEmpty()) {
+            return categoryRepository.findByDescriptionContainingIgnoreCase(name);
+        } else if (active != null) {
+            return categoryRepository.findByActive(active);
+        } else {
+            return categoryRepository.findAll();
+        }
     }
 }

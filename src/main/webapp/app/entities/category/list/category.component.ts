@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Component, NgZone, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
 import { Observable, Subscription, combineLatest, filter, tap } from 'rxjs';
@@ -28,10 +29,11 @@ import { CategoryDeleteDialogComponent } from '../delete/category-delete-dialog.
   ],
 })
 export class CategoryComponent implements OnInit {
+  searchTerm: string = '';
   subscription: Subscription | null = null;
   categories?: ICategory[];
   isLoading = false;
-
+  isActive = false;
   sortState = sortStateSignal({});
 
   public readonly router = inject(Router);
@@ -116,6 +118,19 @@ export class CategoryComponent implements OnInit {
         relativeTo: this.activatedRoute,
         queryParams: queryParamsObj,
       });
+    });
+  }
+
+  search(searchParam: any) {
+    this.isLoading = true;
+    this.categoryService.searchByParam(searchParam, this.isActive).subscribe({
+      next: response => {
+        this.categories = response.body || [];
+        this.isLoading = false;
+      },
+      error: () => {
+        this.isLoading = false;
+      },
     });
   }
 }

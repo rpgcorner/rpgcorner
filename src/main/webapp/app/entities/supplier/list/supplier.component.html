@@ -1,24 +1,29 @@
 <div>
-  <h2 id="page-heading" data-cy="SupplierHeading">
-    <span jhiTranslate="rpgCornerApp.supplier.home.title">Suppliers</span>
+  <div>
+    <h2 id="page-heading" data-cy="SupplierHeading">
+      <span jhiTranslate="rpgCornerApp.supplier.home.title">Suppliers</span>
 
-    <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
-        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
-        <span jhiTranslate="rpgCornerApp.supplier.home.refreshListLabel">Refresh list</span>
-      </button>
+      <div class="d-flex justify-content-start">
+        <div class="input-group me-3" style="max-width: 200px">
+          <input type="text" class="form-control" placeholder="Szabad szöveg" aria-label="Keresés" [(ngModel)]="searchTerm" />
+        </div>
+        <button class="btn btn-info me-2" (click)="search(searchTerm)" [disabled]="isLoading">
+          <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+          <span jhiTranslate="rpgCornerApp.adminAuthority.home.search">Keresés</span>
+        </button>
 
-      <button
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-supplier"
-        [routerLink]="['/supplier/new']"
-      >
-        <fa-icon icon="plus"></fa-icon>
-        <span jhiTranslate="rpgCornerApp.supplier.home.createLabel">Egy új Supplier létrehozása</span>
-      </button>
-    </div>
-  </h2>
+        <button
+          id="jh-create-entity"
+          data-cy="entityCreateButton"
+          class="btn btn-primary jh-create-entity create-supplier"
+          [routerLink]="['/supplier/new']"
+        >
+          <fa-icon icon="plus"></fa-icon>
+          <span jhiTranslate="rpgCornerApp.supplier.home.createLabel">Egy új Supplier létrehozása</span>
+        </button>
+      </div>
+    </h2>
+  </div>
 
   <jhi-alert-error></jhi-alert-error>
 

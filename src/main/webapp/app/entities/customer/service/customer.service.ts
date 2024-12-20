@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -70,5 +71,11 @@ export class CustomerService {
       return [...customersToAdd, ...customerCollection];
     }
     return customerCollection;
+  }
+
+  searchByParam(searchParam?: string): Observable<EntityArrayResponseType> {
+    const options: any = {};
+    if (searchParam) options['searchParam'] = searchParam;
+    return this.http.get<ICustomer[]>(`${this.resourceUrl}/search`, { params: options, observe: 'response' });
   }
 }

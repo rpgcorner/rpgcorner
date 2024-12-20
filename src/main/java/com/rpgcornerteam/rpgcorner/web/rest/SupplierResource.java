@@ -134,4 +134,14 @@ public class SupplierResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    @GetMapping("/search")
+    public List<Supplier> getAllSuppliers(@RequestParam(required = false) String searchParam) {
+        LOG.debug("REST request to get all Suppliers");
+        if (searchParam != null && !searchParam.isEmpty()) {
+            LOG.debug("Filtering suppliers by searchParam: {}", searchParam);
+            return supplierRepository.findByCompanyNameContainingIgnoreCase(searchParam);
+        }
+        return supplierRepository.findAll();
+    }
 }

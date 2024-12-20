@@ -2,10 +2,17 @@
   <h2 id="page-heading" data-cy="WareHeading">
     <span jhiTranslate="rpgCornerApp.ware.home.title">Wares</span>
 
-    <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+    <div class="d-flex justify-content-start">
+      <div class="input-group me-3" style="max-width: 200px">
+        <input type="text" class="form-control" placeholder="Szabad szöveg" aria-label="Keresés" [(ngModel)]="searchTerm" />
+      </div>
+      <div class="form-check me-3">
+        <input type="checkbox" class="form-check-input" id="activeCheckbox" [(ngModel)]="isActive" />
+        <label class="form-check-label" for="activeCheckbox"> Aktív </label>
+      </div>
+      <button class="btn btn-info me-2" (click)="search(searchTerm)" [disabled]="isLoading">
         <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
-        <span jhiTranslate="rpgCornerApp.ware.home.refreshListLabel">Refresh list</span>
+        <span jhiTranslate="rpgCornerApp.adminAuthority.home.search">Keresés</span>
       </button>
 
       <button

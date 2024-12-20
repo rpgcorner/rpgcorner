@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
@@ -122,5 +124,12 @@ export class DisposeService {
     return res.clone({
       body: res.body ? res.body.map(item => this.convertDateFromServer(item)) : null,
     });
+  }
+  searchByParam(name?: string, startDate?: string, endDate?: string): Observable<EntityArrayResponseType> {
+    const options: any = {};
+    if (name) options['name'] = name;
+    if (startDate) options['startDate'] = startDate;
+    if (endDate) options['endDate'] = endDate;
+    return this.http.get<IDispose[]>(`${this.resourceUrl}/search`, { params: options, observe: 'response' });
   }
 }
