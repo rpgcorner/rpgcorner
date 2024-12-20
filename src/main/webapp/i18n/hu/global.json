@@ -11,6 +11,7 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Funkciók",
+        "eladasok": "Eladások",
         "jhipster-needle-menu-add-entry": "",
         "category": "Árukategória",
         "contact": "Kapcsolat",
