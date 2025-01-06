@@ -95,7 +95,7 @@
         <tbody>
           @for (ware of wares; track trackId(ware)) {
             <tr data-cy="entityTable">
-              <td>{{ ware.active }}</td>
+              <td>{{ ware.active ? 'Igen' : 'Nem' }}</td>
               <td>{{ ware.created | formatMediumDate }}</td>
               <td>{{ ware.name }}</td>
               <td>{{ ware.description }}</td>

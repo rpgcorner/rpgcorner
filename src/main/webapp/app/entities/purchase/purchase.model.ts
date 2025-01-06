@@ -5,7 +5,7 @@ import { ISupplier } from 'app/entities/supplier/supplier.model';
 export interface IPurchase {
   id: number;
   purchaseDate?: dayjs.Dayjs | null;
-  purchasedByUser?: Pick<IUser, 'id'> | null;
+  purchasedByUser?: Pick<IUser, 'id' | 'firstName'> | null; // Hozzáadjuk a 'firstName'-t
   purchasedFromSupplier?: ISupplier | null;
 }
 

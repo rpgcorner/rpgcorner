@@ -75,7 +75,7 @@
         <tbody>
           @for (category of categories; track trackId(category)) {
             <tr data-cy="entityTable">
-              <td>{{ category.active }}</td>
+              <td>{{ category.active ? 'Igen' : 'Nem' }}</td>
               <td [jhiTranslate]="'rpgCornerApp.CategoryTypeEnum.' + (category.categoryType ?? 'null')">
                 {{ { null: '', MAIN_CATEGORY: 'Fő kategória', SUB_CATEGORY: 'Sub category' }[category.categoryType ?? 'null'] }}
               </td>

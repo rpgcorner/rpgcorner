@@ -71,12 +71,14 @@
             <tr data-cy="entityTable">
               <td>{{ purchase.purchaseDate | formatMediumDate }}</td>
               <td>
-                {{ purchase.purchasedByUser?.id }}
+                {{ purchase.purchasedByUser?.firstName }}
               </td>
               <td>
                 @if (purchase.purchasedFromSupplier) {
                   <div>
-                    <a [routerLink]="['/supplier', purchase.purchasedFromSupplier.id, 'view']">{{ purchase.purchasedFromSupplier.id }}</a>
+                    <a [routerLink]="['/supplier', purchase.purchasedFromSupplier.id, 'view']">{{
+                      purchase.purchasedFromSupplier.companyName
+                    }}</a>
                   </div>
                 }
               </td>
