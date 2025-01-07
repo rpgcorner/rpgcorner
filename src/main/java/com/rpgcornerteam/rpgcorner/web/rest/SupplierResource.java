@@ -13,6 +13,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -53,10 +54,19 @@ public class SupplierResource {
         if (supplier.getId() != null) {
             throw new BadRequestAlertException("A new supplier cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        // Ellenőrizd, hogy van-e név alapján egyezés
+        boolean exists = supplierRepository.findByCompanyNameContainingIgnoreCase(supplier.getCompanyName()).size() > 0;
+
         supplier = supplierRepository.save(supplier);
-        return ResponseEntity.created(new URI("/api/suppliers/" + supplier.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, supplier.getId().toString()))
-            .body(supplier);
+
+        // Ha van egyezés, egyedi HTTP headerrel jelezd az Angular felé
+        HttpHeaders headers = HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, supplier.getId().toString());
+        if (exists) {
+            headers.add("X-app-warning", "Már létezik szállító hasonló névvel!");
+        }
+
+        return ResponseEntity.created(new URI("/api/suppliers/" + supplier.getId())).headers(headers).body(supplier);
     }
 
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })

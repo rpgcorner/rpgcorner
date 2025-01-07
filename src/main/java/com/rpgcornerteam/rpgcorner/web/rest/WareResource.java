@@ -4,6 +4,8 @@ import com.rpgcornerteam.rpgcorner.domain.Supplier;
 import com.rpgcornerteam.rpgcorner.domain.Ware;
 import com.rpgcornerteam.rpgcorner.repository.WareRepository;
 import com.rpgcornerteam.rpgcorner.web.rest.errors.BadRequestAlertException;
+import com.rpgcornerteam.rpgcorner.web.rest.errors.LoginAlreadyUsedException;
+import com.rpgcornerteam.rpgcorner.web.rest.errors.NameAndProductCodeAlreadyUsedException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import java.net.URI;
@@ -55,6 +57,12 @@ public class WareResource {
         if (ware.getId() != null) {
             throw new BadRequestAlertException("A new ware cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        if (wareRepository.findOneByName(ware.getName()).isPresent()) {
+            throw new NameAndProductCodeAlreadyUsedException();
+        }
+        if (wareRepository.findOneByProductCode(ware.getProductCode()).isPresent()) {
+            throw new NameAndProductCodeAlreadyUsedException();
+        }
         ware = wareRepository.save(ware);
         return ResponseEntity.created(new URI("/api/wares/" + ware.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, ware.getId().toString()))
@@ -85,7 +93,12 @@ public class WareResource {
         if (!wareRepository.existsById(id)) {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
-
+        if (wareRepository.findOneByName(ware.getName()).isPresent()) {
+            throw new NameAndProductCodeAlreadyUsedException();
+        }
+        if (wareRepository.findOneByProductCode(ware.getProductCode()).isPresent()) {
+            throw new NameAndProductCodeAlreadyUsedException();
+        }
         ware = wareRepository.save(ware);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, ware.getId().toString()))

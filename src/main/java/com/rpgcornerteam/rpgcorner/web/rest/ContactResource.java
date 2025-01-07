@@ -4,6 +4,7 @@ import com.rpgcornerteam.rpgcorner.domain.Contact;
 import com.rpgcornerteam.rpgcorner.domain.ReturnedStock;
 import com.rpgcornerteam.rpgcorner.repository.ContactRepository;
 import com.rpgcornerteam.rpgcorner.web.rest.errors.BadRequestAlertException;
+import com.rpgcornerteam.rpgcorner.web.rest.errors.CustomerEmailAlreadyUsedException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -53,6 +54,10 @@ public class ContactResource {
         if (contact.getId() != null) {
             throw new BadRequestAlertException("A new contact cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        System.out.println("email size" + contactRepository.findByEmail(contact.getEmail()).size());
+        if (contactRepository.findByEmail(contact.getEmail()).size() >= 2) {
+            // throw new CustomerEmailAlreadyUsedException();
+        }
         contact = contactRepository.save(contact);
         return ResponseEntity.created(new URI("/api/contacts/" + contact.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, contact.getId().toString()))
@@ -73,6 +78,9 @@ public class ContactResource {
     public ResponseEntity<Contact> updateContact(@PathVariable(value = "id", required = false) final Long id, @RequestBody Contact contact)
         throws URISyntaxException {
         LOG.debug("REST request to update Contact : {}, {}", id, contact);
+        if (contactRepository.findByEmail(contact.getEmail()).size() >= 2) {
+            //throw new CustomerEmailAlreadyUsedException();
+        }
         if (contact.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }

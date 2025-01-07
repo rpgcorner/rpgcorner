@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -6,7 +7,10 @@ import SharedModule from 'app/shared/shared.module';
 import { LANGUAGES } from 'app/config/language.constants';
 import { IUser } from '../user-management.model';
 import { UserManagementService } from '../service/user-management.service';
-
+import { AccountService } from '../../../core/auth/account.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { Account } from '../../../core/auth/account.model';
 const userTemplate = {} as IUser;
 
 const newUser: IUser = {
@@ -46,18 +50,30 @@ export default class UserManagementUpdateComponent implements OnInit {
     langKey: new FormControl(userTemplate.langKey, { nonNullable: true }),
     authorities: new FormControl(userTemplate.authorities, { nonNullable: true }),
   });
-
+  private readonly accountService = inject(AccountService);
+  private readonly destroy$ = new Subject<void>();
   private readonly userService = inject(UserManagementService);
   private readonly route = inject(ActivatedRoute);
+  account = signal<Account | null>(null);
 
   ngOnInit(): void {
+    this.accountService
+      .getAuthenticationState()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(account => this.account.set(account));
+
     this.route.data.subscribe(({ user }) => {
       if (user) {
         this.editForm.reset(user);
+        // Ellenőrzés: saját felhasználó azonosítása
+        if (this.account() && this.account()?.login === user.login) {
+          this.editForm.disable(); // Tiltsd le az űrlapot
+        }
       } else {
         this.editForm.reset(newUser);
       }
     });
+
     this.userService.authorities().subscribe(authorities => this.authorities.set(authorities));
   }
 

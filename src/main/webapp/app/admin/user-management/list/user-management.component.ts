@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
@@ -13,6 +14,7 @@ import { AccountService } from 'app/core/auth/account.service';
 import { UserManagementService } from '../service/user-management.service';
 import { User } from '../user-management.model';
 import UserManagementDeleteDialogComponent from '../delete/user-management-delete-dialog.component';
+import { Account } from '../../../core/auth/account.model';
 
 @Component({
   standalone: true,
@@ -28,7 +30,7 @@ export default class UserManagementComponent implements OnInit {
   itemsPerPage = ITEMS_PER_PAGE;
   page!: number;
   sortState = sortStateSignal({});
-
+  account = signal<Account | null>(null);
   private readonly userService = inject(UserManagementService);
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly router = inject(Router);

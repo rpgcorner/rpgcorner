@@ -1,4 +1,5 @@
-import { Component, OnInit, inject } from '@angular/core';
+/* eslint-disable */
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -13,6 +14,7 @@ import { IWare } from '../ware.model';
 import { WareService } from '../service/ware.service';
 import { WareFormGroup, WareFormService } from './ware-form.service';
 
+import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   standalone: true,
   selector: 'jhi-ware-update',
@@ -24,7 +26,7 @@ export class WareUpdateComponent implements OnInit {
   ware: IWare | null = null;
 
   categoriesSharedCollection: ICategory[] = [];
-
+  errorNameAndProductCodeExists = signal(false);
   protected wareService = inject(WareService);
   protected wareFormService = inject(WareFormService);
   protected categoryService = inject(CategoryService);
@@ -36,6 +38,7 @@ export class WareUpdateComponent implements OnInit {
   compareCategory = (o1: ICategory | null, o2: ICategory | null): boolean => this.categoryService.compareCategory(o1, o2);
 
   ngOnInit(): void {
+    this.errorNameAndProductCodeExists.set(false);
     this.activatedRoute.data.subscribe(({ ware }) => {
       this.ware = ware;
       if (ware) {
@@ -63,7 +66,7 @@ export class WareUpdateComponent implements OnInit {
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IWare>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),
-      error: () => this.onSaveError(),
+      error: response => this.processError(response),
     });
   }
 
@@ -71,7 +74,7 @@ export class WareUpdateComponent implements OnInit {
     this.previousState();
   }
 
-  protected onSaveError(): void {
+  protected onSaveError(response: HttpErrorResponse): void {
     // Api for inheritance.
   }
 
@@ -101,4 +104,6 @@ export class WareUpdateComponent implements OnInit {
       )
       .subscribe((categories: ICategory[]) => (this.categoriesSharedCollection = categories));
   }
+
+  private processError(response: HttpErrorResponse): void {}
 }

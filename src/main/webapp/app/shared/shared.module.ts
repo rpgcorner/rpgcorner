@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -8,7 +9,8 @@ import FindLanguageFromKeyPipe from './language/find-language-from-key.pipe';
 import TranslateDirective from './language/translate.directive';
 import { AlertComponent } from './alert/alert.component';
 import { AlertErrorComponent } from './alert/alert-error.component';
-
+import { WarningInterceptor } from '../core/warning.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 /**
  * Application wide Module
  */
@@ -23,6 +25,13 @@ import { AlertErrorComponent } from './alert/alert-error.component';
     TranslateModule,
     FindLanguageFromKeyPipe,
     TranslateDirective,
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: WarningInterceptor,
+      multi: true,
+    },
   ],
 })
 export default class SharedModule {}

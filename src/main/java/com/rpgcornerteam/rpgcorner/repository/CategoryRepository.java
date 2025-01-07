@@ -1,7 +1,10 @@
 package com.rpgcornerteam.rpgcorner.repository;
 
 import com.rpgcornerteam.rpgcorner.domain.Category;
+import com.rpgcornerteam.rpgcorner.domain.User;
+import com.rpgcornerteam.rpgcorner.domain.Ware;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 

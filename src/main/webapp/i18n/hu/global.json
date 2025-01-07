@@ -146,6 +146,9 @@
     }
   },
   "error": {
+    "customeremailexists": "Az email cím egyezés van a rendszerben. Kérjük, használjon másik értéket!",
+    "nameexists": "Név egyezés van a rendszerben. Kérjük, használjon másik értéket!",
+    "nameandproductcodeexists": "A megadott név és/vagy termékkód már létezik a rendszerben. Kérjük, használjon másik értéket!",
     "internalServerError": "Szerver hiba",
     "server.not.reachable": "A szerver nem elérhető",
     "url.not.found": "Nem található",
