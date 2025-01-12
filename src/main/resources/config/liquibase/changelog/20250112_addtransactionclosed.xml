@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+<changeSet id="add-transactionClosed-column" author="jhipster">
+  <addColumn tableName="product_return">
+    <column name="transactionClosed" type="BOOLEAN" defaultValueBoolean="false">
+      <constraints nullable="false"/>
+    </column>
+  </addColumn>
+  <addColumn tableName="purchase">
+    <column name="transactionClosed" type="BOOLEAN" defaultValueBoolean="false">
+      <constraints nullable="false"/>
+    </column>
+  </addColumn>
+  <addColumn tableName="sale">
+    <column name="transactionClosed" type="BOOLEAN" defaultValueBoolean="false">
+      <constraints nullable="false"/>
+    </column>
+  </addColumn>
+  <addColumn tableName="dispose">
+    <column name="transactionClosed" type="BOOLEAN" defaultValueBoolean="false">
+      <constraints nullable="false"/>
+    </column>
+  </addColumn>
+  <update tableName="product_return">
+    <column name="transactionClosed" valueBoolean="false"/>
+  </update>
+  <update tableName="purchase">
+    <column name="transactionClosed" valueBoolean="false"/>
+  </update>
+  <update tableName="sale">
+    <column name="transactionClosed" valueBoolean="false"/>
+  </update>
+  <update tableName="dispose">
+    <column name="transactionClosed" valueBoolean="false"/>
+  </update>
+</changeSet>
+</databaseChangeLog>

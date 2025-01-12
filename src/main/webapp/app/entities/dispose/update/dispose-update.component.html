@@ -80,6 +80,12 @@
           </div>
         }
       </div>
+      <div class="form-check">
+        <label class="form-check-label" for="transactionClosed">
+          <input class="form-check-input" type="checkbox" id="transactionClosed" name="transactionClosed" formControlName="activated" />
+          <span>Lezárt</span>
+        </label>
+      </div>
       <jhi-disposed-stock [isVisible]="false" [disposeId]="editForm.get(['id'])!.value"></jhi-disposed-stock>
       <div>
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
