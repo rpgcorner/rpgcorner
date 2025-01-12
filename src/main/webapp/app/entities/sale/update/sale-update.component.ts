@@ -36,7 +36,6 @@ export class SaleUpdateComponent implements OnInit {
   protected customerService = inject(CustomerService);
   protected activatedRoute = inject(ActivatedRoute);
 
-  // eslint-disable-next-line @typescript-eslint/member-ordering
   editForm: SaleFormGroup = this.saleFormService.createSaleFormGroup();
 
   compareUser = (o1: IUser | null, o2: IUser | null): boolean => this.userService.compareUser(o1, o2);

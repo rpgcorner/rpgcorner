@@ -36,7 +36,7 @@ export class ReturnedStockUpdateComponent implements OnInit {
   protected productReturnService = inject(ProductReturnService);
   protected activatedRoute = inject(ActivatedRoute);
   productReturnId: number = 0;
-  // eslint-disable-next-line @typescript-eslint/member-ordering
+
   editForm: ReturnedStockFormGroup = this.returnedStockFormService.createReturnedStockFormGroup();
 
   compareWare = (o1: IWare | null, o2: IWare | null): boolean => this.wareService.compareWare(o1, o2);

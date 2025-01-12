@@ -17,16 +17,7 @@ import { CustomerDeleteDialogComponent } from '../delete/customer-delete-dialog.
   standalone: true,
   selector: 'jhi-customer',
   templateUrl: './customer.component.html',
-  imports: [
-    RouterModule,
-    FormsModule,
-    SharedModule,
-    SortDirective,
-    SortByDirective,
-    DurationPipe,
-    FormatMediumDatetimePipe,
-    FormatMediumDatePipe,
-  ],
+  imports: [RouterModule, FormsModule, SharedModule, SortDirective, SortByDirective],
 })
 export class CustomerComponent implements OnInit {
   subscription: Subscription | null = null;

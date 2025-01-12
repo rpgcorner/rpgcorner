@@ -35,7 +35,6 @@ export class DisposedStockUpdateComponent implements OnInit {
   protected disposeService = inject(DisposeService);
   protected activatedRoute = inject(ActivatedRoute);
 
-  // eslint-disable-next-line @typescript-eslint/member-ordering
   editForm: DisposedStockFormGroup = this.disposedStockFormService.createDisposedStockFormGroup();
 
   compareWare = (o1: IWare | null, o2: IWare | null): boolean => this.wareService.compareWare(o1, o2);

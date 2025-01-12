@@ -92,24 +92,19 @@
                 }
               </td>
               <td>
-                {{ productReturn.returnedByUser?.id }}
+                {{ productReturn.returnedByUser?.firstName }}
               </td>
               <td>
                 @if (productReturn.returnedByCustomer) {
                   <div>
                     <a [routerLink]="['/customer', productReturn.returnedByCustomer.id, 'view']">{{
-                      productReturn.returnedByCustomer.id
+                      productReturn.returnedByCustomer.contact?.contactName
                     }}</a>
                   </div>
                 }
               </td>
               <td class="text-end">
                 <div class="btn-group">
-                  <a [routerLink]="['/product-return', productReturn.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
-                    <fa-icon icon="eye"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Nézet</span>
-                  </a>
-
                   <a [routerLink]="['/product-return', productReturn.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
                     <fa-icon icon="pencil-alt"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Szerkesztés</span>

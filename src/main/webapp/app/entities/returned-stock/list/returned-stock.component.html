@@ -84,7 +84,7 @@
               <td>
                 @if (returnedStock.returnedWare) {
                   <div>
-                    <a [routerLink]="['/ware', returnedStock.returnedWare.id, 'view']">{{ returnedStock.returnedWare.id }}</a>
+                    <a [routerLink]="['/ware', returnedStock.returnedWare.id, 'view']">{{ returnedStock.returnedWare.name }}</a>
                   </div>
                 }
               </td>
@@ -97,16 +97,6 @@
               </td>
               <td class="text-end">
                 <div class="btn-group">
-                  <a
-                    *ngIf="isVisible"
-                    [routerLink]="['/returned-stock', returnedStock.id, 'view']"
-                    class="btn btn-info btn-sm"
-                    data-cy="entityDetailsButton"
-                  >
-                    <fa-icon icon="eye"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Nézet</span>
-                  </a>
-
                   <a
                     *ngIf="isVisible"
                     [routerLink]="['/returned-stock', returnedStock.id, 'edit']"

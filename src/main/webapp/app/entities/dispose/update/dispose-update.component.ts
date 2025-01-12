@@ -14,14 +14,12 @@ import { IDispose } from '../dispose.model';
 import { DisposeService } from '../service/dispose.service';
 import { DisposeFormGroup, DisposeFormService } from './dispose-form.service';
 import { DisposedStockComponent } from '../../disposed-stock/list/disposed-stock.component';
-import { SoldStockComponent } from '../../sold-stock/list/sold-stock.component';
-import { ISale } from '../../sale/sale.model';
 
 @Component({
   standalone: true,
   selector: 'jhi-dispose-update',
   templateUrl: './dispose-update.component.html',
-  imports: [SharedModule, FormsModule, ReactiveFormsModule, DisposedStockComponent, SoldStockComponent],
+  imports: [SharedModule, FormsModule, ReactiveFormsModule, DisposedStockComponent],
 })
 export class DisposeUpdateComponent implements OnInit {
   isSaving = false;
@@ -34,7 +32,6 @@ export class DisposeUpdateComponent implements OnInit {
   protected userService = inject(UserService);
   protected activatedRoute = inject(ActivatedRoute);
 
-  // eslint-disable-next-line @typescript-eslint/member-ordering
   editForm: DisposeFormGroup = this.disposeFormService.createDisposeFormGroup();
 
   compareUser = (o1: IUser | null, o2: IUser | null): boolean => this.userService.compareUser(o1, o2);

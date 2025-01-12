@@ -11,16 +11,6 @@
         <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
         <span jhiTranslate="rpgCornerApp.adminAuthority.home.search">Keresés</span>
       </button>
-
-      <button
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-inventory"
-        [routerLink]="['/inventory/new']"
-      >
-        <fa-icon icon="plus"></fa-icon>
-        <span jhiTranslate="rpgCornerApp.inventory.home.createLabel">Egy új Inventory létrehozása</span>
-      </button>
     </div>
   </h2>
 
@@ -67,22 +57,7 @@
                 }
               </td>
               <td class="text-end">
-                <div class="btn-group">
-                  <a [routerLink]="['/inventory', inventory.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
-                    <fa-icon icon="eye"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Nézet</span>
-                  </a>
-
-                  <a [routerLink]="['/inventory', inventory.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
-                    <fa-icon icon="pencil-alt"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Szerkesztés</span>
-                  </a>
-
-                  <button type="submit" (click)="delete(inventory)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                    <fa-icon icon="times"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Törlés</span>
-                  </button>
-                </div>
+                <div class="btn-group"></div>
               </td>
             </tr>
           }

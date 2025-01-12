@@ -1,15 +1,22 @@
 <div>
   <h2 id="page-heading" data-cy="SoldStockHeading">
-    <span jhiTranslate="rpgCornerApp.soldStock.home.title" *ngIf="isVisible">SoldStocks</span>
+    <span *ngIf="isVisible">Értékesítés</span>
     <span jhiTranslate="rpgCornerApp.soldStock.home.aruTitle" *ngIf="!isVisible">SoldStocks</span>
 
-    <div class="d-flex justify-content-end" *ngIf="isVisible">
-      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+    <div class="d-flex justify-content-start" *ngIf="isVisible">
+      <!-- Dátum intervallum szűrők -->
+      <div class="input-group me-3" style="max-width: 300px">
+        <input type="date" class="form-control" placeholder="Kezdő dátum" [(ngModel)]="startDate" />
+        <span class="input-group-text">-</span>
+        <input type="date" class="form-control" placeholder="Befejező dátum" [(ngModel)]="endDate" />
+      </div>
+      <button class="btn btn-info me-2" (click)="search()" [disabled]="isLoading">
         <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
-        <span jhiTranslate="rpgCornerApp.soldStock.home.refreshListLabel">Refresh list</span>
+        <span jhiTranslate="rpgCornerApp.adminAuthority.home.search">Keresés</span>
       </button>
 
       <button
+        *ngIf="!isVisible"
         id="jh-create-entity"
         data-cy="entityCreateButton"
         class="btn btn-primary jh-create-entity create-sold-stock"
@@ -48,6 +55,27 @@
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
           <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="soldWare.id">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.soldStock.soldWare">Sold Ware</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="unitPrice" *ngIf="!isVisible">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.soldStock.unitPrice">Unit Price</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="returnedSupplie" *ngIf="!isVisible">
+              <div class="d-flex">
+                <span jhiTranslate="rpgCornerApp.soldStock.returnedSupplie">Returned Supplie</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+
             <th scope="col" jhiSortBy="supplie">
               <div class="d-flex">
                 <span jhiTranslate="rpgCornerApp.soldStock.supplie">Supplie</span>
@@ -55,32 +83,7 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="unitPrice">
-              <div class="d-flex">
-                <span jhiTranslate="rpgCornerApp.soldStock.unitPrice">Unit Price</span>
 
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="returnedSupplie">
-              <div class="d-flex">
-                <span jhiTranslate="rpgCornerApp.soldStock.returnedSupplie">Returned Supplie</span>
-
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="soldWare.id">
-              <div class="d-flex">
-                <span jhiTranslate="rpgCornerApp.soldStock.soldWare">Sold Ware</span>
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="sale.id" *ngIf="isVisible">
-              <div class="d-flex">
-                <span jhiTranslate="rpgCornerApp.soldStock.sale">Sale</span>
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -88,9 +91,6 @@
         <tbody>
           @for (soldStock of soldStocks; track trackId(soldStock)) {
             <tr data-cy="entityTable">
-              <td>{{ soldStock.supplie }}</td>
-              <td>{{ soldStock.unitPrice }}</td>
-              <td>{{ soldStock.returnedSupplie }}</td>
               <td>
                 @if (soldStock.soldWare) {
                   <div>
@@ -98,27 +98,14 @@
                   </div>
                 }
               </td>
-              <td *ngIf="isVisible">
-                @if (soldStock.sale) {
-                  <div>
-                    <a [routerLink]="['/sale', soldStock.sale.id, 'view']">{{ soldStock.sale.id }}</a>
-                  </div>
-                }
-              </td>
+              <td *ngIf="!isVisible">{{ soldStock.unitPrice }}</td>
+              <td *ngIf="!isVisible">{{ soldStock.returnedSupplie }}</td>
+              <td>{{ soldStock.supplie }}</td>
+
               <td class="text-end">
                 <div class="btn-group">
                   <a
-                    *ngIf="isVisible"
-                    [routerLink]="['/sold-stock', soldStock.id, 'view']"
-                    class="btn btn-info btn-sm"
-                    data-cy="entityDetailsButton"
-                  >
-                    <fa-icon icon="eye"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Nézet</span>
-                  </a>
-
-                  <a
-                    *ngIf="isVisible"
+                    *ngIf="!isVisible"
                     [routerLink]="['/sold-stock', soldStock.id, 'edit']"
                     class="btn btn-primary btn-sm"
                     data-cy="entityEditButton"
@@ -127,7 +114,13 @@
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Szerkesztés</span>
                   </a>
 
-                  <button type="submit" (click)="delete(soldStock)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                  <button
+                    *ngIf="!isVisible"
+                    type="submit"
+                    (click)="delete(soldStock)"
+                    class="btn btn-danger btn-sm"
+                    data-cy="entityDeleteButton"
+                  >
                     <fa-icon icon="times"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Törlés</span>
                   </button>

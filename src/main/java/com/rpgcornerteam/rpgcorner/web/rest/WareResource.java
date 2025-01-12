@@ -58,10 +58,10 @@ public class WareResource {
             throw new BadRequestAlertException("A new ware cannot already have an ID", ENTITY_NAME, "idexists");
         }
         if (wareRepository.findOneByName(ware.getName()).isPresent()) {
-            throw new NameAndProductCodeAlreadyUsedException();
+            //throw new NameAndProductCodeAlreadyUsedException();
         }
         if (wareRepository.findOneByProductCode(ware.getProductCode()).isPresent()) {
-            throw new NameAndProductCodeAlreadyUsedException();
+            //throw new NameAndProductCodeAlreadyUsedException();
         }
         ware = wareRepository.save(ware);
         return ResponseEntity.created(new URI("/api/wares/" + ware.getId()))
@@ -94,10 +94,10 @@ public class WareResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
         if (wareRepository.findOneByName(ware.getName()).isPresent()) {
-            throw new NameAndProductCodeAlreadyUsedException();
+            //throw new NameAndProductCodeAlreadyUsedException();
         }
         if (wareRepository.findOneByProductCode(ware.getProductCode()).isPresent()) {
-            throw new NameAndProductCodeAlreadyUsedException();
+            //throw new NameAndProductCodeAlreadyUsedException();
         }
         ware = wareRepository.save(ware);
         return ResponseEntity.ok()

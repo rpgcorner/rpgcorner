@@ -68,15 +68,15 @@ public class ProductReturn implements Serializable {
      * A felhasználó aki az árut visszavette.
      */
     @Schema(description = "A felhasználó aki az árut visszavette.")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private User returnedByUser;
 
     /**
      * A vevő aki az árut visszahozta.
      */
     @Schema(description = "A vevő aki az árut visszahozta.")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "contact", "sales", "productReturns" }, allowSetters = true)
+    @ManyToOne(fetch = FetchType.EAGER)
+    // @JsonIgnoreProperties(value = { "contact", "sales", "productReturns" }, allowSetters = true)
     private Customer returnedByCustomer;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

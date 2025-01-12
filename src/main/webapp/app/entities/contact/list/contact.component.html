@@ -129,16 +129,6 @@
               </td>
               <td class="text-end">
                 <div class="btn-group">
-                  <a
-                    *ngIf="isVisible"
-                    [routerLink]="['/contact', contact.id, 'view']"
-                    class="btn btn-info btn-sm"
-                    data-cy="entityDetailsButton"
-                  >
-                    <fa-icon icon="eye"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Nézet</span>
-                  </a>
-
                   <a [routerLink]="['/contact', contact.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
                     <fa-icon icon="pencil-alt"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Szerkesztés</span>

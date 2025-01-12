@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';

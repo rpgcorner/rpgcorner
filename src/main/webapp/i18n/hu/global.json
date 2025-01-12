@@ -7,11 +7,11 @@
       "raktar": "Raktár kezelés",
       "ertekesites": "Értékesítés",
       "riportok": "Riportok",
-      "eladasok": "Eladások",
+      "eladasok": "Értékesítés",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Funkciók",
-        "eladasok": "Eladások",
+        "eladasok": "Értékesítés",
         "jhipster-needle-menu-add-entry": "",
         "category": "Árukategória",
         "contact": "Kapcsolat",

@@ -93,6 +93,13 @@
           </div>
         }
       </div>
+
+      <div class="form-check">
+        <label class="form-check-label" for="activated">
+          <input class="form-check-input" type="checkbox" id="activated" name="activated" formControlName="activated" />
+          <span>Lezárt</span>
+        </label>
+      </div>
       <jhi-sold-stock [isVisible]="false" [salesId]="editForm.get(['id'])!.value"></jhi-sold-stock>
       <div>
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">

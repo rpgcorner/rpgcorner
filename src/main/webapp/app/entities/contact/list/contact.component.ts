@@ -17,16 +17,7 @@ import { ContactDeleteDialogComponent } from '../delete/contact-delete-dialog.co
   standalone: true,
   selector: 'jhi-contact',
   templateUrl: './contact.component.html',
-  imports: [
-    RouterModule,
-    FormsModule,
-    SharedModule,
-    SortDirective,
-    SortByDirective,
-    DurationPipe,
-    FormatMediumDatetimePipe,
-    FormatMediumDatePipe,
-  ],
+  imports: [RouterModule, FormsModule, SharedModule, SortDirective, SortByDirective],
 })
 export class ContactComponent implements OnInit {
   subscription: Subscription | null = null;

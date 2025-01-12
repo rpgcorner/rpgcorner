@@ -6,7 +6,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
 import { SortByDirective, SortDirective, SortService, type SortState, sortStateSignal } from 'app/shared/sort';
-import { DurationPipe, FormatMediumDatePipe, FormatMediumDatetimePipe } from 'app/shared/date';
 import { FormsModule } from '@angular/forms';
 import { DEFAULT_SORT_DATA, ITEM_DELETED_EVENT, SORT } from 'app/config/navigation.constants';
 import { ISoldStock } from '../sold-stock.model';
@@ -17,16 +16,7 @@ import { SoldStockDeleteDialogComponent } from '../delete/sold-stock-delete-dial
   standalone: true,
   selector: 'jhi-sold-stock',
   templateUrl: './sold-stock.component.html',
-  imports: [
-    RouterModule,
-    FormsModule,
-    SharedModule,
-    SortDirective,
-    SortByDirective,
-    DurationPipe,
-    FormatMediumDatetimePipe,
-    FormatMediumDatePipe,
-  ],
+  imports: [RouterModule, FormsModule, SharedModule, SortDirective, SortByDirective],
 })
 export class SoldStockComponent implements OnInit {
   subscription: Subscription | null = null;
@@ -35,7 +25,8 @@ export class SoldStockComponent implements OnInit {
   @Input() isVisible = true;
   @Input() salesId?: number;
   sortState = sortStateSignal({});
-
+  startDate: any;
+  endDate: any;
   public readonly router = inject(Router);
   protected readonly soldStockService = inject(SoldStockService);
   protected readonly activatedRoute = inject(ActivatedRoute);
@@ -129,5 +120,8 @@ export class SoldStockComponent implements OnInit {
         queryParams: queryParamsObj,
       });
     });
+  }
+  search() {
+    this.load();
   }
 }

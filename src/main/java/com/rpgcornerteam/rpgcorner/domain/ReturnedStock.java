@@ -52,11 +52,11 @@ public class ReturnedStock implements Serializable {
         value = { "mainCategory", "subCategory", "inventory", "disposedStock", "purchasedStock", "returnedStock", "soldStock" },
         allowSetters = true
     )
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(unique = true)
     private Ware returnedWare;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties(value = { "returnedStocks", "sale", "returnedByUser", "returnedByCustomer" }, allowSetters = true)
     private ProductReturn productReturn;
 

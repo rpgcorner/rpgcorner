@@ -53,7 +53,7 @@ public class CustomerResource {
     public ResponseEntity<Customer> createCustomer(@Valid @RequestBody Customer customer) throws URISyntaxException {
         LOG.debug("REST request to save Customer : {}", customer);
         if (customerRepository.findOneByContact_ContactName(customer.getContact().getContactName()).isPresent()) {
-            throw new NameConflictException();
+            //throw new NameConflictException();
         }
 
         customer = customerRepository.save(customer);
@@ -79,7 +79,7 @@ public class CustomerResource {
     ) throws URISyntaxException {
         LOG.debug("REST request to update Customer : {}, {}", id, customer);
         if (customerRepository.findOneByContact_ContactName(customer.getContact().getContactName()).isPresent()) {
-            throw new NameConflictException();
+            // throw new NameConflictException();
         }
 
         if (customer.getId() == null) {

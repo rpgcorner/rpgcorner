@@ -98,17 +98,6 @@
               <td class="text-end">
                 <div class="btn-group">
                   <a
-                    *ngIf="isVisible"
-                    [routerLink]="['/purchased-stock', purchasedStock.id, 'view']"
-                    class="btn btn-info btn-sm"
-                    data-cy="entityDetailsButton"
-                  >
-                    <fa-icon icon="eye"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Nézet</span>
-                  </a>
-
-                  <a
-                    *ngIf="isVisible"
                     [routerLink]="['/purchased-stock', purchasedStock.id, 'edit']"
                     class="btn btn-primary btn-sm"
                     data-cy="entityEditButton"

@@ -15,15 +15,13 @@ import { SupplierService } from 'app/entities/supplier/service/supplier.service'
 import { PurchaseService } from '../service/purchase.service';
 import { IPurchase } from '../purchase.model';
 import { PurchaseFormGroup, PurchaseFormService } from './purchase-form.service';
-import { DisposedStockComponent } from '../../disposed-stock/list/disposed-stock.component';
 import { PurchasedStockComponent } from '../../purchased-stock/list/purchased-stock.component';
-import { IDispose } from '../../dispose/dispose.model';
 
 @Component({
   standalone: true,
   selector: 'jhi-purchase-update',
   templateUrl: './purchase-update.component.html',
-  imports: [SharedModule, FormsModule, ReactiveFormsModule, DisposedStockComponent, PurchasedStockComponent],
+  imports: [SharedModule, FormsModule, ReactiveFormsModule, PurchasedStockComponent],
 })
 export class PurchaseUpdateComponent implements OnInit {
   isSaving = false;
@@ -38,7 +36,7 @@ export class PurchaseUpdateComponent implements OnInit {
   protected supplierService = inject(SupplierService);
   protected activatedRoute = inject(ActivatedRoute);
   protected router = inject(Router);
-  // eslint-disable-next-line @typescript-eslint/member-ordering
+
   editForm: PurchaseFormGroup = this.purchaseFormService.createPurchaseFormGroup();
 
   compareUser = (o1: IUser | null, o2: IUser | null): boolean => this.userService.compareUser(o1, o2);

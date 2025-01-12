@@ -7,7 +7,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
 import { SortByDirective, SortDirective, SortService, type SortState, sortStateSignal } from 'app/shared/sort';
-import { DurationPipe, FormatMediumDatePipe, FormatMediumDatetimePipe } from 'app/shared/date';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DEFAULT_SORT_DATA, ITEM_DELETED_EVENT, SORT } from 'app/config/navigation.constants';
 import { ISupplier } from '../supplier.model';
@@ -18,17 +17,7 @@ import { SupplierDeleteDialogComponent } from '../delete/supplier-delete-dialog.
   standalone: true,
   selector: 'jhi-supplier',
   templateUrl: './supplier.component.html',
-  imports: [
-    RouterModule,
-    FormsModule,
-    SharedModule,
-    SortDirective,
-    SortByDirective,
-    DurationPipe,
-    FormatMediumDatetimePipe,
-    FormatMediumDatePipe,
-    ReactiveFormsModule,
-  ],
+  imports: [RouterModule, FormsModule, SharedModule, SortDirective, SortByDirective, ReactiveFormsModule],
 })
 export class SupplierComponent implements OnInit {
   searchTerm: string = '';

@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AuthInterceptor } from 'app/core/interceptor/auth.interceptor';

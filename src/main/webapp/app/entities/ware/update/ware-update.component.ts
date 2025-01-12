@@ -32,7 +32,6 @@ export class WareUpdateComponent implements OnInit {
   protected categoryService = inject(CategoryService);
   protected activatedRoute = inject(ActivatedRoute);
 
-  // eslint-disable-next-line @typescript-eslint/member-ordering
   editForm: WareFormGroup = this.wareFormService.createWareFormGroup();
 
   compareCategory = (o1: ICategory | null, o2: ICategory | null): boolean => this.categoryService.compareCategory(o1, o2);

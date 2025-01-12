@@ -36,7 +36,7 @@ export class PurchasedStockUpdateComponent implements OnInit {
   protected purchaseService = inject(PurchaseService);
   protected activatedRoute = inject(ActivatedRoute);
   purchasedId: number = 0;
-  // eslint-disable-next-line @typescript-eslint/member-ordering
+
   editForm: PurchasedStockFormGroup = this.purchasedStockFormService.createPurchasedStockFormGroup();
 
   compareWare = (o1: IWare | null, o2: IWare | null): boolean => this.wareService.compareWare(o1, o2);

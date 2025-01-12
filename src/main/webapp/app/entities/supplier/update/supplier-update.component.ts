@@ -12,13 +12,12 @@ import { ISupplier } from '../supplier.model';
 import { SupplierService } from '../service/supplier.service';
 import { SupplierFormGroup, SupplierFormService } from './supplier-form.service';
 import { ContactComponent } from '../../contact/list/contact.component';
-import { ContactUpdateComponent } from '../../contact/update/contact-update.component';
 
 @Component({
   standalone: true,
   selector: 'jhi-supplier-update',
   templateUrl: './supplier-update.component.html',
-  imports: [SharedModule, FormsModule, ReactiveFormsModule, ContactComponent, ContactUpdateComponent],
+  imports: [SharedModule, FormsModule, ReactiveFormsModule, ContactComponent],
 })
 export class SupplierUpdateComponent implements OnInit {
   private readonly router = inject(Router);
@@ -29,7 +28,6 @@ export class SupplierUpdateComponent implements OnInit {
   protected supplierFormService = inject(SupplierFormService);
   protected activatedRoute = inject(ActivatedRoute);
 
-  // eslint-disable-next-line @typescript-eslint/member-ordering
   editForm: SupplierFormGroup = this.supplierFormService.createSupplierFormGroup();
 
   ngOnInit(): void {

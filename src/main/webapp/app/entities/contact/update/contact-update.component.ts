@@ -34,7 +34,6 @@ export class ContactUpdateComponent implements OnInit {
   protected supplierService = inject(SupplierService);
   protected activatedRoute = inject(ActivatedRoute);
 
-  // eslint-disable-next-line @typescript-eslint/member-ordering
   editForm: ContactFormGroup = this.contactFormService.createContactFormGroup();
 
   compareSupplier = (o1: ISupplier | null, o2: ISupplier | null): boolean => this.supplierService.compareSupplier(o1, o2);

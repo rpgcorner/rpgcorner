@@ -41,7 +41,7 @@ export class ProductReturnUpdateComponent implements OnInit {
   protected customerService = inject(CustomerService);
   protected activatedRoute = inject(ActivatedRoute);
   protected router = inject(Router);
-  // eslint-disable-next-line @typescript-eslint/member-ordering
+
   editForm: ProductReturnFormGroup = this.productReturnFormService.createProductReturnFormGroup();
 
   compareSale = (o1: ISale | null, o2: ISale | null): boolean => this.saleService.compareSale(o1, o2);
