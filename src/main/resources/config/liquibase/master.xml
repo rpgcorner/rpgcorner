@@ -41,6 +41,7 @@
     <include file="config/liquibase/changelog/20241209232133_added_entity_constraints_Ware.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20241209232132_company_name_to_supplier.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250112_addtransactionclosed.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250112_renameransactionclosed.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

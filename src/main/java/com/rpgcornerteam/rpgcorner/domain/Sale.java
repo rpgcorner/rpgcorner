@@ -75,6 +75,17 @@ public class Sale implements Serializable {
     @JsonIgnoreProperties(value = { "returnedStocks", "sale", "returnedByUser", "returnedByCustomer" }, allowSetters = true)
     private Set<ProductReturn> productReturns = new HashSet<>();
 
+    @Column(name = "transactionClosed")
+    private boolean transactionClosed;
+
+    public boolean getTransactionClosed() {
+        return this.transactionClosed;
+    }
+
+    public void setTransactionClosed(boolean transactionClosed) {
+        this.transactionClosed = transactionClosed;
+    }
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {

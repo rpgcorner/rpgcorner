@@ -66,6 +66,17 @@ public class Dispose implements Serializable {
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
+    @Column(name = "transactionClosed")
+    private boolean transactionClosed;
+
+    public boolean getTransactionClosed() {
+        return this.transactionClosed;
+    }
+
+    public void setTransactionClosed(boolean transactionClosed) {
+        this.transactionClosed = transactionClosed;
+    }
+
     public Long getId() {
         return this.id;
     }
