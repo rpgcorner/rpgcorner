@@ -14,10 +14,11 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type PurchaseFormGroupInput = IPurchase | PartialWithRequiredKeyOf<NewPurchase>;
 
-type PurchaseFormDefaults = Pick<NewPurchase, 'id'>;
+type PurchaseFormDefaults = Pick<NewPurchase, 'id' | 'transactionClosed'>;
 
 type PurchaseFormGroupContent = {
   id: FormControl<IPurchase['id'] | NewPurchase['id']>;
+  transactionClosed: FormControl<IPurchase['transactionClosed']>;
   purchaseDate: FormControl<IPurchase['purchaseDate']>;
   purchasedByUser: FormControl<IPurchase['purchasedByUser']>;
   purchasedFromSupplier: FormControl<IPurchase['purchasedFromSupplier']>;
@@ -40,6 +41,7 @@ export class PurchaseFormService {
           validators: [Validators.required],
         },
       ),
+      transactionClosed: new FormControl(purchaseRawValue.transactionClosed),
       purchaseDate: new FormControl(purchaseRawValue.purchaseDate),
       purchasedByUser: new FormControl(purchaseRawValue.purchasedByUser, {
         validators: [Validators.required],
@@ -67,6 +69,7 @@ export class PurchaseFormService {
   private getFormDefaults(): PurchaseFormDefaults {
     return {
       id: null,
+      transactionClosed: false, // Alapértelmezett érték
     };
   }
 }

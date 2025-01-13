@@ -7,6 +7,7 @@ export interface IPurchase {
   purchaseDate?: dayjs.Dayjs | null;
   purchasedByUser?: Pick<IUser, 'id' | 'firstName'> | null; // Hozzáadjuk a 'firstName'-t
   purchasedFromSupplier?: ISupplier | null;
+  transactionClosed?: boolean | null;
 }
 
 export type NewPurchase = Omit<IPurchase, 'id'> & { id: null };

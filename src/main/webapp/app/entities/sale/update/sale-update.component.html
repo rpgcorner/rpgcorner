@@ -97,7 +97,14 @@
       `
       <div class="form-check">
         <label class="form-check-label" for="transactionClosed">
-          <input class="form-check-input" type="checkbox" id="transactionClosed" name="transactionClosed" formControlName="activated" />
+          <input
+            type="checkbox"
+            class="form-check"
+            name="transactionClosed"
+            id="field_transactionClosed"
+            data-cy="transactionClosed"
+            formControlName="transactionClosed"
+          />
           <span>Lezárt</span>
         </label>
       </div>

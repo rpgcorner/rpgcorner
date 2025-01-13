@@ -1,7 +1,9 @@
+/* eslint-disable */
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { IProductReturn, NewProductReturn } from '../product-return.model';
+import { ISale } from '../../sale/sale.model';
 
 /**
  * A partial Type with required key is used as form input.
@@ -18,6 +20,7 @@ type ProductReturnFormDefaults = Pick<NewProductReturn, 'id'>;
 
 type ProductReturnFormGroupContent = {
   id: FormControl<IProductReturn['id'] | NewProductReturn['id']>;
+  transactionClosed: FormControl<ISale['transactionClosed']>;
   returnDate: FormControl<IProductReturn['returnDate']>;
   note: FormControl<IProductReturn['note']>;
   sale: FormControl<IProductReturn['sale']>;
@@ -42,6 +45,7 @@ export class ProductReturnFormService {
           validators: [Validators.required],
         },
       ),
+      transactionClosed: new FormControl(productReturnRawValue.transactionClosed),
       returnDate: new FormControl(productReturnRawValue.returnDate),
       note: new FormControl(productReturnRawValue.note),
       sale: new FormControl(productReturnRawValue.sale),

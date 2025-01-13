@@ -18,6 +18,7 @@ type SaleFormDefaults = Pick<NewSale, 'id'>;
 
 type SaleFormGroupContent = {
   id: FormControl<ISale['id'] | NewSale['id']>;
+  transactionClosed: FormControl<ISale['transactionClosed']>;
   soldDate: FormControl<ISale['soldDate']>;
   soldByUser: FormControl<ISale['soldByUser']>;
   soldForCustomer: FormControl<ISale['soldForCustomer']>;
@@ -40,6 +41,7 @@ export class SaleFormService {
           validators: [Validators.required],
         },
       ),
+      transactionClosed: new FormControl(saleRawValue.transactionClosed),
       soldDate: new FormControl(saleRawValue.soldDate),
       soldByUser: new FormControl(saleRawValue.soldByUser, {
         validators: [Validators.required],

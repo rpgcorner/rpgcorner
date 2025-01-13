@@ -1,7 +1,9 @@
 package com.rpgcornerteam.rpgcorner.web.rest;
 
 import com.rpgcornerteam.rpgcorner.domain.Purchase;
+import com.rpgcornerteam.rpgcorner.domain.PurchasedStock;
 import com.rpgcornerteam.rpgcorner.repository.PurchaseRepository;
+import com.rpgcornerteam.rpgcorner.repository.PurchasedStockRepository;
 import com.rpgcornerteam.rpgcorner.web.rest.errors.BadRequestAlertException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -15,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -37,9 +40,11 @@ public class PurchaseResource {
     private String applicationName;
 
     private final PurchaseRepository purchaseRepository;
+    private final PurchasedStockRepository purchasedStockRepository;
 
-    public PurchaseResource(PurchaseRepository purchaseRepository) {
+    public PurchaseResource(PurchaseRepository purchaseRepository, PurchasedStockRepository purchasedStockRepository) {
         this.purchaseRepository = purchaseRepository;
+        this.purchasedStockRepository = purchasedStockRepository;
     }
 
     /**
@@ -61,6 +66,13 @@ public class PurchaseResource {
             .body(purchase);
     }
 
+    // Segédmetódus a hibaüzenet kezelésére
+    private ResponseEntity<Purchase> createWarningResponse(String warningMessage) {
+        HttpHeaders headers = HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, "");
+        headers.add("X-app-warning", warningMessage);
+        return ResponseEntity.created(URI.create("/api/purchase/")).headers(headers).body(null);
+    }
+
     /**
      * {@code PUT  /purchases/:id} : Updates an existing purchase.
      *
@@ -77,6 +89,19 @@ public class PurchaseResource {
         @Valid @RequestBody Purchase purchase
     ) throws URISyntaxException {
         LOG.debug("REST request to update Purchase : {}, {}", id, purchase);
+        if (purchase.getTransactionClosed()) {
+            List<PurchasedStock> purchasedStockList = purchasedStockRepository.findByPurchase_Id(purchase.getId());
+            for (PurchasedStock purchasedStock : purchasedStockList) {
+                if (purchasedStock.getSupplie() <= 0) {
+                    return createWarningResponse("Minimum egy darabot meg kell adni!");
+                }
+            }
+
+            if (purchasedStockList.isEmpty()) {
+                return createWarningResponse("Minimum egy árucikket meg kell adni!");
+            }
+        }
+
         if (purchase.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }

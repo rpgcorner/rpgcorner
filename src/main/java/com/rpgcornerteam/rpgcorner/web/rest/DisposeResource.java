@@ -1,7 +1,12 @@
 package com.rpgcornerteam.rpgcorner.web.rest;
 
 import com.rpgcornerteam.rpgcorner.domain.Dispose;
+import com.rpgcornerteam.rpgcorner.domain.DisposedStock;
+import com.rpgcornerteam.rpgcorner.domain.Purchase;
+import com.rpgcornerteam.rpgcorner.domain.PurchasedStock;
 import com.rpgcornerteam.rpgcorner.repository.DisposeRepository;
+import com.rpgcornerteam.rpgcorner.repository.DisposedStockRepository;
+import com.rpgcornerteam.rpgcorner.repository.InventoryRepository;
 import com.rpgcornerteam.rpgcorner.web.rest.errors.BadRequestAlertException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -15,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -37,9 +43,17 @@ public class DisposeResource {
     private String applicationName;
 
     private final DisposeRepository disposeRepository;
+    private final DisposedStockRepository disposedStockRepository;
+    private final InventoryRepository inventoryRepository;
 
-    public DisposeResource(DisposeRepository disposeRepository) {
+    public DisposeResource(
+        DisposeRepository disposeRepository,
+        DisposedStockRepository disposedStockRepository,
+        InventoryRepository inventoryRepository
+    ) {
+        this.inventoryRepository = inventoryRepository;
         this.disposeRepository = disposeRepository;
+        this.disposedStockRepository = disposedStockRepository;
     }
 
     /**
@@ -61,6 +75,13 @@ public class DisposeResource {
             .body(dispose);
     }
 
+    // Segédmetódus a hibaüzenet kezelésére
+    private ResponseEntity<Dispose> createWarningResponse(String warningMessage) {
+        HttpHeaders headers = HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, "");
+        headers.add("X-app-warning", warningMessage);
+        return ResponseEntity.created(URI.create("/api/dispose/")).headers(headers).body(null);
+    }
+
     /**
      * {@code PUT  /disposes/:id} : Updates an existing dispose.
      *
@@ -76,6 +97,31 @@ public class DisposeResource {
         @PathVariable(value = "id", required = false) final Long id,
         @Valid @RequestBody Dispose dispose
     ) throws URISyntaxException {
+        if (dispose.getTransactionClosed()) {
+            List<DisposedStock> disposedStockList = disposedStockRepository.findByDispose_Id(dispose.getId());
+            for (DisposedStock disposedStock : disposedStockList) {
+                if (disposedStock.getDisposedWare().getInventory().getSupplie() < disposedStock.getSupplie()) {
+                    return createWarningResponse(
+                        "Csak olyan árucikk selejtezhető, amiből van raktárkészlet és csak annyi selejtezhető, amennyi raktárkészleten van."
+                    );
+                } else {
+                    disposedStock
+                        .getDisposedWare()
+                        .getInventory()
+                        .setSupplie(disposedStock.getDisposedWare().getInventory().getSupplie() - disposedStock.getSupplie());
+                    inventoryRepository.save(disposedStock.getDisposedWare().getInventory());
+                }
+
+                if (disposedStock.getSupplie() <= 0) {
+                    return createWarningResponse("Minimum egy darabot meg kell adni!");
+                }
+            }
+
+            if (disposedStockList.isEmpty()) {
+                return createWarningResponse("Minimum egy árucikket meg kell adni!");
+            }
+        }
+
         LOG.debug("REST request to update Dispose : {}, {}", id, dispose);
         if (dispose.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

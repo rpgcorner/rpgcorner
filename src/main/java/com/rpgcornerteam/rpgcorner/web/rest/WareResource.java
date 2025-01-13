@@ -1,7 +1,9 @@
 package com.rpgcornerteam.rpgcorner.web.rest;
 
+import com.rpgcornerteam.rpgcorner.domain.Inventory;
 import com.rpgcornerteam.rpgcorner.domain.Supplier;
 import com.rpgcornerteam.rpgcorner.domain.Ware;
+import com.rpgcornerteam.rpgcorner.repository.InventoryRepository;
 import com.rpgcornerteam.rpgcorner.repository.WareRepository;
 import com.rpgcornerteam.rpgcorner.web.rest.errors.BadRequestAlertException;
 import com.rpgcornerteam.rpgcorner.web.rest.errors.LoginAlreadyUsedException;
@@ -17,6 +19,7 @@ import java.util.stream.StreamSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -40,8 +43,11 @@ public class WareResource {
 
     private final WareRepository wareRepository;
 
-    public WareResource(WareRepository wareRepository) {
+    private final InventoryRepository inventoryRepository;
+
+    public WareResource(WareRepository wareRepository, InventoryRepository inventoryRepository) {
         this.wareRepository = wareRepository;
+        this.inventoryRepository = inventoryRepository;
     }
 
     /**
@@ -83,6 +89,14 @@ public class WareResource {
     public ResponseEntity<Ware> updateWare(@PathVariable(value = "id", required = false) final Long id, @Valid @RequestBody Ware ware)
         throws URISyntaxException {
         LOG.debug("REST request to update Ware : {}, {}", id, ware);
+        Inventory inventory = inventoryRepository.findByWare_Id(ware.getId());
+        if (!ware.getActive() && !inventory.getSupplie().equals(0)) {
+            HttpHeaders headers = HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, "");
+
+            headers.add("X-app-warning", "A tétel nem inaktiválható, mivel még van készleten!");
+            return ResponseEntity.created(new URI("/api/ware/")).headers(headers).body(null);
+        }
+
         if (ware.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }

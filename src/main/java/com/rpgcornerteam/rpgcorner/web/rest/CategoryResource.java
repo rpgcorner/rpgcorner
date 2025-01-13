@@ -1,17 +1,19 @@
 package com.rpgcornerteam.rpgcorner.web.rest;
 
 import com.rpgcornerteam.rpgcorner.domain.Category;
-import com.rpgcornerteam.rpgcorner.domain.Supplier;
+import com.rpgcornerteam.rpgcorner.domain.enumeration.CategoryTypeEnum;
 import com.rpgcornerteam.rpgcorner.repository.CategoryRepository;
 import com.rpgcornerteam.rpgcorner.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -52,6 +54,22 @@ public class CategoryResource {
         if (category.getId() != null) {
             throw new BadRequestAlertException("A new category cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        if (category.getCategoryType() == CategoryTypeEnum.MAIN_CATEGORY) {
+            List<Long> subCategoriId = new ArrayList<>();
+            for (Category subCategory : category.getSubCategories()) {
+                if (subCategoriId.contains(subCategory.getId())) {
+                    HttpHeaders headers = HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, null);
+
+                    headers.add(
+                        "X-app-warning",
+                        "A megadott al kategória már létezik a kiválasztott fő kategóriában. Kérjük, válasszon másikat!"
+                    );
+                    return ResponseEntity.created(new URI("/api/category/")).headers(headers).body(null);
+                } else {
+                    subCategoriId.add(subCategory.getId());
+                }
+            }
+        }
         category = categoryRepository.save(category);
         return ResponseEntity.created(new URI("/api/categories/" + category.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, category.getId().toString()))
@@ -61,7 +79,7 @@ public class CategoryResource {
     /**
      * {@code PUT  /categories/:id} : Updates an existing category.
      *
-     * @param id the id of the category to save.
+     * @param id       the id of the category to save.
      * @param category the category to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated category,
      * or with status {@code 400 (Bad Request)} if the category is not valid,
@@ -94,7 +112,7 @@ public class CategoryResource {
     /**
      * {@code PATCH  /categories/:id} : Partial updates given fields of an existing category, field will ignore if it is null
      *
-     * @param id the id of the category to save.
+     * @param id       the id of the category to save.
      * @param category the category to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated category,
      * or with status {@code 400 (Bad Request)} if the category is not valid,

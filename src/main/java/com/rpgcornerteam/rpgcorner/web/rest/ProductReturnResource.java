@@ -1,7 +1,12 @@
 package com.rpgcornerteam.rpgcorner.web.rest;
 
 import com.rpgcornerteam.rpgcorner.domain.ProductReturn;
+import com.rpgcornerteam.rpgcorner.domain.ReturnedStock;
+import com.rpgcornerteam.rpgcorner.domain.Sale;
+import com.rpgcornerteam.rpgcorner.domain.SoldStock;
+import com.rpgcornerteam.rpgcorner.repository.InventoryRepository;
 import com.rpgcornerteam.rpgcorner.repository.ProductReturnRepository;
+import com.rpgcornerteam.rpgcorner.repository.ReturnedStockRepository;
 import com.rpgcornerteam.rpgcorner.web.rest.errors.BadRequestAlertException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -15,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -37,9 +43,17 @@ public class ProductReturnResource {
     private String applicationName;
 
     private final ProductReturnRepository productReturnRepository;
+    private final ReturnedStockRepository returnedStockRepository;
+    private final InventoryRepository inventoryRepository;
 
-    public ProductReturnResource(ProductReturnRepository productReturnRepository) {
+    public ProductReturnResource(
+        ProductReturnRepository productReturnRepository,
+        InventoryRepository inventoryRepository,
+        ReturnedStockRepository returnedStockRepository
+    ) {
+        this.returnedStockRepository = returnedStockRepository;
         this.productReturnRepository = productReturnRepository;
+        this.inventoryRepository = inventoryRepository;
     }
 
     /**
@@ -61,6 +75,13 @@ public class ProductReturnResource {
             .body(productReturn);
     }
 
+    // Segédmetódus a hibaüzenet kezelésére
+    private ResponseEntity<ProductReturn> createWarningResponse(String warningMessage) {
+        HttpHeaders headers = HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, "");
+        headers.add("X-app-warning", warningMessage);
+        return ResponseEntity.created(URI.create("/api/productReturn/")).headers(headers).body(null);
+    }
+
     /**
      * {@code PUT  /product-returns/:id} : Updates an existing productReturn.
      *
@@ -76,6 +97,28 @@ public class ProductReturnResource {
         @PathVariable(value = "id", required = false) final Long id,
         @Valid @RequestBody ProductReturn productReturn
     ) throws URISyntaxException {
+        if (productReturn.getTransactionClosed()) {
+            List<ReturnedStock> disposedStockList = returnedStockRepository.findByProductReturn_Id(productReturn.getId());
+            for (ReturnedStock disposedStock : disposedStockList) {
+                if (disposedStock.getReturnedWare().getInventory().getSupplie() < disposedStock.getSupplie()) {
+                    return createWarningResponse("Csak annyi áru hozható vissza, amennyi korábban megvásárlásra került.");
+                } else {
+                    disposedStock
+                        .getReturnedWare()
+                        .getInventory()
+                        .setSupplie(disposedStock.getReturnedWare().getInventory().getSupplie() + disposedStock.getSupplie());
+                    inventoryRepository.save(disposedStock.getReturnedWare().getInventory());
+                }
+
+                if (disposedStock.getSupplie() <= 0) {
+                    return createWarningResponse("Minimum egy darabot meg kell adni!");
+                }
+            }
+
+            if (disposedStockList.isEmpty()) {
+                return createWarningResponse("Minimum egy árucikket meg kell adni!");
+            }
+        }
         LOG.debug("REST request to update ProductReturn : {}, {}", id, productReturn);
         if (productReturn.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

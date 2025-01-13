@@ -15,4 +15,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface InventoryRepository extends JpaRepository<Inventory, Long> {
     List<Inventory> findByWare_DescriptionContainingIgnoreCase(String searchParam);
+
+    Inventory findByWare_Id(Long id);
 }

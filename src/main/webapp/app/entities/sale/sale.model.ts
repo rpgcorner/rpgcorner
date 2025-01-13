@@ -7,6 +7,7 @@ export interface ISale {
   soldDate?: dayjs.Dayjs | null;
   soldByUser?: IUser | null; // A teljes IUser típus kell
   soldForCustomer?: ICustomer | null;
+  transactionClosed?: boolean | null;
 }
 
 export type NewSale = Omit<ISale, 'id'> & { id: null };

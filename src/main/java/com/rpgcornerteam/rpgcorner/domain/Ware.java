@@ -88,7 +88,7 @@ public class Ware implements Serializable {
      */
     @Schema(description = "Az árucikk raktárkészlete.")
     @JsonIgnoreProperties(value = { "ware" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "ware")
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "ware")
     private Inventory inventory;
 
     @JsonIgnoreProperties(value = { "disposedWare", "dispose" }, allowSetters = true)

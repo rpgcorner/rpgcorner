@@ -18,6 +18,7 @@ type DisposeFormDefaults = Pick<NewDispose, 'id'>;
 
 type DisposeFormGroupContent = {
   id: FormControl<IDispose['id'] | NewDispose['id']>;
+  transactionClosed: FormControl<IDispose['transactionClosed']>;
   disposeDate: FormControl<IDispose['disposeDate']>;
   note: FormControl<IDispose['note']>;
   disposedByUser: FormControl<IDispose['disposedByUser']>;
@@ -40,6 +41,7 @@ export class DisposeFormService {
           validators: [Validators.required],
         },
       ),
+      transactionClosed: new FormControl(disposeRawValue.transactionClosed),
       disposeDate: new FormControl(disposeRawValue.disposeDate),
       note: new FormControl(disposeRawValue.note),
       disposedByUser: new FormControl(disposeRawValue.disposedByUser, {

@@ -10,6 +10,7 @@ export interface IProductReturn {
   sale?: ISale | null;
   returnedByUser?: IUser | null;
   returnedByCustomer?: ICustomer | null;
+  transactionClosed?: boolean | null;
 }
 
 export type NewProductReturn = Omit<IProductReturn, 'id'> & { id: null };

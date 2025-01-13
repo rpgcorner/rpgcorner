@@ -1,7 +1,13 @@
 package com.rpgcornerteam.rpgcorner.web.rest;
 
+import com.rpgcornerteam.rpgcorner.domain.Dispose;
+import com.rpgcornerteam.rpgcorner.domain.DisposedStock;
 import com.rpgcornerteam.rpgcorner.domain.Sale;
+import com.rpgcornerteam.rpgcorner.domain.SoldStock;
+import com.rpgcornerteam.rpgcorner.repository.DisposedStockRepository;
+import com.rpgcornerteam.rpgcorner.repository.InventoryRepository;
 import com.rpgcornerteam.rpgcorner.repository.SaleRepository;
+import com.rpgcornerteam.rpgcorner.repository.SoldStockRepository;
 import com.rpgcornerteam.rpgcorner.web.rest.errors.BadRequestAlertException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -15,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -37,9 +44,13 @@ public class SaleResource {
     private String applicationName;
 
     private final SaleRepository saleRepository;
+    private final SoldStockRepository soldStockRepository;
+    private final InventoryRepository inventoryRepository;
 
-    public SaleResource(SaleRepository saleRepository) {
+    public SaleResource(SaleRepository saleRepository, SoldStockRepository soldStockRepository, InventoryRepository inventoryRepository) {
         this.saleRepository = saleRepository;
+        this.inventoryRepository = inventoryRepository;
+        this.soldStockRepository = soldStockRepository;
     }
 
     /**
@@ -61,6 +72,13 @@ public class SaleResource {
             .body(sale);
     }
 
+    // Segédmetódus a hibaüzenet kezelésére
+    private ResponseEntity<Sale> createWarningResponse(String warningMessage) {
+        HttpHeaders headers = HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, "");
+        headers.add("X-app-warning", warningMessage);
+        return ResponseEntity.created(URI.create("/api/sale/")).headers(headers).body(null);
+    }
+
     /**
      * {@code PUT  /sales/:id} : Updates an existing sale.
      *
@@ -74,6 +92,31 @@ public class SaleResource {
     @PutMapping("/{id}")
     public ResponseEntity<Sale> updateSale(@PathVariable(value = "id", required = false) final Long id, @Valid @RequestBody Sale sale)
         throws URISyntaxException {
+        if (sale.getTransactionClosed()) {
+            List<SoldStock> disposedStockList = soldStockRepository.findBySale_Id(sale.getId());
+            for (SoldStock disposedStock : disposedStockList) {
+                if (disposedStock.getSoldWare().getInventory().getSupplie() < disposedStock.getSupplie()) {
+                    return createWarningResponse(
+                        "Csak olyan árucikk vásárolható, amelyből van raktárkészlet, és a vásárlás nem haladhatja meg a rendelkezésre álló mennyiséget."
+                    );
+                } else {
+                    disposedStock
+                        .getSoldWare()
+                        .getInventory()
+                        .setSupplie(disposedStock.getSoldWare().getInventory().getSupplie() - disposedStock.getSupplie());
+                    inventoryRepository.save(disposedStock.getSoldWare().getInventory());
+                }
+
+                if (disposedStock.getSupplie() <= 0) {
+                    return createWarningResponse("Minimum egy darabot meg kell adni!");
+                }
+            }
+
+            if (disposedStockList.isEmpty()) {
+                return createWarningResponse("Minimum egy árucikket meg kell adni!");
+            }
+        }
+
         LOG.debug("REST request to update Sale : {}, {}", id, sale);
         if (sale.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

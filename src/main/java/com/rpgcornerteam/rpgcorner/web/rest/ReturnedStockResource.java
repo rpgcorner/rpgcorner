@@ -1,7 +1,9 @@
 package com.rpgcornerteam.rpgcorner.web.rest;
 
+import com.rpgcornerteam.rpgcorner.domain.Purchase;
 import com.rpgcornerteam.rpgcorner.domain.PurchasedStock;
 import com.rpgcornerteam.rpgcorner.domain.ReturnedStock;
+import com.rpgcornerteam.rpgcorner.domain.SoldStock;
 import com.rpgcornerteam.rpgcorner.repository.ReturnedStockRepository;
 import com.rpgcornerteam.rpgcorner.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -12,6 +14,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -56,6 +59,13 @@ public class ReturnedStockResource {
         return ResponseEntity.created(new URI("/api/returned-stocks/" + returnedStock.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, returnedStock.getId().toString()))
             .body(returnedStock);
+    }
+
+    // Segédmetódus a hibaüzenet kezelésére
+    private ResponseEntity<Purchase> createWarningResponse(String warningMessage) {
+        HttpHeaders headers = HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, "");
+        headers.add("X-app-warning", warningMessage);
+        return ResponseEntity.created(URI.create("/api/purchase/")).headers(headers).body(null);
     }
 
     /**
